@@ -5,9 +5,10 @@ const Style = makeStyles((theme) => ({
     "& > *": {
       margin: theme.spacing(1),
     },
-    backgroundColor: "black",
   },
-
+  headerButton: {
+    marginRight: theme.spacing(2),
+  },
   buttonSaibaMais: {},
 }));
 
