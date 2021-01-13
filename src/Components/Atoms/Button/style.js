@@ -6,7 +6,9 @@ const Style = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
-
+  headerButton: {
+    marginRight: theme.spacing(2),
+  },
   buttonSaibaMais: {},
 
   buttonArrow: {
