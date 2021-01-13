@@ -5,7 +5,9 @@ const Style = makeStyles((theme) => ({
     flexGrow: 1,
   },
 
-  text: {},
+  textCard: {
+    width: "90%",
+  },
 }));
 
 export default Style;

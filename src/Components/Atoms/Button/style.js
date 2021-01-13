@@ -10,6 +10,14 @@ const Style = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   buttonSaibaMais: {},
+
+  buttonArrow: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+    borderRadius: "100%",
+    border: "5px solid #fff"
+  }
 }));
 
 export default Style;
