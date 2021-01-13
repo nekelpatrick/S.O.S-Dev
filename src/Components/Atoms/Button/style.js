@@ -9,15 +9,17 @@ const Style = makeStyles((theme) => ({
   headerButton: {
     marginRight: theme.spacing(2),
   },
-  buttonSaibaMais: {},
+  buttonSaibaMais: {
+    width: "200px",
+  },
 
   buttonArrow: {
     "& > *": {
       margin: theme.spacing(1),
     },
     borderRadius: "100%",
-    border: "5px solid #fff"
-  }
+    border: "5px solid #fff",
+  },
 }));
 
 export default Style;
