@@ -1,9 +1,13 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const Style = makeStyles((theme) => ({
-  title: {},
+  title: {
+    flexGrow: 1,
+  },
 
-  text: {},
+  textCard: {
+    width: "90%",
+  },
 }));
 
 export default Style;

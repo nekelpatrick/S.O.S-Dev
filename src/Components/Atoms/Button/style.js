@@ -5,10 +5,19 @@ const Style = makeStyles((theme) => ({
     "& > *": {
       margin: theme.spacing(1),
     },
-    backgroundColor: "black",
   },
-
+  headerButton: {
+    marginRight: theme.spacing(2),
+  },
   buttonSaibaMais: {},
+
+  buttonArrow: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+    borderRadius: "100%",
+    border: "5px solid #fff"
+  }
 }));
 
 export default Style;
