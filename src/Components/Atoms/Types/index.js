@@ -5,11 +5,14 @@ import useStyles from "./style.js";
 const Types = ({ variant, component, classe, text }) => {
   const classes = useStyles();
   return (
-    <div className={classes[classe]}>
-      <Typography variant={variant} component={component} gutterBottom>
-        {text}
-      </Typography>
-    </div>
+    <Typography
+      className={classes[classe]}
+      variant={variant}
+      component={component}
+      gutterBottom
+    >
+      {text}
+    </Typography>
   );
 };
 
