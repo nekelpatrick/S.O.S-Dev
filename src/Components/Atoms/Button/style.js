@@ -22,6 +22,7 @@ const Style = makeStyles((theme) => ({
   },
 
   buttonLogin: {},
+  buttonRegister: {},
 }));
 
 export default Style;
