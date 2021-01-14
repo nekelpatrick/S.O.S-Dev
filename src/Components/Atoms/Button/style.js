@@ -9,7 +9,9 @@ const Style = makeStyles((theme) => ({
   headerButton: {
     marginRight: theme.spacing(2),
   },
-  buttonSaibaMais: {},
+  buttonSaibaMais: {
+    width: "200px",
+  },
 
   buttonArrow: {
     "& > *": {
