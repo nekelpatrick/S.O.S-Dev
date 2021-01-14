@@ -2,10 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const Styles = makeStyles((theme) => ({
   container: {
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-    height: "20vh",
+    height: "50vh",
+    marginBottom: '6vh',
   },
 
   grid: {
@@ -16,19 +14,20 @@ const Styles = makeStyles((theme) => ({
   },
 
   card: {
-    height: "100%",
+    height: "20vh",
+    width: '20vw',
+    border: "1px solid #EFDCBD"
   },
 
   cardContent: {
-    height: "30%",
+    padding: '2vh 2vh 1vh 2vh',
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "Center",
   },
   comments: {
-    height: "90%",
+    paddingTop: '0px',
     display: "flex",
-    justifyContent: "center",
     alignItems: "Center",
   },
 }));
