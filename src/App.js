@@ -1,10 +1,12 @@
 import "./App.css";
-import Pages from "./Pages/routes";
+import Pages from "./Routes/routes";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import { Paper } from "@material-ui/core";
 
 import Header from "./Components/Organisms/Header/index";
+
+import Techs from "./Components/Molecules/Techs";
 
 
 function App() {
@@ -29,9 +31,10 @@ function App() {
   console.log(theme.palette);
   return (
     <ThemeProvider theme={theme}>
-      <Paper color="primary" style={{ height: "100vh" }}>
+      <Paper color="primary" >
         <Header />
-        <Pages />
+        {/* <Pages /> */}
+        <Techs />
       </Paper>
     </ThemeProvider>
   );
