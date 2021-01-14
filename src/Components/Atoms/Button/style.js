@@ -20,6 +20,9 @@ const Style = makeStyles((theme) => ({
     borderRadius: "100%",
     border: "5px solid #fff",
   },
+
+  buttonLogin: {},
+  buttonRegister: {},
 }));
 
 export default Style;
