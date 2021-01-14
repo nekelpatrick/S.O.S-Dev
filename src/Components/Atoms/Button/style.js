@@ -21,6 +21,17 @@ const Style = makeStyles((theme) => ({
     border: "5px solid #fff",
   },
 
+  buttonTechs: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+    width: "45%",
+    height: "16%",
+    borderRadius: "9px",
+    margin: "0 auto",
+
+  },
+
   buttonLogin: {},
   buttonRegister: {},
 }));
