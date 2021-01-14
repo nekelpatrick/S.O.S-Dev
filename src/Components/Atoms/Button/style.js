@@ -16,8 +16,10 @@ const Style = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
     borderRadius: "100%",
-    border: "5px solid #fff"
-  }
+    border: "5px solid #fff",
+  },
+
+  buttonLogin: {},
 }));
 
 export default Style;

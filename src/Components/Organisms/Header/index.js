@@ -7,8 +7,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import Style from "./style";
 
-import Button from "../../Atoms/Button";
 import Typography from "../../Atoms/Types/";
+import Popup from "../../Organisms/Pop-up";
 
 export default function ButtonAppBar() {
   const useStyles = Style;
@@ -31,8 +31,7 @@ export default function ButtonAppBar() {
             classe="title"
             text="S.O.S Space Open Source"
           ></Typography>
-
-          <Button color="inherit" classe="headerButton" text="entrar"></Button>
+          <Popup />
         </Toolbar>
       </AppBar>
     </div>
