@@ -21,6 +21,27 @@ const Style = makeStyles((theme) => ({
     border: "5px solid #fff",
   },
 
+  buttonTechs: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+    width: "45%",
+    height: "16%",
+    borderRadius: "9px",
+    margin: "0 auto",
+
+  },
+  buttonPupUpAddTechs: {
+    fontFamily: "fontawesome",
+    fontSize: "1rem",
+    color: "#E63462",
+
+    padding: "0%",
+    minWidth: "0px",
+    backgroundColor: "#ffffff00",
+    borderRadius: "12px",
+  },
+
   buttonLogin: {},
   buttonRegister: {},
 }));
