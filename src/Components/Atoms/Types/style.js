@@ -16,7 +16,9 @@ const Style = makeStyles((theme) => ({
 
   commentContent: {
     fontSize: '12px',
-  }
+  },
+  
+  titlePopUp: {},
 }));
 
 export default Style;
