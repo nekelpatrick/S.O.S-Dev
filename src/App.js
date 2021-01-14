@@ -2,11 +2,18 @@ import "./App.css";
 import Pages from "./Pages/routes";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-import { Paper } from "@material-ui/core";
+import { Paper, makeStyles } from "@material-ui/core";
 
 import Header from "./Components/Organisms/Header/index";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: "#090C17",
+  },
+}));
+
 function App() {
+  const classes = useStyles();
   const theme = createMuiTheme({
     palette: {
       divider: "#870A39",
@@ -18,7 +25,7 @@ function App() {
         main: "#E63462",
       },
       background: {
-        paper: "#0C101D",
+        paper: "#121a2b",
       },
     },
   });
@@ -28,7 +35,11 @@ function App() {
   console.log(theme.palette);
   return (
     <ThemeProvider theme={theme}>
-      <Paper color="primary" style={{ height: "100vh" }}>
+      <Paper
+        className={classes.root}
+        color="primary"
+        style={{ height: "100vh" }}
+      >
         <Header />
         <Pages />
       </Paper>
