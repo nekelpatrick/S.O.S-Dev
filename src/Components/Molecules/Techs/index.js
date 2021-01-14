@@ -1,4 +1,4 @@
-import { TechsContent } from "./style";
+import { TechsContent, StyledPopup } from "./style";
 
 import Input from "../../Atoms/Input";
 import Button from "../../Atoms/Button";
@@ -28,26 +28,37 @@ const Techs = () => {
         console.log(e.target.value)
     };
 
+    const icon = <i class="fas fa-plus"></i>
+
     return (
+
+    <StyledPopup
+      trigger={<Button text={icon} classe="buttonPupUpAddTechs"/>}
+      modal
+      nested
+    >
+      {close => (
         <TechsContent>
-            <form onSubmit={handleSubmit(patchTechs)} className="form-content">
-                <Types text="Adicionar Tecnologia" variant="h6"/>
-                    <Input 
-                    label="Tecnologias" 
-                    name="techs"
-                    id="techs"
-                    onChange={changeTextInput} 
-                    variant="outlined"
-                    inputRef={register}
-                    helperText={errors.techs?.message}/>
-                    <Input select="select" label="Nível de Experiência" onChange={changeOption} variant="outlined">
-                        <option>Iniciante</option>
-                        <option>Intermediário</option>
-                        <option>Avançado</option>
-                    </Input>
-                    <Button text="Cadastrar" classe="buttonTechs" type="submit"/>
-            </form>
-        </TechsContent>
+        <form onSubmit={handleSubmit(patchTechs)} className="form-content">
+            <Types text="Adicionar Tecnologia" variant="h6"/>
+                <Input 
+                label="Tecnologias" 
+                name="techs"
+                id="techs"
+                onChange={changeTextInput} 
+                variant="outlined"
+                inputRef={register}
+                helperText={errors.techs?.message}/>
+                <Input select="select" label="Nível de Experiência" onChange={changeOption} variant="outlined">
+                    <option>Iniciante</option>
+                    <option>Intermediário</option>
+                    <option>Avançado</option>
+                </Input>
+                <Button text="Cadastrar" classe="buttonTechs" type="submit"/>
+        </form>
+    </TechsContent>
+      )}
+    </StyledPopup>
     )
 };
 
