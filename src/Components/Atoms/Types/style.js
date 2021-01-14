@@ -8,6 +8,7 @@ const Style = makeStyles((theme) => ({
   textCard: {
     width: "90%",
   },
+  titlePopUp: {},
 }));
 
 export default Style;
