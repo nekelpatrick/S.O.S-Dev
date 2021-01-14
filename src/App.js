@@ -6,6 +6,7 @@ import { Paper } from "@material-ui/core";
 
 import Header from "./Components/Organisms/Header/index";
 
+
 function App() {
   const theme = createMuiTheme({
     palette: {

@@ -1,8 +1,8 @@
 import Checkbox from "@material-ui/core/Checkbox";
 import { useState } from "react";
 
-export const CheckBoxAtom = ({ color }) => {
-  const [checked, setChecked] = useState(true);
+const CheckBoxAtom = ({ color }) => {
+  const [checked, setChecked] = useState(false);
 
   return (
     <>
@@ -15,3 +15,5 @@ export const CheckBoxAtom = ({ color }) => {
     </>
   );
 };
+
+export default CheckBoxAtom;

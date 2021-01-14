@@ -1,12 +1,16 @@
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
+import useStyles from "./style";
 
-const Input = ({name, label, error, helperText, select, value, onChange, children}) => {
+const Input = ({name, label, variant, error, helperText, select, value, onChange, classe, children}) => {
     console.log(children)
+    const classes = useStyles();
 
     return (
         <TextField
+        className={classes[classe]}
         label = {label}
+        variant = {variant}
         name = {name}
         value = {value}
         onChange = {onChange}
@@ -14,8 +18,8 @@ const Input = ({name, label, error, helperText, select, value, onChange, childre
         helperText = {helperText && helperText}
         select = {select}
         >
-            {children && children.map(({props}) => (
-                <MenuItem value = {props.children}>{props.children}</MenuItem>
+            {children && children.map((props) => (
+                <MenuItem value = {props.value}>{props.item}</MenuItem>
             ))}
         </TextField>
     )
