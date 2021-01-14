@@ -18,8 +18,8 @@ const Input = ({name, label, variant, error, helperText, select, value, onChange
         helperText = {helperText && helperText}
         select = {select}
         >
-            {children && children.map((props) => (
-                <MenuItem value = {props.value}>{props.item}</MenuItem>
+            {children && children.map(({props}) => (
+                <MenuItem value = {props.children}>{props.children}</MenuItem>
             ))}
         </TextField>
     )

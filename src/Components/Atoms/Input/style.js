@@ -6,7 +6,8 @@ const Style = makeStyles((theme) => ({
         width: "63%",
     },
     inputSelect: {
-        width: "100%",
+        width: "inherit",
+        fontSize: "0.5rem"
     }
 
 }));

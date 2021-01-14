@@ -6,6 +6,8 @@ import { Paper } from "@material-ui/core";
 
 import Header from "./Components/Organisms/Header/index";
 
+import Filters from "./Components/Molecules/Filters";
+
 
 function App() {
   const theme = createMuiTheme({
@@ -32,6 +34,7 @@ function App() {
       <Paper color="primary" style={{ height: "100vh" }}>
         <Header />
         <Pages />
+        <Filters/>
       </Paper>
     </ThemeProvider>
   );

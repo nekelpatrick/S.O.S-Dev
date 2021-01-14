@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FiltersContent = styled.section `
     width: 75vw;
-    height: 19vh;
+    height: 24vh;
     margin-left: auto;
     display: flex;
     justify-content: space-evenly;
@@ -11,17 +11,17 @@ export const FiltersContent = styled.section `
     .checkBox-content {
         width: 20%;
         height: 100%;
-        padding: 1% 1% 1% 0%;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: baseline;
+        align-items: center;
 
         border: 3px solid lightyellow;
     }
     .selects-content {
-        width: 100%;
+        width: 90%;
         display:flex;
+        margin-bottom: 3px;
         align-items: center;
         justify-content: center;
     }
@@ -34,9 +34,4 @@ export const FiltersContent = styled.section `
 
         border: 3px solid lightyellow;
     }
-`
-
-export const Label = styled.label `
-    color: lightyellow;
-    margin-right: auto;
 `
