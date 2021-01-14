@@ -1,7 +1,7 @@
 import defaultImage from "./no-image.png";
 import { StyledImage } from "./style";
 
-const Image = ({ src, alt, width, height, borderRadius }) => {
+const Image = ({ src, alt, width, height, borderRadius, margin }) => {
   return (
     <StyledImage
       src={src || defaultImage}
@@ -9,6 +9,7 @@ const Image = ({ src, alt, width, height, borderRadius }) => {
       width={width}
       height={height}
       borderRadius={borderRadius}
+      margin = {margin}
     />
   );
 };
