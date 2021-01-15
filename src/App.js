@@ -7,9 +7,6 @@ import { useStyles, theme } from "./Theme";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 
-import Techs from "./Components/Molecules/Techs";
-
-import Filters from "./Components/Molecules/Filters";
 
 function App() {
   const classes = useStyles();
@@ -23,8 +20,6 @@ function App() {
         style={{ height: "100vh" }}
       >
         <Header />
-        <Filters />
-        <Techs />
       </Paper>
     </ThemeProvider>
   );
