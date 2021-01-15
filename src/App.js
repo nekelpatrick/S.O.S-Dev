@@ -1,41 +1,27 @@
 import "./App.css";
-import Pages from "./Routes/routes";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-
-import { Paper } from "@material-ui/core";
-
 import Header from "./Components/Organisms/Header/index";
 
+import { useStyles, theme } from "./Theme";
+
+import { ThemeProvider } from "@material-ui/core/styles";
+import { Paper } from "@material-ui/core";
+
 import Techs from "./Components/Molecules/Techs";
-import Projects from "./Components/Molecules/Projects";
 
 function App() {
-  const theme = createMuiTheme({
-    palette: {
-      divider: "#870A39",
-      type: "dark",
-      primary: {
-        main: "#17223A",
-      },
-      secondary: {
-        main: "#E63462",
-      },
-      background: {
-        paper: "#0C101D",
-      },
-    },
-  });
-
-  //por hora o tema ficará aqui, logo pretendo reorganizar.
+  const classes = useStyles();
 
   console.log(theme.palette);
   return (
     <ThemeProvider theme={theme}>
-      <Paper color="primary">
+      <Paper
+        className={classes.root}
+        color="primary"
+        style={{ height: "100vh" }}
+      >
         <Header />
         {/* <Pages /> */}
         <Techs />
-        <Projects />
       </Paper>
     </ThemeProvider>
   );
