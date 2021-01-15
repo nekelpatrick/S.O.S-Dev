@@ -7,8 +7,6 @@ import { useStyles, theme } from "./Theme";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 
-import Techs from "./Components/Molecules/Techs";
-
 function App() {
   const classes = useStyles();
 

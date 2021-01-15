@@ -15,6 +15,7 @@ export const Popup = () => {
         trigger={<Button className="button" text="ENTRAR" />}
         modal
         nested
+        onClose={() => setIsReg(true)}
       >
         {(close) => (
           <Container>

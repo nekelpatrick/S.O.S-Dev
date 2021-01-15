@@ -5,7 +5,9 @@ import Button from "../../Atoms/Button";
 import Types from "../../Atoms/Types";
 import Input from "../../Atoms/Input";
 
-import { Form, Style } from "./style";
+import { Form } from "./style";
+
+import { api } from "../../../axios-globalConfig/axios-global";
 
 import { useForm } from "react-hook-form";
 
@@ -20,7 +22,7 @@ const Login = ({ text, setIsReg, isReg }) => {
       .min(8, "Senha deve conter no mínimo 8 dígitos")
       .matches(
         /^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-        "Senha deve conter: pelomenos 1 letra maiuscula, 1 letra minuscula, 1 caractere especial e 1 número"
+        "Senha incorreta"
       )
       .required("Campo obrigatório"),
   });
@@ -30,7 +32,16 @@ const Login = ({ text, setIsReg, isReg }) => {
   });
 
   const handleForm = (data) => {
-    console.log(data);
+    api
+      .post("/login", { ...data })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        setError("user_register", {
+          message: "Email já existe",
+        });
+      });
   };
 
   return (
