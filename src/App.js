@@ -1,12 +1,10 @@
 import "./App.css";
-// import Pages from "./Pages/routes";
 import Header from "./Components/Organisms/Header/index";
 
 import { useStyles, theme } from "./Theme";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
-
 
 function App() {
   const classes = useStyles();
