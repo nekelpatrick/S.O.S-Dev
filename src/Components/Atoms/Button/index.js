@@ -2,7 +2,13 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import useStyles from "./style.js";
 
-export default function ContainedButtons({ text, classe, onClick, type }) {
+export default function ContainedButtons({
+  text,
+  classe,
+  onClick,
+  type,
+  size,
+}) {
   const classes = useStyles();
 
   return (
@@ -13,9 +19,6 @@ export default function ContainedButtons({ text, classe, onClick, type }) {
       color="secondary"
       type={type}
       size={size}
-      onClick={onClick}
-      variant="contained"
-      color="secondary"
     >
       {text}
     </Button>

@@ -2,6 +2,8 @@ import { Form } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+import api from "../../../axios-globalConfig/axios-global";
+
 import Button from "../../Atoms/Button";
 import Types from "../../Atoms/Types";
 import Input from "../../Atoms/Input";
@@ -32,7 +34,16 @@ const Register = ({ text, setIsReg }) => {
   });
 
   const handleForm = (data) => {
-    console.log(data);
+    api
+      .post("/register", { ...data })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        setError("user_register", {
+          message: "Email já existe",
+        });
+      });
   };
 
   return (

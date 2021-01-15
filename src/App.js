@@ -1,5 +1,4 @@
 import "./App.css";
-import Pages from "./Pages/routes";
 import Header from "./Components/Organisms/Header/index";
 
 import { useStyles, theme } from "./Theme";
