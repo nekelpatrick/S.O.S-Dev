@@ -7,7 +7,7 @@ import { Paper } from "@material-ui/core";
 import Header from "./Components/Organisms/Header/index";
 
 import Techs from "./Components/Molecules/Techs";
-
+import Projects from "./Components/Molecules/Projects";
 
 function App() {
   const theme = createMuiTheme({
@@ -31,10 +31,11 @@ function App() {
   console.log(theme.palette);
   return (
     <ThemeProvider theme={theme}>
-      <Paper color="primary" >
+      <Paper color="primary">
         <Header />
         {/* <Pages /> */}
         <Techs />
+        <Projects />
       </Paper>
     </ThemeProvider>
   );
