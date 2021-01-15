@@ -20,7 +20,7 @@ const Login = ({ text, setIsReg, isReg }) => {
       .min(8, "Senha deve conter no mínimo 8 dígitos")
       .matches(
         /^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-        "Senha deve conter: pelomenos 1 letra maiuscula, 1 letra minuscula, 1 caractere especial e 1 número"
+        "Senha incorreta"
       )
       .required("Campo obrigatório"),
   });
