@@ -1,5 +1,5 @@
 import { Switch, Route } from "react-router-dom";
-import LandingPage from '../Pages/Landing-Page'
+import LandingPage from "../Pages/Landing-Page";
 
 const Pages = () => {
   //Importar header aqui;
