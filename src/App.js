@@ -6,8 +6,7 @@ import { Paper } from "@material-ui/core";
 
 import Header from "./Components/Organisms/Header/index";
 
-import Login from "./Components/Molecules/Login";
-import Register from "./Components/Molecules/Register";
+import Filters from "./Components/Molecules/Filters";
 
 function App() {
   const theme = createMuiTheme({
@@ -33,8 +32,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Paper color="primary" >
         <Header />
-        <Login />
-        <Register />
+        <Filters />
       </Paper>
     </ThemeProvider>
   );
