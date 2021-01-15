@@ -6,66 +6,29 @@ import {
   CardContent,
   Divider,
   Grid,
-  Typography,
-  makeStyles,
   CardActions,
   Paper,
 } from "@material-ui/core";
 
 import Button from "../../Atoms/Button";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    maxWidth: "50vw",
-    margin: theme.spacing(1),
-    flexGrow: 1,
-  },
-
-  cardHeader: {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-  },
-  content: {
-    margin: theme.spacing(1),
-
-    display: "flex",
-    textAlign: "center",
-    alignItems: "center",
-    height: "18vh",
-  },
-
-  contentItem: { height: "18vh", backgroundColor: "#17223a" },
-
-  statsItem: {
-    alignItems: "center",
-    justifyContent: "center",
-    display: "flex",
-    flexDirection: "column",
-  },
-  statsIcon: {
-    margin: theme.spacing(1),
-  },
-}));
+import Typography from "../../Atoms/Types";
+import useStyles from "./style";
 
 const ProductCard = () => {
   const classes = useStyles();
 
   return (
-    <Card elevation={8} className={classes.root}>
+    <Card elevation={12} className={classes.root}>
       <CardContent>
         <Grid className={classes.cardHeader} container spacing={2}>
           <Grid item xs={2}>
             <Typography
               align="center"
-              color="textPrimary"
+              color="textSecondary"
               gutterBottom
               variant="h4"
-            >
-              Título
-            </Typography>
+              text="Título"
+            ></Typography>
           </Grid>
 
           <Grid item xs={1}>
@@ -74,28 +37,31 @@ const ProductCard = () => {
               color="textPrimary"
               gutterBottom
               variant="h6"
-            >
-              Tech
-            </Typography>
+              text="Título"
+            ></Typography>
           </Grid>
         </Grid>
 
         <div className={classes.content}>
           <Grid container spacing={2}>
             <Grid item xs>
-              <Paper elevation={6} className={classes.contentItem}>
+              <Paper elevation={7} className={classes.contentItem}>
                 <Typography
                   color="textSecondary"
                   display="inline"
                   variant="body2"
-                >
-                  DESCRIÇAO
-                </Typography>
+                  text="DESCRIÇAO"
+                ></Typography>
               </Paper>
             </Grid>
             <Grid item xs>
-              <Paper elevation={6} className={classes.contentItem}>
-                STACKS
+              <Paper elevation={7} className={classes.contentItem}>
+                <Typography
+                  color="textSecondary"
+                  display="inline"
+                  variant="body2"
+                  text="STACKS"
+                ></Typography>
               </Paper>
             </Grid>
           </Grid>
@@ -116,7 +82,12 @@ const ProductCard = () => {
           </Grid>
 
           <Grid className={classes.statsItem} item>
-            <Typography color="textPrimary" display="inline" variant="h8">
+            <Typography
+              color="textPrimary"
+              display="inline"
+              variant="h8"
+              text="Nome"
+            >
               Nome
             </Typography>
             <Avatar className={classes.statsIcon} />
