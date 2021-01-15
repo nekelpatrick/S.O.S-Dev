@@ -2,18 +2,23 @@ import styled from "styled-components";
 
 const Section2Content = styled.section `
     width: 100vw;
-    height: 50vh;
+    max-width: 100%;
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
+
+    height: 50vh;
 
     .description-text-content {
         width: 50vw;
-        padding: 9%;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        margin: 0px;
     }
+
+    .description {
+        width: 40vw;
+    }
+
     .second-image-content {
         width: 50vw;
         display: flex;
