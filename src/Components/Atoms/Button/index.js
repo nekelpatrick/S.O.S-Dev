@@ -1,21 +1,19 @@
-import { Button } from "@material-ui/core";
-import BotãoContent from "./styles"
+import React from "react";
+import Button from "@material-ui/core/Button";
+import useStyles from "./style.js";
 
-const Botão = ({entrar, sair}) => {
+export default function ContainedButtons({ text, classe, onClick, type }) {
+  const classes = useStyles();
 
-    return (
-        <>
-        {entrar && (
-            <BotãoContent entar >
-                <Button>Entrar</Button>
-            </BotãoContent>)
-        }
-        {sair && (
-            <BotãoContent entar >
-                <Button>Entrar</Button>
-            </BotãoContent>)}
-        </>
-    )
-};
-
-export default Botão;
+  return (
+    <Button
+      className={classes[classe]}
+      onClick={onClick}
+      variant="contained"
+      color="secondary"
+      type={type}
+    >
+      {text}
+    </Button>
+  );
+}
