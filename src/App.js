@@ -1,4 +1,8 @@
 import "./App.css";
+<<<<<<< HEAD
+=======
+// import Pages from "./Pages/routes";
+>>>>>>> bb719e9213606837a1a6f6b6490d572accaccc44
 import Header from "./Components/Organisms/Header/index";
 
 import { useStyles, theme } from "./Theme";
@@ -6,7 +10,6 @@ import { useStyles, theme } from "./Theme";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 
-import Techs from "./Components/Molecules/Techs";
 
 function App() {
   const classes = useStyles();
@@ -20,8 +23,6 @@ function App() {
         style={{ height: "100vh" }}
       >
         <Header />
-        {/* <Pages /> */}
-        <Techs />
       </Paper>
     </ThemeProvider>
   );

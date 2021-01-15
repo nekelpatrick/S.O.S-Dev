@@ -18,7 +18,13 @@ export default function ContainedButtons({
       variant="contained"
       color="secondary"
       type={type}
+<<<<<<< HEAD
       size={size}
+=======
+      onClick={onClick}
+      variant="contained"
+      color="secondary"
+>>>>>>> bb719e9213606837a1a6f6b6490d572accaccc44
     >
       {text}
     </Button>
