@@ -1,8 +1,8 @@
 import { Form } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
-import api from "../../../axios-globalConfig/axios-global";
+import axios from "axios";
+import { api } from "../../../axios-globalConfig/axios-global";
 
 import Button from "../../Atoms/Button";
 import Types from "../../Atoms/Types";
