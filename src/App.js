@@ -33,7 +33,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Paper color="primary" >
         <Header />
-        {/* <Pages /> */}
+          <Pages />
         <Techs />
       </Paper>
     </ThemeProvider>
