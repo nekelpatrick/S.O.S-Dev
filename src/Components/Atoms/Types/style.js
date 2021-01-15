@@ -18,7 +18,13 @@ const Style = makeStyles((theme) => ({
     fontSize: '12px',
   },
   
-  titlePopUp: {},
+  fontStyleProfile: {
+    color: "#EFDCBD",
+  },
+
+  profileContacts: {
+    color: "#EFDCBD",
+  }
 }));
 
 export default Style;
