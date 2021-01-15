@@ -14,11 +14,6 @@ const Filters = () => {
         time: ""
     });
 
-    const changeTextInputValue = (e) => {
-        //dps setar esse valor em um estado para fazer o filtro
-        console.log("input value: " + e.target.value);
-    };
-
     const optionsList = [
         {setValue: (e) => {setOptions({...options, techs: e.target.value})},
         options: ["React", "Python", "SQL"], label: "Tecnologias", value: "techs"}, 
@@ -29,6 +24,11 @@ const Filters = () => {
         {setValue: (e) => {setOptions({...options, time: e.target.value})}, 
         options: ["3 a 7 dias", "8 a 15 dias", "+ de 15 dias"], label: "Tempo Estimado", value: "time"}
     ];
+
+    const changeTextInputValue = (e) => {
+        //dps setar esse valor em um estado para fazer o filtro
+        console.log("input value: " + e.target.value);
+    };
 
     console.log(options)
 

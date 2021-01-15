@@ -12,6 +12,9 @@ export default function ContainedButtons({ text, classe, onClick, type }) {
       variant="contained"
       color="secondary"
       type={type}
+      onClick={onClick}
+      variant="contained"
+      color="secondary"
     >
       {text}
     </Button>

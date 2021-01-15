@@ -8,6 +8,16 @@ const Style = makeStyles((theme) => ({
   textCard: {
     width: "90%",
   },
+
+  commentTitle: {
+    fontSize: '15px',
+    marginRight: '1vw'
+  },
+
+  commentContent: {
+    fontSize: '12px',
+  },
+  
   titlePopUp: {},
 }));
 
