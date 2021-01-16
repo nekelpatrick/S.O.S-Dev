@@ -1,5 +1,5 @@
 import "./App.css";
-// import Pages from "./Pages/routes";
+import Pages from "./Pages/Landing-Page/index";
 import Header from "./Components/Organisms/Header/index";
 
 import { useStyles, theme } from "./Theme";
@@ -20,6 +20,7 @@ function App() {
         style={{ height: "100vh" }}
       >
         <Header />
+        <Pages />
       </Paper>
     </ThemeProvider>
   );
