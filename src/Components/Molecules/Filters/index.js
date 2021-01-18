@@ -6,7 +6,6 @@ import Buttom from "../../Atoms/Button";
 
 import { useState } from "react";
 
-
 const Filters = () => {
     const [options, setOptions] = useState({
         techs: "",
@@ -15,61 +14,42 @@ const Filters = () => {
         time: ""
     });
 
-    const changeTechs = (e) => {
-        setOptions({...options, techs: e.target.value})
-    }
-    const changeStack = (e) => {
-        setOptions({...options, stack: e.target.value})
-    }
-    const changeNivel = (e) => {
-        setOptions({...options, nivel: e.target.value})
-    }
-    const changeTime = (e) => {
-        setOptions({...options, time: e.target.value})
-    }
+    const optionsList = [
+        {setValue: (e) => {setOptions({...options, techs: e.target.value})},
+        options: ["React", "Python", "SQL"], label: "Tecnologias", value: "techs"}, 
+        {setValue: (e) => {setOptions({...options, stack: e.target.value})}, 
+        options: ["Front-End", "Back-End", "Full-Stack"], label: "Stack", value: "stack"}, 
+        {setValue: (e) => {setOptions({...options, nivel: e.target.value})}, 
+        options: ["Iniciante", "Intermediário", "Avançado"], label: "Nivel", value: "nivel"}, 
+        {setValue: (e) => {setOptions({...options, time: e.target.value})}, 
+        options: ["3 a 7 dias", "8 a 15 dias", "+ de 15 dias"], label: "Tempo Estimado", value: "time"}
+    ];
 
     const changeTextInputValue = (e) => {
         //dps setar esse valor em um estado para fazer o filtro
-        console.log("input value" + e.target.value);
-    }
+        console.log("input value: " + e.target.value);
+    };
 
     console.log(options)
 
     return (
         <FiltersContent>
             <div className="checkBox-content">
-                <div className="selects-content">
-                    <CheckBoxAtom/>
-                    <Input onChange={changeTechs} value={options.techs} select="select" label="Tecnologias" classe="inputSelect">
-                        <option>React</option>
-                        <option>Python</option>
-                        <option>SQL</option>
-                    </Input>
-                </div>
-                <div className="selects-content">
-                    <CheckBoxAtom/>
-                    <Input onChange={changeStack} value={options.stack} select="select" label="Stack" classe="inputSelect">
-                        <option>Front-End</option>
-                        <option>Back-End</option>
-                        <option>Full-Stack</option>
-                    </Input>
-                </div>
-                <div className="selects-content">
-                    <CheckBoxAtom/>
-                    <Input onChange={changeNivel} value={options.nivel} select="select" label="Nível" classe="inputSelect">
-                        <option>Iniciante</option>
-                        <option>Intermediário</option>
-                        <option>Avançado</option>
-                    </Input>
-                </div>
-                <div className="selects-content">
-                    <CheckBoxAtom/>
-                    <Input onChange={changeTime} value={options.time} select="select" label="Tempo" classe="inputSelect">
-                        <option>3 a 7 dias</option>
-                        <option>8 a 15 dias</option>
-                        <option>+ de 15 dias</option>
-                    </Input>
-                </div>
+                {optionsList.map((option, index) => (
+                    <div key={index} className="selects-content">
+                        <CheckBoxAtom/>
+                        <Input 
+                        onChange={option.setValue} 
+                        value={options[option.value]} 
+                        select="select" label={option.label} 
+                        classe="inputSelect"
+                        >
+                            {option.options.map((item, index) => (
+                                <option key={index}>{item}</option>
+                            ))}
+                        </Input>
+                    </div>
+                ))}
             </div>
             <div className="searchInput-content">
                 <Input 
