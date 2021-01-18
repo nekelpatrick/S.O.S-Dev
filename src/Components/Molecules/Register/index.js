@@ -1,6 +1,8 @@
 import { Form } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import axios from "axios";
+import { api } from "../../../axios-globalConfig/axios-global";
 
 import Button from "../../Atoms/Button";
 import Types from "../../Atoms/Types";
@@ -8,14 +10,10 @@ import Input from "../../Atoms/Input";
 
 import { useForm } from "react-hook-form";
 
-const Register = ({ text, setIsReg, isReg }) => {
+const Register = ({ text, setIsReg }) => {
   const title = "Cadastro";
 
   const schema = yup.object().shape({
-    name: yup
-      .string()
-      .min(3, "O nome deve conter no mínimo 3 letras")
-      .required("Campo obrigatorio"),
     user: yup.string().required("Campo obrigatório"),
     email: yup.string().email("email invalido").required("Campo obrigatório"),
     password: yup
@@ -36,7 +34,16 @@ const Register = ({ text, setIsReg, isReg }) => {
   });
 
   const handleForm = (data) => {
-    console.log(data);
+    api
+      .post("/register", { ...data })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        setError("user_register", {
+          message: "Email já existe",
+        });
+      });
   };
 
   return (
@@ -59,14 +66,6 @@ const Register = ({ text, setIsReg, isReg }) => {
           id="email"
           inputRef={register}
           helperText={errors.email?.message}
-        />
-        <Input
-          label="Nome"
-          variant="outlined"
-          name="name"
-          id="name"
-          inputRef={register}
-          helperText={errors.name?.message}
         />
         <Input
           label="Senha"

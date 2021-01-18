@@ -8,6 +8,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 
 
+
 function App() {
   const classes = useStyles();
 
@@ -17,7 +18,6 @@ function App() {
       <Paper
         className={classes.root}
         color="primary"
-        style={{ height: "100vh" }}
       >
         <Header />
         <Pages />
