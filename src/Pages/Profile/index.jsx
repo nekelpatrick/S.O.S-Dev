@@ -18,7 +18,10 @@ const Profile = () => {
             />
             <TechContainer>
                 <div className = 'techs'>
+                    <div className = 'title'>
                     <Types variant = 'h6' component = 'h3' text = 'Tecnologias' align = 'center' classe = "fontStyleProfile"/> 
+                    <Techs />
+                    </div>
                     <div>textotextotxetoxeto</div>
                 </div>
                 <div className = 'techsLevel'>

@@ -10,8 +10,8 @@ export const TechsContent = styled.div `
     justify-content: space-evenly;
     align-items: center;
 
-    border: 4px solid lightyellow;
-    border-radius: 9px;
+    /* border: 4px solid lightyellow; */
+    /* border-radius: 9px; */
 
     h6 {
         text-align: center;
