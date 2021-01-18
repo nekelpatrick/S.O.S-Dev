@@ -11,7 +11,7 @@ import Types from "../../Components/Atoms/Types";
 import noImage from "./Image/perfil-blog.png";
 import Techs from "../../Components/Molecules/Techs";
 
-import RenderBox from "../PerfilRenderBox";
+import RenderBox from "../RenderBox/PerfilRenderBox";
 
 import { Grid } from "@material-ui/core";
 
@@ -68,6 +68,7 @@ const Profile = () => {
                     align="center"
                     classe="fontStyleProfile"
                   />
+
                   <Techs />
                 </div>
                 <div>textotextotxetoxeto</div>
