@@ -8,11 +8,6 @@ import ProductCard from '../../Components/Molecules/Project-Card'
 
 import { useState } from 'react'
 
-import Image from "../../Components/Atoms/Image";
-import Types from "../../Components/Atoms/Types";
-import noImage from "./Image/perfil-blog.png";
-import Techs from "../../Components/Molecules/Techs";
-
 import RenderBox from "../PerfilRenderBox";
 
 import { Grid } from "@material-ui/core";
@@ -22,7 +17,6 @@ const Profile = () => {
  
   return (
     <Grid container>
-      {/* Grid item xs quer dizer que o item deve preencher o que sobrar da tela */}
       <Grid item xs>
         <Container>
           <Image
@@ -39,81 +33,119 @@ const Profile = () => {
           classe = 'profileFavorites'
           onClick = {() => setFavouriteTime(isFavoriteTime ? false : true)}
           />
-          <TechContainer>
-            <div className="techs">
-              <Types
-                variant="h6"
-                component="h3"
-                text="Tecnologias"
-                align="center"
-                classe="fontStyleProfile"
-              />
-              <div>textotextotxetoxeto</div>
-            </div>
-            <div className="techsLevel">
-              <Types
-                variant="h6"
-                component="h3"
-                text="Nível de Experiência"
-                align="center"
-                classe="fontStyleProfile"
-              />
-              <div>avançado</div>
-            </div>
-          </TechContainer>
             <TechContainer>
-                <div className = 'techs'>
-                  <Types variant = 'h6' component = 'h3' text = 'Tecnologias' align = 'center' classe = "fontStyleProfile"/> 
-                  <div>tecnologia da mãe joana</div>
+              <div className="techs">
+                <div className="title">
+                  <Types
+                    variant="h6"
+                    component="h3"
+                    text="Tecnologias"
+                    align="center"
+                    classe="fontStyleProfile"
+                  />
                 </div>
-                <div className = 'techsLevel'>
-                  <Types variant = 'h6' component = 'h3' text = 'Nível de Experiência' align = 'center' classe = "fontStyleProfile"/>
-                    <div>avançado</div>
-                </div>
+                <div>textotextotxetoxeto</div>
+              </div>
+              <div className="techsLevel">
+                <Types
+                  variant="h6"
+                  component="h3"
+                  text="Nível de Experiência"
+                  align="center"
+                  classe="fontStyleProfile"
+                />
+                <div>avançado</div>
+              </div>
             </TechContainer>
-                <PendingProjectsContainer >
-                    <Types variant = 'h6' component = 'h3' text = 'Projetos em Andamento' align = 'center' classe = "fontStyleProfile"/>
-                    <div>Projeto do beabá</div>
-                </PendingProjectsContainer>
-                <CompletedProjectsContainer>
-                    <div className = 'project'>
-                        <Types variant = 'h6' component = 'h3' text = 'Projetos Prontos' align = 'center' classe = "fontStyleProfile"/>
-                        <div>Projeto da dona maria</div>
-                    </div>
-                    <div className = 'deploy'>
-                        <Types variant = 'h6' component = 'h3' text = 'Deploy' align = 'center' classe = "fontStyleProfile"/>
-                        <div>www.adocicameuamor.com.br</div>
-                    </div>
-                </CompletedProjectsContainer>
-                <ContactContainer>
-                    <Types variant = 'h6' component = 'h3' text = 'Contato' align = 'center' classe = "fontStyleProfile"/>
-                        <div className = 'contactsContainer'>                        
-                            <div className = 'webContacts'>
-                                    <Types variant = 'p' component = 'h4' text = 'Email' align = 'center' classe = "profileContacts" />
-                                    <div>donamaria@mail.com</div>
-                                    <Types variant = 'p' component = 'h4' text = 'Portfolio' align = 'center' classe = "profileContacts"/>
-                                    <div>www.portfolio.com.br</div>
-                            </div>
-                            <div className = 'socialContacts'>
-                                    <Types variant = 'p' component = 'h4' text = 'Telefone' align = 'center' classe = "profileContacts"/>
-                                <div>(11) 91234-5678</div>
-                                    <Types variant = 'p' component = 'h4' text = 'Redes Sociais' align = 'center' classe = "profileContacts"/>
-                                <div>Linkedin - Git - Instagram</div>
-                            </div>
-                        </div>
-                </ContactContainer>
+            <PendingProjectsContainer>
+              <Types
+                variant="h6"
+                component="h3"
+                text="Projetos em Andamento"
+                align="center"
+                classe="fontStyleProfile"
+              />
+              <div>Projeto do beabá</div>
+            </PendingProjectsContainer>
+            <CompletedProjectsContainer>
+              <div className="project">
+                <Types
+                  variant="h6"
+                  component="h3"
+                  text="Projetos Prontos"
+                  align="center"
+                  classe="fontStyleProfile"
+                />
+                <div>Projeto da dona maria</div>
+              </div>
+              <div className="deploy">
+                <Types
+                  variant="h6"
+                  component="h3"
+                  text="Deploy"
+                  align="center"
+                  classe="fontStyleProfile"
+                />
+                <div>www.adocicameuamor.com.br</div>
+              </div>
+            </CompletedProjectsContainer>
+          <ContactContainer>
+            <Types
+              variant="h6"
+              component="h3"
+              text="Contato"
+              align="center"
+              classe="fontStyleProfile"
+            />
+            <div className="contactsContainer">
+              <div className="webContacts">
+                <Types
+                  variant="p"
+                  component="h4"
+                  text="Email"
+                  align="center"
+                  classe="profileContacts"
+                />
+                <div>Projeto da dona maria</div>
+                <Types
+                  variant="p"
+                  component="h4"
+                  text="Portfolio"
+                  align="center"
+                  classe="profileContacts"
+                />
+                <div>www.protifolio.com</div>
+              </div>
+              <div className="socialContacts">
+                <Types
+                  variant="p"
+                  component="h4"
+                  text="Telefone"
+                  align="center"
+                  classe="profileContacts"
+                />
+                <div>www.adocicameuamor.com.br</div>
+                <Types
+                  variant="p"
+                  component="h4"
+                  text="Redes Sociais"
+                  align="center"
+                  classe="profileContacts"
+                />
+                <div>Linkedin - Git - Instagram</div>
+              </div>
+            </div>
+          </ContactContainer>
         </Container>
       </Grid>
-
       <Grid item xs={8}>
         <RenderBox>
-        {isFavoriteTime ? 
+        {/*isFavoriteTime ? 
             <div>Projetos favoritos</div> :
             <ProductCard />
-        }
+        */}
         </RenderBox>
       </Grid>
-      {/* Grid item xs={8} quer dizer que este ITEM deve ter o maior tamanho na tela */}
     </Grid>
   );
 };
