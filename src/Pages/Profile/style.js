@@ -21,6 +21,12 @@ export const TechContainer = styled.div`
     flex-direction: row;
     margin-bottom: 2vh;
 
+    .title {
+        display: flex;
+        justify-content: space-evenly;
+        width: 15vw;
+    }
+
     .techs, .techsLevel{
         padding: 0 1vw 0 1vw;
         display: flex;
