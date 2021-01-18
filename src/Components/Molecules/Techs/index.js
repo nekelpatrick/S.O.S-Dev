@@ -33,7 +33,7 @@ const Techs = () => {
     return (
 
     <StyledPopup
-      trigger={<Button text={icon} classe="buttonPupUpAddTechs"/>}
+      trigger={<Button text={icon} classe="buttonPupUpAddTechs" />}
       modal
       nested
     >
