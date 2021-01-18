@@ -86,7 +86,7 @@ const ProductCard = () => {
                   label="Descrição"
                   placeholder="Insira a Descrição do projeto"
                   multiline
-                  rows={7}
+                  rows={6}
                   value={value}
                   onChange={handleChange}
                   variant="outlined"
@@ -103,7 +103,7 @@ const ProductCard = () => {
                   label="Habilidades Necessárias"
                   placeholder="Insira as Habilidades necessárias"
                   multiline
-                  rows={7}
+                  rows={6}
                   value={value}
                   onChange={handleChange}
                   variant="outlined"
