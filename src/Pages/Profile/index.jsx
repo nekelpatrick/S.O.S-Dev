@@ -1,20 +1,63 @@
-import { Container, TechContainer, PendingProjectsContainer, CompletedProjectsContainer, ContactContainer } from './style'
-import Image from '../../Components/Atoms/Image'
-import Types from '../../Components/Atoms/Types'
-import noImage from './Image/perfil-blog.png'
-import Techs from '../../Components/Molecules/Techs'
+import {
+  Container,
+  TechContainer,
+  PendingProjectsContainer,
+  CompletedProjectsContainer,
+  ContactContainer,
+} from "./style";
 
+import Image from "../../Components/Atoms/Image";
+import Types from "../../Components/Atoms/Types";
+import noImage from "./Image/perfil-blog.png";
+import Techs from "../../Components/Molecules/Techs";
+
+import RenderBox from "../PerfilRenderBox";
+
+import { Grid } from "@material-ui/core";
 
 const Profile = () => {
-    return (
+  return (
+    <Grid container>
+      {/* Grid item xs quer dizer que o item deve preencher o que sobrar da tela */}
+      <Grid item xs>
         <Container>
-            <Image 
-            src = {noImage}
-            alt = 'Foto do perfil'
-            width = '120px'
-            height = '120px'
-            borderRadius = '50%'
-            margin = '2vh 0px 2vh 0px'
+          <Image
+            src={noImage}
+            alt="Foto do perfil"
+            width="120px"
+            height="120px"
+            borderRadius="50%"
+            margin="2vh 0px 2vh 0px"
+          />
+          <TechContainer>
+            <div className="techs">
+              <Types
+                variant="h6"
+                component="h3"
+                text="Tecnologias"
+                align="center"
+                classe="fontStyleProfile"
+              />
+              <div>textotextotxetoxeto</div>
+            </div>
+            <div className="techsLevel">
+              <Types
+                variant="h6"
+                component="h3"
+                text="Nível de Experiência"
+                align="center"
+                classe="fontStyleProfile"
+              />
+              <div>avançado</div>
+            </div>
+          </TechContainer>
+          <PendingProjectsContainer>
+            <Types
+              variant="h6"
+              component="h3"
+              text="Projetos em Andamento"
+              align="center"
+              classe="fontStyleProfile"
             />
             <TechContainer>
                 <div className = 'techs'>
@@ -61,7 +104,14 @@ const Profile = () => {
                     </div>
             </ContactContainer>
         </Container>
-    )
-}
+      </Grid>
 
-export default Profile
+      <Grid item xs={8}>
+        <RenderBox />
+      </Grid>
+      {/* Grid item xs={8} quer dizer que este ITEM deve ter o maior tamanho na tela */}
+    </Grid>
+  );
+};
+
+export default Profile;
