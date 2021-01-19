@@ -5,7 +5,9 @@ import Button from "../../Atoms/Button";
 import Types from "../../Atoms/Types";
 import Input from "../../Atoms/Input";
 
-import { Form, Style } from "./style";
+import { Form } from "./style";
+
+import { api } from "../../../axios-globalConfig/axios-global";
 
 import { useForm } from "react-hook-form";
 
@@ -20,11 +22,11 @@ const Login = ({ text, setIsReg, isReg }) => {
     email: yup.string().email("email invalido").required("Campo obrigatório"),
     password: yup
       .string()
-      // .min(8, "Senha deve conter no mínimo 8 dígitos")
-      // .matches(
-      //   /^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-      //   "Senha deve conter: pelomenos 1 letra maiuscula, 1 letra minuscula, 1 caractere especial e 1 número"
-      // )
+      .min(8, "Senha deve conter no mínimo 8 dígitos")
+      .matches(
+        /^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+        "Senha incorreta"
+      )
       .required("Campo obrigatório"),
   });
 
@@ -32,26 +34,17 @@ const Login = ({ text, setIsReg, isReg }) => {
     resolver: yupResolver(schema),
   });
 
-  const handleForm = async (data) => {
-    try {
-      const response = await axios.post("http://localhost:3001/login", {
-        email: data.email,
-        password: data.password
+  const handleForm = (data) => {
+    api
+      .post("/login", { ...data })
+      .then((res) => {
+        console.log(res);
       })
-      let token = response.data.accessToken;
-      let decoded = jwt_decode(token);
-      let userId = decoded.sub
-      const user = await axios.get("http://localhost:3001/users/1", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      console.log(user)
-    }
-    catch (error) {
-      console.log(error)
-      alert("credenciais inválidas")
-    }
+      .catch((err) => {
+        setError("user_register", {
+          message: "Email já existe",
+        });
+      });
   };
 
   return (
