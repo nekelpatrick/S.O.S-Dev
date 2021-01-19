@@ -11,9 +11,14 @@ import { api } from "../../../axios-globalConfig/axios-global";
 
 import { useForm } from "react-hook-form";
 
+import { useDispatch } from "react-redux";
+import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
+
 const Login = ({ text, setIsReg, isReg }) => {
   const title = "Login";
   const singUp = "Não tem uma conta?";
+
+  const dispatch = useDispatch();
 
   const schema = yup.object().shape({
     email: yup.string().email("email invalido").required("Campo obrigatório"),
@@ -35,7 +40,7 @@ const Login = ({ text, setIsReg, isReg }) => {
     api
       .post("/login", { ...data })
       .then((res) => {
-        console.log(res);
+        dispatch(getProfileThunk(data.email, res.data.accessToken));
       })
       .catch((err) => {
         setError("user_register", {
