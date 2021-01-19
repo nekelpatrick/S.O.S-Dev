@@ -8,7 +8,7 @@ import ProductCard from '../../Components/Molecules/Project-Card'
 
 import { useState } from 'react'
 
-import RenderBox from "../PerfilRenderBox";
+import RenderBox from "../RenderBox/PerfilRenderBox";
 
 import { Grid } from "@material-ui/core";
 
