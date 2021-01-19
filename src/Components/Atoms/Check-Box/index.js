@@ -6,31 +6,22 @@ import { FilterContext } from "../../Molecules/Filters/filterContext";
 const CheckBoxAtom = ({ color, check, handleFilter, selectValue }) => {
   const { options, setOptions } = useContext(FilterContext);
 
-  // const removeSelectedFilter = (propToRemove) => {
-  //   const newProjectsList = projectsList.filter((project) => project[propToRemove] !== selectValue);
-  //   setProjectsList(newProjectsList);
-  // }
-
   const setNewOption = () => {
     const optionsValue = Object.values(options);
     const indexOfValue = optionsValue.findIndex((project) => project === selectValue);
 
     if (indexOfValue === 0) {
-      setOptions({...options, techs: ""});
+      setOptions({...options, title: ""});
       console.log(options)
-      // removeSelectedFilter("techs");
     }
     if (indexOfValue === 1) {
-      setOptions({...options, area: ""});
-      // removeSelectedFilter("area");
+      setOptions({...options, type: ""});
     }
     if (indexOfValue === 2) {
       setOptions({...options, nivel: ""});
-      // removeSelectedFilter("nivel");
     }
     if (indexOfValue === 3) {
       setOptions({...options, time: ""});
-      // removeSelectedFilter("time");
     }
   };
 
@@ -42,7 +33,7 @@ const CheckBoxAtom = ({ color, check, handleFilter, selectValue }) => {
     <>
       <Checkbox
         checked={check}
-        onChange={() => setNewOption()}
+        onClick={() => setNewOption()}
         color={color}
         inputProps={{ "aria-label": "uncontrolled-checkbox" }}
       />

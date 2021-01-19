@@ -1,8 +1,7 @@
-import { RiUserLine } from "react-icons/ri";
 
 const projectsReducer = (state = [], action) => {
     switch (action.type) {
-        case "@addProjects":
+        case "@add_projects":
             const { projects } = action;
             return projects;
 

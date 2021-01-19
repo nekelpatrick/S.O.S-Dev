@@ -6,14 +6,23 @@ import ContainedButtons from '../../Components/Atoms/Button'
 
 import ProductCard from '../../Components/Molecules/Project-Card'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import { useSelector } from "react-redux";
 
 import RenderBox from "../RenderBox/PerfilRenderBox";
 
 import { Grid } from "@material-ui/core";
 
 const Profile = () => {
-  const [isFavoriteTime, setFavouriteTime] = useState(false)
+  const [isFavoriteTime, setFavouriteTime] = useState(false);
+  const [userInfos, setUserInfos] = useState([]);
+  const profile = useSelector((state) => state.profile);
+
+  useEffect(() => {
+    setUserInfos(profile)
+  }, [profile]);
+
+  console.log(profile)
  
   return (
     <Grid container>
@@ -27,7 +36,7 @@ const Profile = () => {
             borderRadius="50%"
             margin="2vh 0px 2vh 0px"
           />
-          <Types variant = 'h5' component = 'h2' text = 'Nome do meliante' align = 'center' classe = 'fontStyleProfileName' />
+          <Types variant = 'h5' component = 'h2' text = {userInfos.user} align = 'center' classe = 'fontStyleProfileName' />
           <ContainedButtons
           text = {isFavoriteTime ? 'PROJETOS' : 'FAVORITOS'}
           classe = 'profileFavorites'
@@ -44,7 +53,7 @@ const Profile = () => {
                     classe="fontStyleProfile"
                   />
                 </div>
-                <div>textotextotxetoxeto</div>
+                <div>{userInfos.tecnologia}</div>
               </div>
               <div className="techsLevel">
                 <Types
