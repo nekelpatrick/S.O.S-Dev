@@ -10,9 +10,14 @@ import {
   Typography,
   Container,
   TextField,
-  Button,
   IconButton,
   Divider,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@material-ui/core";
 
 import { RiImageEditLine } from "react-icons/ri";
@@ -30,17 +35,17 @@ const useStyles = makeStyles((theme) => ({
 
   avatar: {
     backgroundColor: "#C4C4C4",
-    width: 65,
-    height: 65,
+    width: 55,
+    height: 55,
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom: 2,
+    marginBottom: 1,
   },
 
   textContainer: {
     display: "flex",
     flexDirection: "column",
-    maxWidth: "30vw",
+    maxWidth: "23vw",
   },
   techButton: {
     height: "40px",
@@ -54,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
 
     justifyContent: "center",
-    margin: "10px",
+    margin: "4px",
   },
   avatarButton: {
     margin: "5px",
@@ -73,23 +78,6 @@ export default function UserProfile({ user }) {
   const [course_module, setCourse_madule] = useState("");
   const [open, setOpen] = useState(false);
 
-  // VALIDATION WITH YUP
-  const schema = yup.object().shape({
-    name: yup
-      .string()
-      .required("Campo Necessário")
-      .matches(/[A-Za-z]\s[A-Za-z]/, "Formato Inválido"),
-    email: yup
-      .string()
-      .required("Campo Necessário")
-      .email("Formato de email Inválido"),
-
-    contact: yup.string().required("Campo Necessário"),
-  });
-  const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(schema),
-  });
-
   // UPADATE MESSAGE
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -105,7 +93,8 @@ export default function UserProfile({ user }) {
   };
 
   //  AQUI PODEMOS FAZER UM ARRAY PARA INPUT SELECT
-  const modules = [];
+
+  const userLevel = ["Iniciante", "Intermediário", "Avançado"];
 
   // GET AVATAR HANDLER
   const handleAvatarChange = (e) => {
@@ -119,6 +108,50 @@ export default function UserProfile({ user }) {
     data.image = image;
     setOpen(true);
   };
+
+  // ------ MODAL POP UP PARA REDE SOCIAIS --------------------
+
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [socialMedia, setSocialMedia] = useState("");
+
+  const handleClickOpen = (media) => {
+    setDialogOpen(true);
+    setSocialMedia(media);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
+
+  const handleSaveLink = () => {
+    setDialogOpen(false);
+  };
+  //-------------------------------------------------------
+
+  // ---------------- VALIDATION YUP ---------------------------------
+  const schema = yup.object().shape({
+    name: yup
+      .string()
+      .required("Campo Necessário")
+      .matches(/[A-Za-z]\s[A-Za-z]/, "Formato Inválido"),
+    email: yup
+      .string()
+      .required("Campo Necessário")
+      .email("Formato de email Inválido"),
+    contact: yup.string().required("Campo Necessário"),
+    linkSocial: yup
+      .string()
+      .matches(
+        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+        "Enter correct url!"
+      ),
+  });
+
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  //------------------------------VALIDATION YUP------------------------
 
   return (
     <>
@@ -176,7 +209,7 @@ export default function UserProfile({ user }) {
 
           {/* FIM TECNOLOGIAS */}
 
-          <Divider style={{ margin: 30 }} />
+          <Divider style={{ margin: 10 }} />
           {/*  */}
 
           <Container
@@ -224,15 +257,70 @@ export default function UserProfile({ user }) {
             />
 
             <Container className={classes.socialButtons}>
-              <Avatar className={classes.avatarButton}>
+              <Avatar
+                className={classes.avatarButton}
+                component={IconButton}
+                onClick={() => handleClickOpen("Linkedin")}
+              >
                 <AiFillLinkedin />
               </Avatar>
-              <Avatar className={classes.avatarButton}>
+
+              <Avatar
+                className={classes.avatarButton}
+                component={IconButton}
+                onClick={() => handleClickOpen("Github")}
+              >
                 <AiFillGithub />
               </Avatar>
-              <Avatar className={classes.avatarButton}>
+
+              <Avatar
+                className={classes.avatarButton}
+                component={IconButton}
+                onClick={() => handleClickOpen("Instagram")}
+              >
                 <AiFillInstagram />
               </Avatar>
+
+              {/* -------------------modal- */}
+
+              <Dialog
+                open={dialogOpen}
+                onClose={handleDialogClose}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Insira o link para seu {socialMedia}
+                  </DialogContentText>
+                  <TextField
+                    name="linkSocial"
+                    autoFocus
+                    margin="dense"
+                    id="linkSocial"
+                    label="Email Address"
+                    type="email"
+                    fullWidth
+                    color="textPrimary"
+                    error={!!errors.linkSocial}
+                    helperText={errors.linkSocial?.message}
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleDialogClose} color="secondary">
+                    Cancelar
+                  </Button>
+                  <Button
+                    type="submit"
+                    onClick={handleDialogClose}
+                    color="textPrimary"
+                  >
+                    Salvar
+                  </Button>
+                </DialogActions>
+              </Dialog>
+
+              {/* --------------------------- */}
             </Container>
           </Container>
 
