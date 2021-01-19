@@ -1,7 +1,6 @@
 import { Form } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "axios";
 import { api } from "../../../axios-globalConfig/axios-global";
 
 import Button from "../../Atoms/Button";
@@ -9,9 +8,13 @@ import Types from "../../Atoms/Types";
 import Input from "../../Atoms/Input";
 
 import { useForm } from "react-hook-form";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
+import { getAllUsersThunk } from "../../../Redux/modules/users/thunks";
 const Register = ({ text, setIsReg }) => {
   const title = "Cadastro";
+  const dispatch = useDispatch();
+  const { users } = useSelector((state) => state);
 
   const schema = yup.object().shape({
     user: yup.string().required("Campo obrigatório"),
@@ -35,11 +38,17 @@ const Register = ({ text, setIsReg }) => {
 
   const handleForm = (data) => {
     delete data.passwordConfirm;
+    data.tecnologia = [];
+    data.telefone = "";
+    data.redesSociais = "";
+    data.portifolio = "";
     api
       .post("/register", { ...data })
       .then((res) => {
-        console.log(res);
+        dispatch(getAllUsersThunk());
+        dispatch(getProfileThunk(data.email, res.data.accessToken));
       })
+
       .catch((err) => {
         setError("user_register", {
           message: "Email já existe",
@@ -93,7 +102,6 @@ const Register = ({ text, setIsReg }) => {
           type="submit"
         />
       </Form>
-
       <Button text={text} onClick={() => setIsReg(true)}></Button>
     </>
   );
