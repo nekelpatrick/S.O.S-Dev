@@ -1,7 +1,6 @@
 import "./App.css";
 import Pages from "./Routes/routes";
 import Header from "./Components/Organisms/Header/index";
-
 import { useStyles, theme } from "./Theme";
 
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -13,12 +12,9 @@ function App() {
   console.log(theme.palette);
   return (
     <ThemeProvider theme={theme}>
-      <Paper
-        className={classes.root}
-        color="primary"
-      >
+      <Paper className={classes.root} color="primary">
         <Header />
-          <Pages />
+        <Pages />
       </Paper>
     </ThemeProvider>
   );
