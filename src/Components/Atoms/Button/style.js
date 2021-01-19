@@ -37,9 +37,20 @@ const Style = makeStyles((theme) => ({
     color: "#E63462",
 
     padding: "0%",
-    minWidth: "0px",
+    width: "60px",
     backgroundColor: "#ffffff00",
     borderRadius: "12px",
+    '&:hover': {
+      backgroundColor: "#ffffff05"
+    }
+  },
+
+  profileFavorites: {
+    fontSize: "1rem",
+    color: '#EFDCBD',
+
+    borderRadius: "12px",
+    marginBottom: '1vh',
   },
 
   buttonLogin: {},

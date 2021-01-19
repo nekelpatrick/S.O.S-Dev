@@ -1,7 +1,14 @@
 import styled from 'styled-components'
 
+export const ProfileContainer = styled.div`
+    width: 100vw;
+    background-color: #0C101D;
+    display: flex;
+
+`
+
 export const Container = styled.div`
-    height: 92.5vh;
+    height: 92.4vh;
     width: 30vw;
     background-color: #17223A;
     border-right: 1px solid #EFDCBD;
@@ -11,6 +18,18 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+`
+
+export const BodyContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 45vw;
+    height: 70vh;
+    background-color: #17223A;
+    border: 3px solid #EFDCBD;
+    margin: 0 auto;
+    align-self: flex-end;
 
 `
 
