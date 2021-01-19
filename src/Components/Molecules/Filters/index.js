@@ -1,6 +1,6 @@
 import { FiltersContent } from "./style";
 
-// import CheckBoxAtom from "../../Atoms/Check-Box";
+// import CheckBoxAtom from "../../Atoms/Check-Box"; 
 import Input from "../../Atoms/Input";
 import Buttom from "../../Atoms/Button";
 
