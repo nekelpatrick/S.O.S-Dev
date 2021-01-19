@@ -14,7 +14,6 @@ import { getAllUsersThunk } from "../../../Redux/modules/users/thunks";
 const Register = ({ text, setIsReg }) => {
   const title = "Cadastro";
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state);
 
   const schema = yup.object().shape({
     user: yup.string().required("Campo obrigatório"),
