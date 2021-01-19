@@ -1,7 +1,8 @@
 import React from "react";
 
-import Card from "../Components/Molecules/Project-Card-Add-New";
-import Card2 from "../Components/Molecules/Project-Card";
+import Card from "../../Components/Molecules/Project-Card-Add-New";
+import Card2 from "../../Components/Molecules/Project-Card";
+import EditUser from "../../Components/Organisms/ProfileForm";
 
 import { makeStyles } from "@material-ui/core";
 
@@ -16,8 +17,7 @@ const PerfilRenderBox = () => {
 
   return (
     <div className={classes.RenderBox}>
-      <Card2></Card2>
-      <Card2></Card2>
+      <EditUser />
     </div>
   );
 };
