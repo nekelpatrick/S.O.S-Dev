@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const Style = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
+    marginBottom: "0px",
   },
 
   textCard: {
@@ -10,14 +11,14 @@ const Style = makeStyles((theme) => ({
   },
 
   commentTitle: {
-    fontSize: '15px',
-    marginRight: '1vw'
+    fontSize: "15px",
+    marginRight: "1vw",
   },
 
   commentContent: {
-    fontSize: '12px',
+    fontSize: "12px",
   },
-  
+
   fontStyleProfile: {
     color: "#EFDCBD",
   },
@@ -28,7 +29,7 @@ const Style = makeStyles((theme) => ({
 
   fontStyleProfileName: {
     color: "#EFDCBD",
-  }
+  },
 }));
 
 export default Style;
