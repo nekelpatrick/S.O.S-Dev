@@ -1,7 +1,14 @@
 import styled from 'styled-components'
 
+export const ProfileContainer = styled.div`
+    width: 100vw;
+    background-color: #0C101D;
+    display: flex;
+
+`
+
 export const Container = styled.div`
-    height: 92.5vh;
+    height: 92.4vh;
     width: 30vw;
     background-color: #17223A;
     border-right: 1px solid #EFDCBD;
@@ -14,18 +21,24 @@ export const Container = styled.div`
 
 `
 
+export const BodyContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 45vw;
+    height: 70vh;
+    background-color: #17223A;
+    border: 3px solid #EFDCBD;
+    margin: 0 auto;
+    align-self: flex-end;
+
+`
+
 export const TechContainer = styled.div`
     width: 30vw;
     height: 17vh;
     display: flex;
     flex-direction: row;
     margin-bottom: 2vh;
-
-    .title {
-        display: flex;
-        justify-content: space-evenly;
-        width: 15vw;
-    }
 
     .techs, .techsLevel{
         padding: 0 1vw 0 1vw;

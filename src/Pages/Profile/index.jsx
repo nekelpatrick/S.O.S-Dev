@@ -1,21 +1,20 @@
-import {
-  Container,
-  TechContainer,
-  PendingProjectsContainer,
-  CompletedProjectsContainer,
-  ContactContainer,
-} from "./style";
+import { Container, TechContainer, PendingProjectsContainer, CompletedProjectsContainer, ContactContainer, BodyContainer, ProfileContainer } from './style'
+import Image from '../../Components/Atoms/Image'
+import Types from '../../Components/Atoms/Types'
+import noImage from './Image/perfil-blog.png'
+import ContainedButtons from '../../Components/Atoms/Button'
 
-import Image from "../../Components/Atoms/Image";
-import Types from "../../Components/Atoms/Types";
-import noImage from "./Image/perfil-blog.png";
-import Techs from "../../Components/Molecules/Techs";
+import ProductCard from '../../Components/Molecules/Project-Card'
+
+import { useState } from 'react'
 
 import RenderBox from "../RenderBox/PerfilRenderBox";
 
 import { Grid } from "@material-ui/core";
 
 const Profile = () => {
+  const [isFavoriteTime, setFavouriteTime] = useState(false)
+ 
   return (
     <Grid container>
       <Grid item xs>
@@ -28,36 +27,12 @@ const Profile = () => {
             borderRadius="50%"
             margin="2vh 0px 2vh 0px"
           />
-          <TechContainer>
-            <div className="techs">
-              <Types
-                variant="h6"
-                component="h3"
-                text="Tecnologias"
-                align="center"
-                classe="fontStyleProfile"
-              />
-              <div>textotextotxetoxeto</div>
-            </div>
-            <div className="techsLevel">
-              <Types
-                variant="h6"
-                component="h3"
-                text="Nível de Experiência"
-                align="center"
-                classe="fontStyleProfile"
-              />
-              <div>avançado</div>
-            </div>
-          </TechContainer>
-          <PendingProjectsContainer>
-            <Types
-              variant="h6"
-              component="h3"
-              text="Projetos em Andamento"
-              align="center"
-              classe="fontStyleProfile"
-            />
+          <Types variant = 'h5' component = 'h2' text = 'Nome do meliante' align = 'center' classe = 'fontStyleProfileName' />
+          <ContainedButtons
+          text = {isFavoriteTime ? 'PROJETOS' : 'FAVORITOS'}
+          classe = 'profileFavorites'
+          onClick = {() => setFavouriteTime(isFavoriteTime ? false : true)}
+          />
             <TechContainer>
               <div className="techs">
                 <div className="title">
@@ -68,8 +43,6 @@ const Profile = () => {
                     align="center"
                     classe="fontStyleProfile"
                   />
-
-                  <Techs />
                 </div>
                 <div>textotextotxetoxeto</div>
               </div>
@@ -116,7 +89,6 @@ const Profile = () => {
                 <div>www.adocicameuamor.com.br</div>
               </div>
             </CompletedProjectsContainer>
-          </PendingProjectsContainer>
           <ContactContainer>
             <Types
               variant="h6"
@@ -167,7 +139,12 @@ const Profile = () => {
         </Container>
       </Grid>
       <Grid item xs={8}>
-        <RenderBox />
+        <RenderBox>
+        {/*isFavoriteTime ? 
+            <div>Projetos favoritos</div> :
+            <ProductCard />
+        */}
+        </RenderBox>
       </Grid>
     </Grid>
   );

@@ -24,6 +24,10 @@ const Style = makeStyles((theme) => ({
 
   profileContacts: {
     color: "#EFDCBD",
+  },
+
+  fontStyleProfileName: {
+    color: "#EFDCBD",
   }
 }));
 
