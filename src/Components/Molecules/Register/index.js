@@ -11,9 +11,12 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
 import { getAllUsersThunk } from "../../../Redux/modules/users/thunks";
-const Register = ({ text, setIsReg }) => {
+import { useHistory } from "react-router-dom";
+const Register = ({ text, setIsReg, close }) => {
   const title = "Cadastro";
   const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const schema = yup.object().shape({
     user: yup.string().required("Campo obrigatório"),
@@ -46,6 +49,8 @@ const Register = ({ text, setIsReg }) => {
       .then((res) => {
         dispatch(getAllUsersThunk());
         dispatch(getProfileThunk(data.email, res.data.accessToken));
+        history.push("/profile");
+        close();
       })
 
       .catch((err) => {
