@@ -4,6 +4,8 @@ import Input from "../../Atoms/Input";
 import Button from "../../Atoms/Button";
 import Types from "../../Atoms/Types";
 
+import { api } from "../../../axios-globalConfig/axios-global";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -12,12 +14,21 @@ const Techs = () => {
   const schema = yup.object().shape({
     techs: yup.string().required("Campo obrigatório"),
   });
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, setError } = useForm({
     resolver: yupResolver(schema),
   });
 
   const patchTechs = (data) => {
-    console.log(data);
+    api
+      .patch("/users/tecnologia", { ...data })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        setError("tech_patch", {
+          message: "Tecnologia já cadastrada.",
+        });
+      });
   };
 
   const changeOption = (e) => {

@@ -41,7 +41,7 @@ const Projects = ({ text }) => {
         console.log(res);
       })
       .catch((err) => {
-        setError("user_register", {
+        setError("add_project", {
           message: "Projeto já existe",
         });
       });
