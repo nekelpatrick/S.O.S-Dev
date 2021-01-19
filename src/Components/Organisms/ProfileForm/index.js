@@ -18,13 +18,14 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Select,
+  Input,
+  MenuItem,
 } from "@material-ui/core";
 
 import { RiImageEditLine } from "react-icons/ri";
 
 import { AiFillLinkedin, AiFillGithub, AiFillInstagram } from "react-icons/ai";
-
-import Techs from "../../Molecules/Techs/index";
 
 // METERIAL-UI RELATED
 const useStyles = makeStyles((theme) => ({
@@ -68,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserProfile({ user }) {
   // GLOBAL VARIABLES
+
   const classes = useStyles();
   let image = false;
   // const token = window.localStorage.getItem("token") || Cookies.get("token");
@@ -93,8 +95,6 @@ export default function UserProfile({ user }) {
   };
 
   //  AQUI PODEMOS FAZER UM ARRAY PARA INPUT SELECT
-
-  const userLevel = ["Iniciante", "Intermediário", "Avançado"];
 
   // GET AVATAR HANDLER
   const handleAvatarChange = (e) => {
@@ -126,7 +126,15 @@ export default function UserProfile({ user }) {
   const handleSaveLink = () => {
     setDialogOpen(false);
   };
+
   //-------------------------------------------------------
+  const userLevels = ["Iniciante", "Intermediário", "Avançado"];
+
+  const [userLevel, setUserLevel] = useState([]);
+
+  const handleSelectorChange = (event) => {
+    setUserLevel(event.target.value);
+  };
 
   // ---------------- VALIDATION YUP ---------------------------------
   const schema = yup.object().shape({
@@ -204,7 +212,34 @@ export default function UserProfile({ user }) {
               Tecnologias
             </Typography>
 
-            <Techs className={classes.techButton} />
+            <TextField
+              inputRef={register}
+              name="tecnologia"
+              id="contact-tecnologia"
+              error={!!errors.contact}
+              helperText={errors.contact?.message}
+              style={{ margin: 8 }}
+              defaultValue={user?.techs}
+              variant="outlined"
+              label="Insira sua tecnologia"
+            />
+            <Typography className={classes.text} variant="body1">
+              Qual seu nível na Tecnologia
+            </Typography>
+            <Select
+              labelId="demo-mutiple-name-label"
+              id="demo-mutiple-name"
+              multiple
+              value={userLevel}
+              onChange={handleChange}
+              input={<Input />}
+            >
+              {userLevels.map((userSelected) => (
+                <MenuItem key={userSelected} value={userSelected}>
+                  {userSelected}
+                </MenuItem>
+              ))}
+            </Select>
           </Container>
 
           {/* FIM TECNOLOGIAS */}
