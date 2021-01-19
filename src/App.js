@@ -1,8 +1,5 @@
 import "./App.css";
-<<<<<<< HEAD
-=======
 import Pages from "./Routes/routes";
->>>>>>> a5962e088de98860276275de7aebe26944b3e42e
 import Header from "./Components/Organisms/Header/index";
 
 import { useStyles, theme } from "./Theme";
@@ -16,12 +13,9 @@ function App() {
   console.log(theme.palette);
   return (
     <ThemeProvider theme={theme}>
-      <Paper
-        className={classes.root}
-        color="primary"
-      >
+      <Paper className={classes.root} color="primary">
         <Header />
-          <Pages />
+        <Pages />
       </Paper>
     </ThemeProvider>
   );

@@ -7,6 +7,8 @@ import Input from "../../Atoms/Input";
 
 import Select from "@material-ui/core/Select";
 
+import { api } from "../../../axios-globalConfig/axios-global";
+
 import { StyledPopup, Container, StyledForm } from "./style";
 
 import { useForm } from "react-hook-form";
@@ -33,7 +35,16 @@ const Projects = ({ text }) => {
   });
 
   const handleForm = (data) => {
-    console.log(data);
+    api
+      .post("/projects", { ...data })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        setError("user_register", {
+          message: "Projeto já existe",
+        });
+      });
   };
 
   const changeOption = (e) => {
