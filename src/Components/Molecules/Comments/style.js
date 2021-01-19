@@ -1,35 +1,39 @@
-import { makeStyles } from "@material-ui/core/styles";
+import styled from "styled-components";
 
-const Styles = makeStyles((theme) => ({
-  container: {
-    height: "50vh",
-    marginBottom: '6vh',
-  },
+export const Card = styled.div`
+  height: 40%;
+  width: 25%;
+  margin: 0 20px;
+  border: 2px solid #efdcbd;
+  border-radius: 5px;
+`;
 
-  grid: {
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
+export const CardInfo = styled.div`
+  height: 30%;
+  width: 100%;
+  padding: 20px 0 0 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 
-  card: {
-    height: "20vh",
-    width: '20vw',
-    border: "1px solid #EFDCBD"
-  },
+  h3 {
+    margin: 0 0 0 10px;
+  }
+`;
+export const CardContent = styled.div`
+  height: 70%;
+  padding: 20px 20px 10px 20px;
 
-  cardContent: {
-    padding: '2vh 2vh 1vh 2vh',
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "Center",
-  },
-  comments: {
-    paddingTop: '0px',
-    display: "flex",
-    alignItems: "Center",
-  },
-}));
+  p {
+    margin: 0;
+  }
+`;
 
-export default Styles;
+export const AspasCima = styled.div`
+  height: 55%;
+`;
+
+export const AspasBaixo = styled(AspasCima)`
+  display: flex;
+  align-items: flex-end;
+`;

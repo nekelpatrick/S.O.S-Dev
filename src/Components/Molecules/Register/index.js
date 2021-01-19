@@ -34,6 +34,7 @@ const Register = ({ text, setIsReg }) => {
   });
 
   const handleForm = (data) => {
+    delete data.passwordConfirm;
     api
       .post("/register", { ...data })
       .then((res) => {
