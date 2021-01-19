@@ -52,7 +52,7 @@ const ProductCard = () => {
               <Typography
                 color="textSecondary"
                 gutterBottom
-                variant="h7"
+                variant="h6"
                 text={`Publicado em: ${time}`}
               ></Typography>
             </Grid>
@@ -61,7 +61,7 @@ const ProductCard = () => {
               <Typography
                 color="textSecondary"
                 gutterBottom
-                variant="h7"
+                variant="h6"
                 text={`Tempo Estimado: ${estimated} dias`}
               ></Typography>
             </Grid>
