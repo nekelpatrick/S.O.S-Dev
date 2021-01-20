@@ -1,7 +1,6 @@
 import { Form } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "axios";
 import { api } from "../../../axios-globalConfig/axios-global";
 
 import Button from "../../Atoms/Button";
@@ -9,13 +8,19 @@ import Types from "../../Atoms/Types";
 import Input from "../../Atoms/Input";
 
 import { useForm } from "react-hook-form";
-
-const Register = ({ text, setIsReg }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
+import { getAllUsersThunk } from "../../../Redux/modules/users/thunks";
+import { useHistory } from "react-router-dom";
+const Register = ({ text, setIsReg, close }) => {
   const title = "Cadastro";
+  const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const schema = yup.object().shape({
     user: yup.string().required("Campo obrigatório"),
-    email: yup.string().email("email invalido").required("Campo obrigatório"),
+    email: yup.string().email("Email invalido").required("Campo obrigatório"),
     password: yup
       .string()
       .min(8, "Senha deve conter no mínimo 8 dígitos")
@@ -34,11 +39,23 @@ const Register = ({ text, setIsReg }) => {
   });
 
   const handleForm = (data) => {
+    delete data.passwordConfirm;
+    data.src = "";
+    data.tech = [];
+    data.phone = "";
+    data.socialMedia = "";
+    data.portifolio = "";
+    data.onGoingProjects = [];
+    data.completedProjects = [];
     api
       .post("/register", { ...data })
       .then((res) => {
-        console.log(res);
+        dispatch(getAllUsersThunk());
+        dispatch(getProfileThunk(data.email, res.data.accessToken));
+        history.push("/profile");
+        close();
       })
+
       .catch((err) => {
         setError("user_register", {
           message: "Email já existe",
@@ -92,7 +109,6 @@ const Register = ({ text, setIsReg }) => {
           type="submit"
         />
       </Form>
-
       <Button text={text} onClick={() => setIsReg(true)}></Button>
     </>
   );

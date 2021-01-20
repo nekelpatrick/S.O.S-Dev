@@ -8,14 +8,15 @@ import Types from '../../Atoms/Types'
 import ContainedButtons from '../../Atoms/Button'
 import { useStyles, SlideContainer } from './style'
 
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+
+
 const Slides = () => {
     const classes = useStyles();
     const [bestProjects, setBestProjects] = useState([])
     const [projectIndex, setProjectIndex] = useState(0)
-
-    const getAPI = () => {
-        //pegar os 5 projetos mais cotados;
-    }
+    const projects = useSelector((state) => state.projects);
 
     const showProjects = (e) => {
         if (e.target.outerText === '<'){
@@ -29,14 +30,27 @@ const Slides = () => {
         }
         return setProjectIndex(projectIndex + 1)
     }
-    
+
+    setTimeout(() => { //slide automático
+        if (projectIndex === 4) {
+            setProjectIndex(0)
+        }
+        if (projectIndex < 4) {
+            setProjectIndex(projectIndex + 1)
+        }
+    }, 2700)
+
+    useEffect(() => {
+        setBestProjects(projects)
+    }, [projects]);
+
     return (
         <SlideContainer>
             <ContainedButtons text = '<' classe = "buttonArrow" onClick = {(e) => showProjects(e) }/>
             <Card className = {classes.root}>
                 <CardContent>
-                    <Types variant = 'h5' component = 'h2' text = {bestProjects.length > 0 ? bestProjects[projectIndex].projectTitle : 'Titulo do Projeto'} />
-                    <Types variant = 'h7' component = 'h5' text = {bestProjects.length > 0 ? bestProjects[projectIndex].projectType : "Tipo do projeto" } />
+                    <Types variant = 'h5' component = 'h2' text = {bestProjects.length > 0 ? bestProjects[projectIndex].title : "Título do Projeto"} />
+                    <Types variant = 'h7' component = 'h5' text = {bestProjects.length > 0 ? bestProjects[projectIndex].type : "Tipo do projeto" } />
                     <Types variant = 'body1' component = 'p' text = {bestProjects.length > 0 ? bestProjects[projectIndex].description : "Descrição"} />
                 </CardContent>
                 <CardActions>

@@ -1,136 +1,105 @@
 import { FiltersContent } from "./style";
 
-import CheckBoxAtom from "../../Atoms/Check-Box";
+import CheckBoxAtom from "../../Atoms/Check-Box"; 
 import Input from "../../Atoms/Input";
 import Buttom from "../../Atoms/Button";
 
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { FilterProvider } from "./filterContext";
+
+import { searchUser } from '../../../Redux/modules/Search-User/action'
+
+import { useHistory } from 'react-router-dom'
+import addFilteredProjectsThunk from "../../../Redux/modules/filteredProjects/thunk";
 
 const Filters = () => {
     const [options, setOptions] = useState({
-        techs: "",
-        area: "",
+        qualifications: "",
+        type: "",
         nivel: "",
         time: ""
     });
-    const [projectOrCreatorName, setProjectOrCreatorName] = useState("");
-    const [filteredProjects, setFilteredProjects] = useState([]);
+    const {user, projects, users, filteredProjects} = useSelector((state) => state); //-> estão sendo aplicados nas lógicas do redux
+    const dispatch = useDispatch();//=> estão sendo aplicados nas lógicas do redux
+    const history = useHistory();
 
-    const projects = [
-        {projectName: "pokemon", creatorName: "edu", techs: "React", area: "Front-End", nivel: "Intermediário", time: "3 a 7 dias", id: "1"}, 
-        {projectName: "rick morty", creatorName: "edu", techs: "React", area: "Front-End", nivel: "Intermediário", time: "3 a 7 dias", id: "2"}, 
-        {projectName: "kenzie hub", creatorName: "jack chan", techs: "React", area: "Front-End", nivel: "Avançado", time: "3 a 7 dias", id: "3"}, 
-        {projectName: "capstone", creatorName: "los hermanos", techs: "React", area: "Front-End", nivel: "Avançado", time: "8 a 15 dias", id: "4"}, 
-        {projectName: "lig4", creatorName: "chaka nevers", techs: "javascript", area: "Front-End", nivel: "Iniciante", time: "3 a 7 dias", id: "5"}, 
-        {projectName: "data base", creatorName: "zambers", techs: "Python", area: "Back-End", nivel: "Intermediário", time: "+ de 15 dias", id: "6"}
-    ];
-
-    const handleFilter = () => {
+    const handleFilterBySelects = () => {
         // variáveis e funções auxiliáres
-        const filterProjectsBy = (propToFilter) => {
+        const filterProjectsByProp = (propToFilter, isQualifications) => { //filtrar projeto pela prop do select
+            if (isQualifications) {
+                return projects.filter((project) => project.qualifications.includes(options[propToFilter]))
+            }
             return projects.filter((project) => project[propToFilter] === options[propToFilter])
         };
+
+        let filterByQualifications = filterProjectsByProp("qualifications", true);
+        let haveProjectsByThisQualifications = filterByQualifications.length > 0 ? true : false;
         
-        let filterByTechs = filterProjectsBy("techs");
-        let haveProjectsByThisTech = filterByTechs.length > 0 ? true : false;
-
-        let filterByArea = filterProjectsBy("area");
-        let haveProjectsByThisArea = filterByArea.length > 0 ? true : false;
-
-        let filterByNivel = filterProjectsBy("nivel");
+        let filterByType = filterProjectsByProp("type");
+        let haveProjectsByThisType = filterByType.length > 0 ? true : false;
+        
+        let filterByNivel = filterProjectsByProp("nivel");
         let haveProjectsByThisNivel = filterByNivel.length > 0 ? true : false;
-
-        let filterByTime = filterProjectsBy("time");
-        let haveProjectsByThisTime = filterByTime.length > 0 ? true : false;
-
-        let notSelectedFilterFound = haveProjectsByThisTech && haveProjectsByThisArea && haveProjectsByThisNivel && haveProjectsByThisTime
-        ? false
-        : true;
         
-        let filterByCreator = projects.filter((project) => project.creatorName === projectOrCreatorName);
-        let haveProjectByThisCreatorName = filterByCreator.length > 0 ? true : false;
+        let filterByTime = filterProjectsByProp("time");
+        let haveProjectsByThisTime = filterByTime.length > 0 ? true : false;
+        
 
-        let filterByProject = projects.filter((project) => project.projectName === projectOrCreatorName);
-        let haveProjectByThisProjectName = filterByProject.length > 0 ? true : false;
+        // let notSelectedFilterFound = haveProjectsByThisQualifications && haveProjectsByThisType && haveProjectsByThisNivel && haveProjectsByThisTime
+        // ? false
+        // : true;
 
-        const filtereds = []
-
-        const pushOnFilteredProjects = (filterBy) => {
-            filterBy.forEach((project) => { //removendo repetidos
-                filtereds.push(project)
+        const filteredsList = []; //será dado push com os elementos filtrados e dispach no thunk no final
+        const pushOnFilteredProjects = (filterBy) => { //faz push em filteredsList sem repetições
+            filterBy.forEach((project) => {
+                if ( !filteredsList.some((repeatedProject) => repeatedProject.id === project.id) ) {
+                    filteredsList.push(project);
+                }
             })
         };
-
-        const filteredProjectsBy = (filterBy, notFoundMessage, notSelectedFilterFound) => {
-
-            if (notSelectedFilterFound) {
-                if (haveProjectByThisCreatorName) {
-                    pushOnFilteredProjects(filterByCreator)
-                } else if (haveProjectByThisProjectName) {
-                    pushOnFilteredProjects(filterByProject)
-                }
-                else {
-                    console.log(notFoundMessage);
-                }
-            }
-            else {
-                if (haveProjectByThisCreatorName) {
-                    pushOnFilteredProjects(filterByCreator)
-                } else if (haveProjectByThisProjectName) {
-                    pushOnFilteredProjects(filterByProject);
-                }
-                else {
-                    pushOnFilteredProjects(filterBy);
-                }
-            }
-        };
-
-        //push em filteredProjects se encontrar projetos com os filtros de select ou inputText selecionados
-        if (haveProjectsByThisTech) {
-            filteredProjectsBy(filterByTechs)
-
+        
+        //push em filteredsList se encontrar projetos com os filtros de select
+        if (haveProjectsByThisQualifications) {
+            pushOnFilteredProjects(filterByQualifications)
         } 
-        if (haveProjectsByThisArea) {
-            filteredProjectsBy(filterByArea)
-
+        if (haveProjectsByThisType) {
+            pushOnFilteredProjects(filterByType)
         } 
         if (haveProjectsByThisNivel) {
-            filteredProjectsBy(filterByNivel)
-
+            pushOnFilteredProjects(filterByNivel)
         } 
         if (haveProjectsByThisTime) {
-            filteredProjectsBy(filterByTime)
-
-        } 
-        if (notSelectedFilterFound) {
-            const parameterNotUserHere = "este parametro não está sendo usado"
-            filteredProjectsBy(parameterNotUserHere, "nada encontrado", notSelectedFilterFound)
+            pushOnFilteredProjects(filterByTime)
         }
+        // if (notSelectedFilterFound) {
+        //     console.log("okokokok")
+        // }
 
-        const notRepeatedProjects = [];
-        filtereds.forEach((project) => {
-            if ( !notRepeatedProjects.some((repeatedProject) => repeatedProject.id === project.id) ) {
-                notRepeatedProjects.push(project)
-            }
-        })
-        console.log(notRepeatedProjects)
+        dispatch(addFilteredProjectsThunk(filteredsList));
     };
 
+    const changeTextInputValue = (e) => { 
+        dispatch(searchUser(e.target.value)) 
+    };
+    const handleFilterByName = () => {
+        //leva a render box para o componente que renderiza o perfil de outros usuários;
+        history.push(`/profile/${user}`)
+    }
+
     const optionsList = [ //array de selects para ser renderizado com map
-        {setValue: (e) => {setOptions({...options, techs: e.target.value})},
-        options: ["React", "Python", "SQL", "JavaScript", "Java", "TypeScript", "C#", "C++", "C", "PHP", "Ruby", "Go"], label: "Tecnologias", value: "techs"}, 
-        {setValue: (e) => {setOptions({...options, area: e.target.value})}, 
-        options: ["Programação Web", "Programação Mobile", "Programação Desktop", "Web Design"], label: "Área", value: "area"}, 
+        {setValue: (e) => {setOptions({...options, qualifications: e.target.value})},
+        options: ["React", "Python", "SQL", "JavaScript", "Java", "TypeScript", "C#", "C++", "C", "PHP", "Ruby", "Go"], label: "Tecnologias", value: "qualifications"}, 
+        {setValue: (e) => {setOptions({...options, type: e.target.value})}, 
+        options: ["Programação Web", "Programação Mobile", "Programação Desktop", "Web Design", "Front-end", "Full-Stack"], label: "Área", value: "type"}, 
         {setValue: (e) => {setOptions({...options, nivel: e.target.value})}, 
         options: ["Iniciante", "Intermediário", "Avançado"], label: "Nivel", value: "nivel"}, 
         {setValue: (e) => {setOptions({...options, time: e.target.value})}, 
         options: ["3 a 7 dias", "8 a 15 dias", "+ de 15 dias"], label: "Tempo Estimado", value: "time"}
     ];
 
-    const changeTextInputValue = (e) => {
-        setProjectOrCreatorName(e.target.value);
-    };
+    console.log(filteredProjects)
+    console.log(projects)
 
     return (
         <FilterProvider options={options} setOptions={setOptions}>
@@ -140,10 +109,8 @@ const Filters = () => {
                         <div key={index} className="selects-content">
                             <CheckBoxAtom 
                             check={options[option.value].length > 0 ? true : false} 
-                            handleFilter={handleFilter} 
+                            handleFilter={handleFilterBySelects} 
                             selectValue={options[option.value]}
-                            projectsList={filteredProjects}
-                            setProjectsList={setFilteredProjects}
                             />
                             <Input 
                             onChange={option.setValue} 
@@ -161,12 +128,12 @@ const Filters = () => {
                 </div>
                 <div className="searchInput-content">
                     <Input 
-                        label="Procure pelo nome do projeto ou criador" 
+                        label="Procure por um dev" 
                         variant="outlined" 
                         classe="inputSearch"
                         onChange={changeTextInputValue}
                     />
-                    <Buttom onClick={handleFilter} text="Buscar"/>
+                    <Buttom onClick={handleFilterByName} text="Buscar"/>
                 </div>
             </FiltersContent>
         </FilterProvider>

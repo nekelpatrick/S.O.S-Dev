@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    height: 92.5vh;
+    height: 92.4vh;
     width: 30vw;
     background-color: #17223A;
     border-right: 1px solid #EFDCBD;
@@ -20,12 +20,6 @@ export const TechContainer = styled.div`
     display: flex;
     flex-direction: row;
     margin-bottom: 2vh;
-
-    .title {
-        display: flex;
-        justify-content: space-evenly;
-        width: 15vw;
-    }
 
     .techs, .techsLevel{
         padding: 0 1vw 0 1vw;
@@ -91,5 +85,11 @@ export const ContactContainer = styled.div`
         }
     }
 
+`
+
+export const ButtonContainer = styled.div `
+    width: 30vw;
+    display: flex;
+    justify-content: space-around;
 
 `

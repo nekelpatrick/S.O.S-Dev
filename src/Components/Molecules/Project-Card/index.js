@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Box,
@@ -14,7 +14,8 @@ import Button from "../../Atoms/Button";
 import Typography from "../../Atoms/Types";
 import useStyles from "./style";
 
-const ProductCard = () => {
+const ProjectCard = ({titulo, tipo, descricao, stack, user}) => {
+
   const classes = useStyles();
 
   return (
@@ -27,8 +28,8 @@ const ProductCard = () => {
               color="textSecondary"
               gutterBottom
               variant="h4"
-              text="Título"
-            ></Typography>
+              text= {titulo}
+            />
           </Grid>
 
           <Grid item xs={1}>
@@ -37,8 +38,8 @@ const ProductCard = () => {
               color="textPrimary"
               gutterBottom
               variant="h6"
-              text="Título"
-            ></Typography>
+              text={tipo}
+            />
           </Grid>
         </Grid>
 
@@ -50,8 +51,8 @@ const ProductCard = () => {
                   color="textSecondary"
                   display="inline"
                   variant="body2"
-                  text="DESCRIÇAO"
-                ></Typography>
+                  text={descricao}
+                />
               </Paper>
             </Grid>
             <Grid item xs>
@@ -60,8 +61,8 @@ const ProductCard = () => {
                   color="textSecondary"
                   display="inline"
                   variant="body2"
-                  text="STACKS"
-                ></Typography>
+                  text={stack}
+                />
               </Paper>
             </Grid>
           </Grid>
@@ -86,10 +87,8 @@ const ProductCard = () => {
               color="textPrimary"
               display="inline"
               variant="h8"
-              text="Nome"
-            >
-              Nome
-            </Typography>
+              text= {user}
+            />
             <Avatar className={classes.statsIcon} />
           </Grid>
         </Grid>
@@ -98,4 +97,4 @@ const ProductCard = () => {
   );
 };
 
-export default ProductCard;
+export default ProjectCard;
