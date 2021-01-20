@@ -38,6 +38,28 @@ const ProductCard = () => {
         <Grid container justify="space-between" direction="row" wrap="nowrap">
           {/*  */}
 
+          {/* 
+          
+                    <Container maxWidth="md" className={classes.textContainer}>
+            <TextField
+              variant="outlined"
+              multiline
+              name="name"
+              inputRef={register}
+              error={!!errors.name}
+              helperText={errors.name?.message}
+              style={{ margin: 8 }}
+              defaultValue={user?.name}
+              label="Nome do Usuário"
+            />
+          </Container>
+
+          
+          
+          
+          
+          */}
+
           <Grid xs={8} container spacing={1} direction="column">
             <Grid item>
               <Typography
