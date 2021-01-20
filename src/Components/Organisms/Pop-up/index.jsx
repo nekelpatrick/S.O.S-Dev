@@ -20,12 +20,18 @@ export const Popup = () => {
         {(close) => (
           <Container>
             {isReg ? (
-              <Login text="Cadastre-se" isReg={isReg} setIsReg={setIsReg} />
+              <Login
+                text="Cadastre-se"
+                isReg={isReg}
+                setIsReg={setIsReg}
+                close={close}
+              />
             ) : (
               <Register
                 text="Volte para o login"
                 isReg={isReg}
                 setIsReg={setIsReg}
+                close={close}
               />
             )}
           </Container>

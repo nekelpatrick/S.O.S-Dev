@@ -13,11 +13,13 @@ import { useForm } from "react-hook-form";
 
 import { useDispatch } from "react-redux";
 import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
+import { useHistory } from "react-router-dom";
 
-const Login = ({ text, setIsReg, isReg }) => {
+const Login = ({ text, setIsReg, isReg, close }) => {
   const title = "Login";
   const singUp = "Não tem uma conta?";
 
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const schema = yup.object().shape({
@@ -41,6 +43,8 @@ const Login = ({ text, setIsReg, isReg }) => {
       .post("/login", { ...data })
       .then((res) => {
         dispatch(getProfileThunk(data.email, res.data.accessToken));
+        history.push("/profile");
+        close();
       })
       .catch((err) => {
         setError("user_register", {
