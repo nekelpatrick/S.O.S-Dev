@@ -19,9 +19,11 @@ import {
   DialogContentText,
   DialogTitle,
   Select,
-  Input,
   MenuItem,
+  InputLabel,
+  FormControl,
 } from "@material-ui/core";
+import MuiPhoneNumber from "material-ui-phone-number";
 
 import { RiImageEditLine } from "react-icons/ri";
 
@@ -46,7 +48,11 @@ const useStyles = makeStyles((theme) => ({
   textContainer: {
     display: "flex",
     flexDirection: "column",
-    maxWidth: "23vw",
+    maxWidth: "30vw",
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
   },
   techButton: {
     height: "40px",
@@ -127,10 +133,9 @@ export default function UserProfile({ user }) {
     setDialogOpen(false);
   };
 
-  //-------------------------------------------------------
-  const userLevels = ["Iniciante", "Intermediário", "Avançado"];
+  //----------------------SELECT---------------------------------
 
-  const [userLevel, setUserLevel] = useState([]);
+  const [userLevel, setUserLevel] = useState("");
 
   const handleSelectorChange = (event) => {
     setUserLevel(event.target.value);
@@ -201,14 +206,18 @@ export default function UserProfile({ user }) {
             />
           </Container>
 
-          {/* TECNOLOGIAS */}
+          {/* ------------------------------- TECNOLOGIAS */}
 
           <Container
             maxWidth="md"
             className={classes.techContainer}
             align="center"
           >
-            <Typography className={classes.text} variant="body1">
+            <Typography
+              className={classes.text}
+              style={{ margin: 8 }}
+              variant="body1"
+            >
               Tecnologias
             </Typography>
 
@@ -218,33 +227,41 @@ export default function UserProfile({ user }) {
               id="contact-tecnologia"
               error={!!errors.contact}
               helperText={errors.contact?.message}
-              style={{ margin: 8 }}
+              style={{ margin: 6 }}
               defaultValue={user?.techs}
               variant="outlined"
               label="Insira sua tecnologia"
             />
             <Typography className={classes.text} variant="body1">
-              Qual seu nível na Tecnologia
+              Qual sua experiência na Tecnologia
             </Typography>
-            <Select
-              labelId="demo-mutiple-name-label"
-              id="demo-mutiple-name"
-              multiple
-              value={userLevel}
-              onChange={handleChange}
-              input={<Input />}
-            >
-              {userLevels.map((userSelected) => (
-                <MenuItem key={userSelected} value={userSelected}>
-                  {userSelected}
-                </MenuItem>
-              ))}
-            </Select>
+
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">Nível</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={userLevel}
+                onChange={handleSelectorChange}
+              >
+                <MenuItem value={10}>Iniciante</MenuItem>
+                <MenuItem value={20}>Intermediário</MenuItem>
+                <MenuItem value={30}>Avançado</MenuItem>
+              </Select>
+              <Button
+                style={{ marginTop: 8 }}
+                color="secondary"
+                variant="outlined"
+              >
+                Salvar
+              </Button>
+            </FormControl>
           </Container>
+          {console.log(userLevel)}
 
-          {/* FIM TECNOLOGIAS */}
+          {/* -----------------------------------------FIM TECNOLOGIAS */}
 
-          <Divider style={{ margin: 10 }} />
+          <Divider style={{ margin: 10, marginTop: 5 }} />
           {/*  */}
 
           <Container
@@ -278,7 +295,7 @@ export default function UserProfile({ user }) {
               variant="outlined"
               label="Portfolio link"
             />
-            <TextField
+            {/* <TextField
               inputRef={register}
               name="contact-telefone"
               id="contact-telefone"
@@ -289,6 +306,20 @@ export default function UserProfile({ user }) {
               variant="outlined"
               type="number"
               label="Numero de telefone"
+            /> */}
+            <MuiPhoneNumber
+              name="contact-telefone"
+              data-cy="user-phone"
+              defaultCountry={"br"}
+              onlyCountries={["br"]}
+              label="Numero de telefone"
+              //
+              inputRef={register}
+              id="contact-telefone"
+              error={!!errors.contact}
+              helperText={errors.contact?.message}
+              style={{ margin: 8 }}
+              variant="outlined"
             />
 
             <Container className={classes.socialButtons}>
@@ -333,7 +364,7 @@ export default function UserProfile({ user }) {
                     autoFocus
                     margin="dense"
                     id="linkSocial"
-                    label="Email Address"
+                    label="Link"
                     type="email"
                     fullWidth
                     color="textPrimary"
@@ -360,7 +391,12 @@ export default function UserProfile({ user }) {
           </Container>
 
           <Container align="center" className={classes.buttons}>
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              style={{ marginTop: 6 }}
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
               SALVAR ALTERAÇÕES
             </Button>
           </Container>
