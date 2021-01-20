@@ -1,18 +1,36 @@
 import ProjectCard from "../../Molecules/Project-Card";
+
+import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { api } from "../../../axios-globalConfig/axios-global";
 
 const Favorites = () => {
     const [favorites, setFavorites] = useState([]);
+    const [haveFavorites, setHaveFavorites] = useState(false);
+    const { profile } = useSelector((state) => state)
 
     useEffect(() => {
-        api.get("/users").then((res) => setFavorites(res.data))
-    }, [favorites])
+        setFavorites([profile])
+        if ( favorites.length > 0 ) {
+            setHaveFavorites(true)
+        };
+    }, []);
 
-    console.log(favorites);
+    console.log(favorites)
 
+    // utilizar em ProjectCard
+    // titulo={title} tipo={type} descricao={description} stack={qualifications}
     return (
-        <ProjectCard />
+        <>
+        {
+        haveFavorites 
+            ? 
+            // favorites.map(({title, type, description, qualifications}) => (
+                <ProjectCard />
+            // ))
+            :
+            <h2>Nada Ainda</h2>
+        }
+        </>
     )
 };
 

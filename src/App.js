@@ -12,8 +12,6 @@ import { addProjectsThunk } from "./Redux/modules/projects/thunk";
 
 import { useSelector } from "react-redux";
 
-import Favorites from "./Components/Organisms/Favorites";
-
 function App() {
 
   const dispatch = useDispatch();
@@ -30,8 +28,7 @@ function App() {
   return (
       <ThemeProvider theme={theme}>
         <Paper className={classes.root} color="primary">
-          {/* <Pages /> */}
-          <Favorites />
+          <Pages />
         </Paper>
       </ThemeProvider>
   );

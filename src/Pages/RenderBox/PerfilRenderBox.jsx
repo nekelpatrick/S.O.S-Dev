@@ -9,6 +9,7 @@ import EditUser from "../../Components/Organisms/ProfileForm";
 import ProductCard from '../../Components/Molecules/Project-Card-Add-New'
 import Filters from '../../Components/Molecules/Filters'
 import UserSearchProfile from '../../Components/Organisms/User-Search-Profile'
+import Favorites from "../../Components/Organisms/Favorites";
 
 import { makeStyles } from "@material-ui/core";
 
@@ -24,10 +25,10 @@ const PerfilRenderBox = () => {
   const [projects, setProjects] = useState([])
   const [projectOwner, setProjectOwner] = useState([])
 
-  useEffect(() => 
-    api.get('/projects')
-    .then((res) => setProjects(res.data))
-  , [])
+  // useEffect(() => 
+  //   api.get('/projects')
+  //   .then((res) => setProjects(res.data))
+  // , [])
 
   useEffect(() => {
     projects[projectOwner.length] &&
@@ -49,7 +50,7 @@ const PerfilRenderBox = () => {
         </Route>
         <Route exact path = '/profile/favoritos'>
           <Filters />
-          <div>favoritos</div>
+          <Favorites />
         </Route>
         <Route exact path = '/profile/editarPerfil'>
           <EditUser />
