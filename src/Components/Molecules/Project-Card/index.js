@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 
 const ProjectCard = ({ titulo, tipo, descricao, stack, userId }) => {
   const classes = useStyles();
+
   const { users } = useSelector((state) => state);
 
   const findUser = users.find((e) => e.id === parseInt(userId));
