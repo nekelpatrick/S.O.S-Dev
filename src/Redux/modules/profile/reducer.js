@@ -4,7 +4,7 @@ const getProfileReducer = (state = [], action) => {
   switch (action.type) {
     case GET_PROFILE:
       const { user } = action;
-      return state + user;
+      return user;
     default:
       return state;
   }
