@@ -40,10 +40,13 @@ const Register = ({ text, setIsReg, close }) => {
 
   const handleForm = (data) => {
     delete data.passwordConfirm;
-    data.tecnologia = [];
-    data.telefone = "";
-    data.redesSociais = "";
+    data.src = "";
+    data.tech = [];
+    data.phone = "";
+    data.socialMedia = "";
     data.portifolio = "";
+    data.onGoingProjects = [];
+    data.completedProjects = [];
     api
       .post("/register", { ...data })
       .then((res) => {

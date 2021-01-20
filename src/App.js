@@ -33,10 +33,10 @@ function App() {
         <Paper className={classes.root} color="primary">
           <Header />
           <Filters />
-          {/* <Pages /> */}
+          <Pages />
         </Paper>
       </ThemeProvider>
   );
 }
 
-export default App;
+export default App; 

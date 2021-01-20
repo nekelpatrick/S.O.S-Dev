@@ -1,7 +1,5 @@
 import React from "react";
 
-import axios from 'axios'
-
 import { api } from '../../axios-globalConfig/axios-global'
 
 import {Switch, Route} from 'react-router-dom'
