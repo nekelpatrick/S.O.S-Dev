@@ -45,6 +45,7 @@ const Register = ({ text, setIsReg, close }) => {
     data.phone = "";
     data.socialMedia = "";
     data.portifolio = "";
+    data.favorites = [];
     data.onGoingProjects = [];
     data.completedProjects = [];
     api
