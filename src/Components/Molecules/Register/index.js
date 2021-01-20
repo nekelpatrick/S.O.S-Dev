@@ -40,6 +40,7 @@ const Register = ({ text, setIsReg, close }) => {
 
   const handleForm = (data) => {
     delete data.passwordConfirm;
+    data.src = "";
     data.tecnologia = [];
     data.telefone = "";
     data.redesSociais = "";

@@ -1,6 +1,5 @@
 import "./App.css";
 import Pages from "./Routes/routes";
-import Header from "./Components/Organisms/Header/index";
 import { useStyles, theme } from "./Theme";
 import { useDispatch } from "react-redux";
 
@@ -21,7 +20,6 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Paper className={classes.root} color="primary">
-        <Header />
         <Pages />
       </Paper>
     </ThemeProvider>
