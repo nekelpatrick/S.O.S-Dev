@@ -1,6 +1,5 @@
 import "./App.css";
 import Pages from "./Routes/routes";
-import Header from "./Components/Organisms/Header/index";
 import { useStyles, theme } from "./Theme";
 import { useDispatch } from "react-redux";
 
@@ -11,9 +10,9 @@ import { useEffect } from "react";
 import { getAllUsersThunk } from "./Redux/modules/users/thunks";
 import { addProjectsThunk } from "./Redux/modules/projects/thunk";
 
-import Filters from "./Components/Molecules/Filters";
-
 import { useSelector } from "react-redux";
+
+import Favorites from "./Components/Organisms/Favorites";
 
 function App() {
 
@@ -31,7 +30,8 @@ function App() {
   return (
       <ThemeProvider theme={theme}>
         <Paper className={classes.root} color="primary">
-          <Pages />
+          {/* <Pages /> */}
+          <Favorites />
         </Paper>
       </ThemeProvider>
   );
