@@ -19,12 +19,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-<<<<<<< HEAD
       <Paper className={classes.root} color="primary">
-=======
-      <Paper className={classes.root}>
-        <Header />
->>>>>>> 1c43180498810a0f8cbe5c7acfe3df760e93cd8c
         <Pages />
       </Paper>
     </ThemeProvider>
