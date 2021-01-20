@@ -188,7 +188,7 @@ const Profile = () => {
         <RenderBox />
       </Grid>
     </Grid>
-  )
+  );
 };
 
 export default Profile;

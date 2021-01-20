@@ -17,7 +17,6 @@ const mockImgPerfil = [
   "https://www.flaticon.com/svg/vstatic/svg/3874/3874449.svg?token=exp=1611042268~hmac=21ab69257d87c486c39368e630bb8cf1",
 ];
 const LandingPage = () => {
-
   return (
     <Container>
       <Slogan slogan={slogan} img={img1} />

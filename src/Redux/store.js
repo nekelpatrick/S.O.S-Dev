@@ -11,7 +11,7 @@ const reducers = combineReducers({
   filteredProjects: filteredProjectsReducer,
   projects: projectsReducer,
   users: getAllUsersReducer,
-  user: searchUserReducer,
+  searchUser: searchUserReducer,
 });
 
 const store = createStore(reducers, applyMiddleware(thunk));

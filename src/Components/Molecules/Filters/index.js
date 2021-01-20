@@ -21,8 +21,8 @@ const Filters = () => {
         time: ""
     });
     const {user, projects, users, filteredProjects} = useSelector((state) => state); //-> estão sendo aplicados nas lógicas do redux
-    const dispatch = useDispatch();//=> estão sendo aplicados nas lógicas do redux
-    const history = useHistory();
+    const dispatch = useDispatch() //=> estão sendo aplicados nas lógicas do redux
+    const history = useHistory()
 
     const handleFilterBySelects = () => {
         // variáveis e funções auxiliáres
@@ -44,11 +44,6 @@ const Filters = () => {
         
         let filterByTime = filterProjectsByProp("time");
         let haveProjectsByThisTime = filterByTime.length > 0 ? true : false;
-        
-
-        // let notSelectedFilterFound = haveProjectsByThisQualifications && haveProjectsByThisType && haveProjectsByThisNivel && haveProjectsByThisTime
-        // ? false
-        // : true;
 
         const filteredsList = []; //será dado push com os elementos filtrados e dispach no thunk no final
         const pushOnFilteredProjects = (filterBy) => { //faz push em filteredsList sem repetições
@@ -72,9 +67,6 @@ const Filters = () => {
         if (haveProjectsByThisTime) {
             pushOnFilteredProjects(filterByTime)
         }
-        // if (notSelectedFilterFound) {
-        //     console.log("okokokok")
-        // }
 
         dispatch(addFilteredProjectsThunk(filteredsList));
     };

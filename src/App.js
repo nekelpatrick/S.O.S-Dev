@@ -10,8 +10,6 @@ import { useEffect } from "react";
 import { getAllUsersThunk } from "./Redux/modules/users/thunks";
 import { addProjectsThunk } from "./Redux/modules/projects/thunk";
 
-import { useSelector } from "react-redux";
-
 function App() {
 
   const dispatch = useDispatch();
