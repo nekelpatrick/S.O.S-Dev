@@ -11,7 +11,7 @@ import Filters from "../../Components/Molecules/Filters";
 import UserSearchProfile from "../../Components/Organisms/User-Search-Profile";
 
 import { makeStyles } from "@material-ui/core";
-
+import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,27 +20,23 @@ const useStyles = makeStyles((theme) => ({
     height: "95%",
   },
 }));
-const PerfilRenderBox = ({ auth, setAuth }) => {
-  const [projects, setProjects] = useState([]);
+const PerfilRenderBox = () => {
+  const { projects } = useSelector((state) => state);
   const [projectOwner, setProjectOwner] = useState([]);
-
-  useEffect(
-    () => api.get("/projects").then((res) => setProjects(res.data)),
-    []
-  );
-
-  useEffect(() => {
-    projects[projectOwner.length] &&
-      api
-        .get(`/users/${projects[projectOwner.length].userId}`)
-        .then((res) =>
-          projectOwner.length > 0
-            ? setProjectOwner([...projectOwner, res.data.user])
-            : setProjectOwner([res.data.user])
-        );
-  }, [projects, projectOwner]);
-
   const classes = useStyles();
+
+  console.log(projects);
+
+  // useEffect(() => {
+  //   projects[projectOwner.length] &&
+  //     api
+  //       .get(`/users/${projects[projectOwner.length].userId}`)
+  //       .then((res) =>
+  //         projectOwner.length > 0
+  //           ? setProjectOwner([...projectOwner, res.data.user])
+  //           : setProjectOwner([res.data.user])
+  //       );
+  // }, [projects, projectOwner]);
 
   return (
     <div className={classes.RenderBox}>
@@ -48,17 +44,16 @@ const PerfilRenderBox = ({ auth, setAuth }) => {
         <Route exact path="/profile">
           <Filters projects={projects} />
           {projects.length > 0 &&
-            projects.map(
-              ({ title, type, description, qualifications }, index) => (
-                <ProjectCard
-                  titulo={title}
-                  tipo={type}
-                  user={projectOwner[index]}
-                  descricao={description}
-                  stack={qualifications}
-                />
-              )
-            )}
+            projects.map((e, index) => (
+              <ProjectCard
+                key={index}
+                titulo={e.title}
+                tipo={e.type}
+                userId={e.userId}
+                descricao={e.description}
+                stack={e.qualifications}
+              />
+            ))}
         </Route>
         <Route exact path="/profile/favoritos">
           <Filters />

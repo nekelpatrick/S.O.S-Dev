@@ -31,7 +31,7 @@ const Profile = ({ auth, setAuth }) => {
       <Grid item xs>
         <Container>
           <Image
-            src={profile.src !== "" ? profile.src : noImage}
+            src={profile?.src !== "" ? profile?.src : noImage}
             alt="Foto do perfil"
             width="120px"
             height="120px"

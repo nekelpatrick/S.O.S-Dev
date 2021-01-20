@@ -20,8 +20,8 @@ const Comments = ({ name, text, src }) => {
           className="aspasCima"
         />
       </AspasCima>
-      {name.map((e, i) => (
-        <Card key={i}>
+
+      {/* <Card key={i}>
           <CardInfo>
             <Image
               src={src[i]}
@@ -45,8 +45,8 @@ const Comments = ({ name, text, src }) => {
               classe={"commentContent"}
             />
           </CardContent>
-        </Card>
-      ))}
+        </Card> */}
+
       <AspasBaixo>
         <Image
           src={aspasBaixo}
