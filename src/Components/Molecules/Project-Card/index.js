@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Avatar,
   Box,
@@ -14,7 +14,16 @@ import Button from "../../Atoms/Button";
 import Typography from "../../Atoms/Types";
 import useStyles from "./style";
 
+import { useHistory } from 'react-router-dom'
+
+import { useContext } from 'react'
+import { StateContext } from '../../../Pages/Profile/stateContext'
+
+
 const ProjectCard = ({titulo, tipo, descricao, stack, user}) => {
+  const history = useHistory()
+
+  const {isFavoriteTime, setFavouriteTime} = useContext(StateContext)
 
   const classes = useStyles();
 
@@ -78,6 +87,10 @@ const ProjectCard = ({titulo, tipo, descricao, stack, user}) => {
               <Button
                 className={classes.statsIcon}
                 text="abrir projeto"
+                onClick= {() => {
+                  setFavouriteTime(true)
+                  history.push('/profile/novoProjeto')
+                }}
               ></Button>
             </CardActions>
           </Grid>

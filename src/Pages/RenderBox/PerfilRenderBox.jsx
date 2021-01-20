@@ -16,10 +16,14 @@ import { makeStyles } from "@material-ui/core";
 
 import { useState, useEffect } from 'react'
 
+
 const useStyles = makeStyles((theme) => ({
   RenderBox: {
-    width: "100%",
-    height: "95%",
+    // width: "100%",
+    height: "91.5vh",
+    overflowY: 'auto',
+    // margin: ' -1vh 0 0 3.3vw',
+
   },
 }));
 const PerfilRenderBox = () => {

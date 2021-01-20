@@ -21,6 +21,10 @@ import { useHistory } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
+import Projects from '../../Components/Molecules/Projects'
+
+import { StateProvider } from './stateContext'
+
 const Profile = () => {
   const { profile } = useSelector((state) => state);
   const history = useHistory();
@@ -28,7 +32,7 @@ const Profile = () => {
 
   return (
     <Grid container>
-      <Grid item xs>
+      <Grid item xs  = {4} >
         <Container>
           <Image
             src={profile.src !== "" ? profile.src : noImage}
@@ -56,14 +60,7 @@ const Profile = () => {
                 );
               }}
             />
-            <ContainedButtons
-              text="Novo Projeto"
-              classe="profileFavorites"
-              onClick={() => {
-                setFavouriteTime(true);
-                history.push("/profile/novoProjeto");
-              }}
-            />
+            <Projects />
             <ContainedButtons
               text="Editar Perfil"
               classe="profileFavorites"
@@ -184,8 +181,10 @@ const Profile = () => {
           </ContactContainer>
         </Container>
       </Grid>
-      <Grid item xs={8}>
-        <RenderBox />
+      <Grid item xs={8} >
+        <StateProvider isFavoriteTime = {isFavoriteTime} setFavouriteTime = {setFavouriteTime}>
+          <RenderBox />
+        </StateProvider>
       </Grid>
     </Grid>
   );

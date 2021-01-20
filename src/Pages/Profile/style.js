@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     height: 92.4vh;
-    width: 30vw;
+    width: 33.5vw;
     background-color: #17223A;
     border-right: 1px solid #EFDCBD;
     align-self: left;
@@ -11,7 +11,6 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
 `
 
 export const TechContainer = styled.div`
