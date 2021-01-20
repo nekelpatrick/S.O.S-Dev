@@ -2,13 +2,14 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 import { useContext } from "react";
 import { FilterContext } from "../../Molecules/Filters/filterContext";
+import { useEffect, useState } from "react";
 
-const CheckBoxAtom = ({ color, check, handleFilter, selectValue, projectsList, setProjectsList }) => {
+const CheckBoxAtom = ({ color, check, handleFilter, selectValue }) => {
   const { options, setOptions } = useContext(FilterContext);
-
-  const removeSelectedFilter = (propToFilter) => {
-    const newProjectsList = projectsList.filter((project) => project[propToFilter] !== selectValue);
-    setProjectsList(newProjectsList);
+  const [value, setValue] = useState("");
+  
+  if (selectValue !== value) {
+    setValue(selectValue);
   }
 
   const setNewOption = () => {
@@ -16,27 +17,22 @@ const CheckBoxAtom = ({ color, check, handleFilter, selectValue, projectsList, s
     const indexOfValue = optionsValue.findIndex((project) => project === selectValue);
 
     if (indexOfValue === 0) {
-      setOptions({...options, techs: ""});
-      removeSelectedFilter("techs");
+      setOptions({...options, qualifications: ""});
     }
     if (indexOfValue === 1) {
-      setOptions({...options, area: ""});
-      removeSelectedFilter("area");
+      setOptions({...options, type: ""});
     }
     if (indexOfValue === 2) {
       setOptions({...options, nivel: ""});
-      removeSelectedFilter("nivel");
     }
     if (indexOfValue === 3) {
       setOptions({...options, time: ""});
-      removeSelectedFilter("time");
     }
-    
   };
 
-  if ( check ) {
-    handleFilter();
-  }
+  useEffect(() => {
+    return handleFilter()
+  },[value])
 
   return (
     <>
