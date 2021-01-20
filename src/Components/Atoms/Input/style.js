@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const Style = makeStyles((theme) => ({
 
     inputSearch: {
-        width: "63%",
+        width: "18vw",
     },
     inputSelect: {
         width: "inherit",
