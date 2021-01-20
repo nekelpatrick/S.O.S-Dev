@@ -1,6 +1,8 @@
 import Types from "../../Atoms/Types";
 import Image from "../../Atoms/Image";
 
+import { api } from "../../../axios-globalConfig/axios-global";
+
 import aspasCima from "./Images/aspas-cima.png";
 import aspasBaixo from "./Images/aspas-baixo.png";
 
