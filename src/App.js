@@ -31,8 +31,6 @@ function App() {
   return (
       <ThemeProvider theme={theme}>
         <Paper className={classes.root} color="primary">
-          <Header />
-          <Filters />
           <Pages />
         </Paper>
       </ThemeProvider>
