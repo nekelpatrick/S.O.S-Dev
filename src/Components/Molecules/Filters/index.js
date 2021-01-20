@@ -7,36 +7,84 @@ import Buttom from "../../Atoms/Button";
 import { useState } from "react";
 import { FilterProvider } from "./filterContext";
 
-import { useDispatch, useSelector } from 'react-redux'
-import { searchUser } from '../../../Redux/modules/Search-User/action'
+import { useDispatch, useSelector } from "react-redux";
+import { searchUser } from "../../../Redux/modules/Search-User/action";
 
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 const Filters = () => {
-const state = useSelector((state) => state.searchUser) //-> est]ao sendo aplicados nas lógicas do redux
-    const history = useHistory()
-    const dispatch = useDispatch() //=> estão sendo aplicados nas lógicas do redux
-    const [options, setOptions] = useState({
-        techs: "",
-        area: "",
-        nivel: "",
-        time: ""
-    });
-    const [projectOrCreatorName, setProjectOrCreatorName] = useState("");
-    const [filteredProjects, setFilteredProjects] = useState([]);
+  const state = useSelector((state) => state.searchUser); //-> est]ao sendo aplicados nas lógicas do redux
+  const history = useHistory();
+  const dispatch = useDispatch(); //=> estão sendo aplicados nas lógicas do redux
+  const [options, setOptions] = useState({
+    techs: "",
+    area: "",
+    nivel: "",
+    time: "",
+  });
+  const [projectOrCreatorName, setProjectOrCreatorName] = useState("");
+  const [filteredProjects, setFilteredProjects] = useState([]);
 
-    const projects = [
-        {projectName: "pokemon", creatorName: "edu", techs: "React", area: "Front-End", nivel: "Intermediário", time: "3 a 7 dias", id: "1"}, 
-        {projectName: "rick morty", creatorName: "edu", techs: "React", area: "Front-End", nivel: "Intermediário", time: "3 a 7 dias", id: "2"}, 
-        {projectName: "kenzie hub", creatorName: "jack chan", techs: "React", area: "Front-End", nivel: "Avançado", time: "3 a 7 dias", id: "3"}, 
-        {projectName: "capstone", creatorName: "los hermanos", techs: "React", area: "Front-End", nivel: "Avançado", time: "8 a 15 dias", id: "4"}, 
-        {projectName: "lig4", creatorName: "chaka nevers", techs: "javascript", area: "Front-End", nivel: "Iniciante", time: "3 a 7 dias", id: "5"}, 
-        {projectName: "data base", creatorName: "zambers", techs: "Python", area: "Back-End", nivel: "Intermediário", time: "+ de 15 dias", id: "6"}
-    ];
+  const projects = [
+    {
+      projectName: "pokemon",
+      creatorName: "edu",
+      techs: "React",
+      area: "Front-End",
+      nivel: "Intermediário",
+      time: "3 a 7 dias",
+      id: "1",
+    },
+    {
+      projectName: "rick morty",
+      creatorName: "edu",
+      techs: "React",
+      area: "Front-End",
+      nivel: "Intermediário",
+      time: "3 a 7 dias",
+      id: "2",
+    },
+    {
+      projectName: "kenzie hub",
+      creatorName: "jack chan",
+      techs: "React",
+      area: "Front-End",
+      nivel: "Avançado",
+      time: "3 a 7 dias",
+      id: "3",
+    },
+    {
+      projectName: "capstone",
+      creatorName: "los hermanos",
+      techs: "React",
+      area: "Front-End",
+      nivel: "Avançado",
+      time: "8 a 15 dias",
+      id: "4",
+    },
+    {
+      projectName: "lig4",
+      creatorName: "chaka nevers",
+      techs: "javascript",
+      area: "Front-End",
+      nivel: "Iniciante",
+      time: "3 a 7 dias",
+      id: "5",
+    },
+    {
+      projectName: "data base",
+      creatorName: "zambers",
+      techs: "Python",
+      area: "Back-End",
+      nivel: "Intermediário",
+      time: "+ de 15 dias",
+      id: "6",
+    },
+  ];
 
-    const handleFilter = () => {
-        // variáveis e funções auxiliáres
-        /*const filterProjectsBy = (propToFilter) => {
+  const handleFilter = () => {
+    // variáveis e funções auxiliáres
+    /*const filterProjectsBy = (propToFilter) => {
             return projects.filter((project) => project[propToFilter] === options[propToFilter])
         };
         
@@ -123,65 +171,107 @@ const state = useSelector((state) => state.searchUser) //-> est]ao sendo aplicad
             }
         })
         console.log(notRepeatedProjects)*/
-        history.push(`/profile/${state}`) //leva a render box para o componente que renderiza o perfil de outros usuários;
-    };
+    history.push(`/profile/${state}`); //leva a render box para o componente que renderiza o perfil de outros usuários;
+  };
 
-    const optionsList = [ //array de selects para ser renderizado com map
-        {setValue: (e) => {setOptions({...options, techs: e.target.value})},
-        options: ["React", "Python", "SQL", "JavaScript", "Java", "TypeScript", "C#", "C++", "C", "PHP", "Ruby", "Go"], label: "Tecnologias", value: "techs"}, 
-        {setValue: (e) => {setOptions({...options, area: e.target.value})}, 
-        options: ["Programação Web", "Programação Mobile", "Programação Desktop", "Web Design"], label: "Área", value: "area"}, 
-        {setValue: (e) => {setOptions({...options, nivel: e.target.value})}, 
-        options: ["Iniciante", "Intermediário", "Avançado"], label: "Nivel", value: "nivel"}, 
-        {setValue: (e) => {setOptions({...options, time: e.target.value})}, 
-        options: ["3 a 7 dias", "8 a 15 dias", "+ de 15 dias"], label: "Tempo Estimado", value: "time"}
-    ];
+  const optionsList = [
+    //array de selects para ser renderizado com map
+    {
+      setValue: (e) => {
+        setOptions({ ...options, techs: e.target.value });
+      },
+      options: [
+        "React",
+        "Python",
+        "SQL",
+        "JavaScript",
+        "Java",
+        "TypeScript",
+        "C#",
+        "C++",
+        "C",
+        "PHP",
+        "Ruby",
+        "Go",
+      ],
+      label: "Tecnologias",
+      value: "techs",
+    },
+    {
+      setValue: (e) => {
+        setOptions({ ...options, area: e.target.value });
+      },
+      options: [
+        "Programação Web",
+        "Programação Mobile",
+        "Programação Desktop",
+        "Web Design",
+      ],
+      label: "Área",
+      value: "area",
+    },
+    {
+      setValue: (e) => {
+        setOptions({ ...options, nivel: e.target.value });
+      },
+      options: ["Iniciante", "Intermediário", "Avançado"],
+      label: "Nivel",
+      value: "nivel",
+    },
+    {
+      setValue: (e) => {
+        setOptions({ ...options, time: e.target.value });
+      },
+      options: ["3 a 7 dias", "8 a 15 dias", "+ de 15 dias"],
+      label: "Tempo Estimado",
+      value: "time",
+    },
+  ];
 
-    const changeTextInputValue = (e) => {
-        //setProjectOrCreatorName(e.target.value); 
-        dispatch(searchUser(e.target.value)) //troquei para uma sincronização do input com o redux para poder passar os dados do estado para o componente de exibição do perfil
-    };
+  const changeTextInputValue = (e) => {
+    //setProjectOrCreatorName(e.target.value);
+    dispatch(searchUser(e.target.value)); //troquei para uma sincronização do input com o redux para poder passar os dados do estado para o componente de exibição do perfil
+  };
 
-
-    return (
-        <FilterProvider options={options} setOptions={setOptions}>
-            <FiltersContent>
-                <div className="checkBox-content">
-                    {optionsList.map((option, index) => (
-                        <div key={index} className="selects-content">
-                            <CheckBoxAtom 
-                            check={options[option.value].length > 0 ? true : false} 
-                            handleFilter={handleFilter} 
-                            selectValue={options[option.value]}
-                            projectsList={filteredProjects}
-                            setProjectsList={setFilteredProjects}
-                            />
-                            <Input 
-                            onChange={option.setValue} 
-                            value={options[option.value]}
-                            select="select" 
-                            label={option.label} 
-                            classe="inputSelect"
-                            >
-                                {option.options.map((item, index) => (
-                                    <option key={index}>{item}</option>
-                                ))}
-                            </Input>
-                        </div>
-                    ))}
-                </div>
-                <div className="searchInput-content">
-                    <Input 
-                        label="Procure por um dev" 
-                        variant="outlined" 
-                        classe="inputSearch"
-                        onChange={changeTextInputValue}
-                    />
-                    <Buttom onClick={handleFilter} text="Buscar"/>
-                </div>
-            </FiltersContent>
-        </FilterProvider>
-    )
+  return (
+    <FilterProvider options={options} setOptions={setOptions}>
+      <FiltersContent>
+        <div className="checkBox-content">
+          {optionsList.map((option, index) => (
+            <div key={index} className="selects-content">
+              <CheckBoxAtom
+                check={options[option.value].length > 0 ? true : false}
+                handleFilter={handleFilter}
+                selectValue={options[option.value]}
+                projectsList={filteredProjects}
+                setProjectsList={setFilteredProjects}
+              />
+              <Input
+                onChange={option.setValue}
+                value={options[option.value]}
+                select="select"
+                label={option.label}
+                classe="inputSelect"
+              >
+                {option.options.map((item, index) => (
+                  <option key={index}>{item}</option>
+                ))}
+              </Input>
+            </div>
+          ))}
+        </div>
+        <div className="searchInput-content">
+          <Input
+            label="Procure por um dev"
+            variant="outlined"
+            classe="inputSearch"
+            onChange={changeTextInputValue}
+          />
+          <Buttom onClick={handleFilter} text="Buscar" />
+        </div>
+      </FiltersContent>
+    </FilterProvider>
+  );
 };
 
 export default Filters;

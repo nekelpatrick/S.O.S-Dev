@@ -21,7 +21,7 @@ import { useHistory } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
-const Profile = () => {
+const Profile = ({ auth, setAuth }) => {
   const { profile } = useSelector((state) => state);
   const history = useHistory();
   const [isFavoriteTime, setFavouriteTime] = useState(false);

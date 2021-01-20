@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import LandingPage from "../Pages/Landing-Page";
 import Profile from "../Pages/Profile";
@@ -8,28 +8,26 @@ import Header from "../Components/Organisms/Header";
 
 const Pages = () => {
   const { profile } = useSelector((state) => state);
-  const dispatch = useDispatch();
   const history = useHistory();
-
   const [auth, setAuth] = useState(true);
 
   useEffect(() => {
     const user = window.localStorage.getItem("user");
     if (!JSON.parse(user)?.token) {
-      return setAuth(false);
+      setAuth(false);
+      history.push("/");
     } else {
       setAuth(true);
       history.push("/profile");
     }
-  }, [profile, history, dispatch]);
+  }, [profile, history]);
 
   if (auth === false) {
-    history.push("/");
     return (
       <>
-        <Header auth={auth} setAuth={setAuth} />
         <Switch>
           <Route exact path="/">
+            <Header auth={auth} setAuth={setAuth} />
             <LandingPage />
           </Route>
         </Switch>
@@ -42,10 +40,10 @@ const Pages = () => {
 
   return (
     <>
-      <Header auth={auth} setAuth={setAuth} />
       <Switch>
         <Route path="/profile">
-          <Profile />
+          <Header auth={auth} setAuth={setAuth} />
+          <Profile auth={auth} setAuth={setAuth} />
         </Route>
       </Switch>
     </>
