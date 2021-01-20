@@ -25,8 +25,6 @@ const PerfilRenderBox = () => {
   const [projectOwner, setProjectOwner] = useState([]);
   const classes = useStyles();
 
-  console.log(projects);
-
   // useEffect(() => {
   //   projects[projectOwner.length] &&
   //     api

@@ -100,7 +100,7 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId }) => {
               color="textPrimary"
               display="inline"
               variant="h6"
-              text={findUser.user}
+              text={findUser?.user}
             />
             <Avatar className={classes.statsIcon} src={findUser.src} />
           </Grid>
