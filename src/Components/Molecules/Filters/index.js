@@ -7,7 +7,15 @@ import Buttom from "../../Atoms/Button";
 import { useState } from "react";
 import { FilterProvider } from "./filterContext";
 
+import { useDispatch, useSelector } from 'react-redux'
+import { searchUser } from '../../../Redux/modules/Search-User/action'
+
+import { useHistory } from 'react-router-dom'
+
 const Filters = () => {
+const state = useSelector((state) => state.searchUser) //-> est]ao sendo aplicados nas lógicas do redux
+    const history = useHistory()
+    const dispatch = useDispatch() //=> estão sendo aplicados nas lógicas do redux
     const [options, setOptions] = useState({
         techs: "",
         area: "",
@@ -28,7 +36,7 @@ const Filters = () => {
 
     const handleFilter = () => {
         // variáveis e funções auxiliáres
-        const filterProjectsBy = (propToFilter) => {
+        /*const filterProjectsBy = (propToFilter) => {
             return projects.filter((project) => project[propToFilter] === options[propToFilter])
         };
         
@@ -114,7 +122,8 @@ const Filters = () => {
                 notRepeatedProjects.push(project)
             }
         })
-        console.log(notRepeatedProjects)
+        console.log(notRepeatedProjects)*/
+        history.push(`/profile/${state}`) //leva a render box para o componente que renderiza o perfil de outros usuários;
     };
 
     const optionsList = [ //array de selects para ser renderizado com map
@@ -129,8 +138,10 @@ const Filters = () => {
     ];
 
     const changeTextInputValue = (e) => {
-        setProjectOrCreatorName(e.target.value);
+        //setProjectOrCreatorName(e.target.value); 
+        dispatch(searchUser(e.target.value)) //troquei para uma sincronização do input com o redux para poder passar os dados do estado para o componente de exibição do perfil
     };
+
 
     return (
         <FilterProvider options={options} setOptions={setOptions}>
@@ -161,7 +172,7 @@ const Filters = () => {
                 </div>
                 <div className="searchInput-content">
                     <Input 
-                        label="Procure pelo nome do projeto ou criador" 
+                        label="Procure por um dev" 
                         variant="outlined" 
                         classe="inputSearch"
                         onChange={changeTextInputValue}

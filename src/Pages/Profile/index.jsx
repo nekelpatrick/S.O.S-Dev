@@ -1,10 +1,8 @@
-import { Container, TechContainer, PendingProjectsContainer, CompletedProjectsContainer, ContactContainer, BodyContainer, ProfileContainer } from './style'
+import { Container, TechContainer, PendingProjectsContainer, CompletedProjectsContainer, ContactContainer, ButtonContainer } from './style'
 import Image from '../../Components/Atoms/Image'
 import Types from '../../Components/Atoms/Types'
 import noImage from './Image/perfil-blog.png'
 import ContainedButtons from '../../Components/Atoms/Button'
-
-import ProductCard from '../../Components/Molecules/Project-Card'
 
 import { useState } from 'react'
 
@@ -12,8 +10,16 @@ import RenderBox from "../RenderBox/PerfilRenderBox";
 
 import { Grid } from "@material-ui/core";
 
+import { useHistory } from 'react-router-dom'
+
+import { useSelector } from 'react-redux'
+
 const Profile = () => {
+  const state = useSelector((state) => state.profile)
+  const history = useHistory()
   const [isFavoriteTime, setFavouriteTime] = useState(false)
+
+  console.log(state)
  
   return (
     <Grid container>
@@ -27,12 +33,33 @@ const Profile = () => {
             borderRadius="50%"
             margin="2vh 0px 2vh 0px"
           />
-          <Types variant = 'h5' component = 'h2' text = 'Nome do meliante' align = 'center' classe = 'fontStyleProfileName' />
-          <ContainedButtons
-          text = {isFavoriteTime ? 'PROJETOS' : 'FAVORITOS'}
-          classe = 'profileFavorites'
-          onClick = {() => setFavouriteTime(isFavoriteTime ? false : true)}
-          />
+          <Types variant = 'h5' component = 'h2' text = {state.user} align = 'center' classe = 'fontStyleProfileName' />
+          <ButtonContainer>
+            <ContainedButtons
+            text = {isFavoriteTime ? 'PROJETOS' : 'FAVORITOS'}
+            classe = 'profileFavorites'
+            onClick = {() => {
+              setFavouriteTime(isFavoriteTime ? false : true)
+              history.push(isFavoriteTime ? '/profile' : '/profile/favoritos')
+            }}
+            />
+            <ContainedButtons
+            text = 'Novo Projeto'
+            classe = 'profileFavorites'
+            onClick = {() => {
+              setFavouriteTime(true)
+              history.push('/profile/novoProjeto')
+            }}
+            />
+            <ContainedButtons
+            text = 'Editar Perfil'
+            classe = 'profileFavorites'
+            onClick = {() => {
+              setFavouriteTime(true)
+              history.push('/profile/editarPerfil')
+          }}
+            />
+          </ButtonContainer>
             <TechContainer>
               <div className="techs">
                 <div className="title">
@@ -44,7 +71,7 @@ const Profile = () => {
                     classe="fontStyleProfile"
                   />
                 </div>
-                <div>textotextotxetoxeto</div>
+                {state.tecnologia && state.tecnologia.map((atual, index) => <div key = {index}>{atual}</div>)}
               </div>
               <div className="techsLevel">
                 <Types
@@ -89,62 +116,57 @@ const Profile = () => {
                 <div>www.adocicameuamor.com.br</div>
               </div>
             </CompletedProjectsContainer>
-          <ContactContainer>
-            <Types
-              variant="h6"
-              component="h3"
-              text="Contato"
-              align="center"
-              classe="fontStyleProfile"
-            />
-            <div className="contactsContainer">
-              <div className="webContacts">
-                <Types
-                  variant="p"
-                  component="h4"
-                  text="Email"
-                  align="center"
-                  classe="profileContacts"
-                />
-                <div>Projeto da dona maria</div>
-                <Types
-                  variant="p"
-                  component="h4"
-                  text="Portfolio"
-                  align="center"
-                  classe="profileContacts"
-                />
-                <div>www.protifolio.com</div>
+            <ContactContainer>
+              <Types
+                variant="h6"
+                component="h3"
+                text="Contato"
+                align="center"
+                classe="fontStyleProfile"
+              />
+              <div className="contactsContainer">
+                <div className="webContacts">
+                  <Types
+                    variant="p"
+                    component="h4"
+                    text="Email"
+                    align="center"
+                    classe="profileContacts"
+                  />
+                  <div>{state.email}</div>
+                  <Types
+                    variant="p"
+                    component="h4"
+                    text="Portfolio"
+                    align="center"
+                    classe="profileContacts"
+                  />
+                  <div>{state.portifolio}</div>
+                </div>
+                <div className="socialContacts">
+                  <Types
+                    variant="p"
+                    component="h4"
+                    text="Telefone"
+                    align="center"
+                    classe="profileContacts"
+                  />
+                  <div>{state.telefone}</div>
+                  <Types
+                    variant="p"
+                    component="h4"
+                    text="Redes Sociais"
+                    align="center"
+                    classe="profileContacts"
+                  />
+                  <div>{state.redesSociais}</div>
+                </div>
               </div>
-              <div className="socialContacts">
-                <Types
-                  variant="p"
-                  component="h4"
-                  text="Telefone"
-                  align="center"
-                  classe="profileContacts"
-                />
-                <div>www.adocicameuamor.com.br</div>
-                <Types
-                  variant="p"
-                  component="h4"
-                  text="Redes Sociais"
-                  align="center"
-                  classe="profileContacts"
-                />
-                <div>Linkedin - Git - Instagram</div>
-              </div>
-            </div>
-          </ContactContainer>
+            </ContactContainer>
         </Container>
       </Grid>
       <Grid item xs={8}>
-        <RenderBox>
-        {/*isFavoriteTime ? 
-            <div>Projetos favoritos</div> :
-            <ProductCard />
-        */}
-        </RenderBox>
+        <RenderBox />
       </Grid>
     </Grid>
   );
