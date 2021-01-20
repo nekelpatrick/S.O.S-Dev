@@ -10,16 +10,24 @@ import {
   Typography,
   Container,
   TextField,
-  Button,
   IconButton,
   Divider,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
 } from "@material-ui/core";
+import MuiPhoneNumber from "material-ui-phone-number";
 
 import { RiImageEditLine } from "react-icons/ri";
 
 import { AiFillLinkedin, AiFillGithub, AiFillInstagram } from "react-icons/ai";
-
-import Techs from "../../Molecules/Techs/index";
 
 // METERIAL-UI RELATED
 const useStyles = makeStyles((theme) => ({
@@ -30,17 +38,21 @@ const useStyles = makeStyles((theme) => ({
 
   avatar: {
     backgroundColor: "#C4C4C4",
-    width: 65,
-    height: 65,
+    width: 55,
+    height: 55,
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom: 2,
+    marginBottom: 1,
   },
 
   textContainer: {
     display: "flex",
     flexDirection: "column",
     maxWidth: "30vw",
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
   },
   techButton: {
     height: "40px",
@@ -54,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
 
     justifyContent: "center",
-    margin: "10px",
+    margin: "4px",
   },
   avatarButton: {
     margin: "5px",
@@ -63,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserProfile({ user }) {
   // GLOBAL VARIABLES
+
   const classes = useStyles();
   let image = false;
   // const token = window.localStorage.getItem("token") || Cookies.get("token");
@@ -72,23 +85,6 @@ export default function UserProfile({ user }) {
   // LOCAL STATES
   const [course_module, setCourse_madule] = useState("");
   const [open, setOpen] = useState(false);
-
-  // VALIDATION WITH YUP
-  const schema = yup.object().shape({
-    name: yup
-      .string()
-      .required("Campo Necessário")
-      .matches(/[A-Za-z]\s[A-Za-z]/, "Formato Inválido"),
-    email: yup
-      .string()
-      .required("Campo Necessário")
-      .email("Formato de email Inválido"),
-
-    contact: yup.string().required("Campo Necessário"),
-  });
-  const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(schema),
-  });
 
   // UPADATE MESSAGE
   const handleClose = (event, reason) => {
@@ -105,7 +101,6 @@ export default function UserProfile({ user }) {
   };
 
   //  AQUI PODEMOS FAZER UM ARRAY PARA INPUT SELECT
-  const modules = [];
 
   // GET AVATAR HANDLER
   const handleAvatarChange = (e) => {
@@ -119,6 +114,57 @@ export default function UserProfile({ user }) {
     data.image = image;
     setOpen(true);
   };
+
+  // ------ MODAL POP UP PARA REDE SOCIAIS --------------------
+
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [socialMedia, setSocialMedia] = useState("");
+
+  const handleClickOpen = (media) => {
+    setDialogOpen(true);
+    setSocialMedia(media);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
+
+  const handleSaveLink = () => {
+    setDialogOpen(false);
+  };
+
+  //----------------------SELECT---------------------------------
+
+  const [userLevel, setUserLevel] = useState("");
+
+  const handleSelectorChange = (event) => {
+    setUserLevel(event.target.value);
+  };
+
+  // ---------------- VALIDATION YUP ---------------------------------
+  const schema = yup.object().shape({
+    name: yup
+      .string()
+      .required("Campo Necessário")
+      .matches(/[A-Za-z]\s[A-Za-z]/, "Formato Inválido"),
+    email: yup
+      .string()
+      .required("Campo Necessário")
+      .email("Formato de email Inválido"),
+    contact: yup.string().required("Campo Necessário"),
+    linkSocial: yup
+      .string()
+      .matches(
+        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+        "Enter correct url!"
+      ),
+  });
+
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  //------------------------------VALIDATION YUP------------------------
 
   return (
     <>
@@ -160,23 +206,62 @@ export default function UserProfile({ user }) {
             />
           </Container>
 
-          {/* TECNOLOGIAS */}
+          {/* ------------------------------- TECNOLOGIAS */}
 
           <Container
             maxWidth="md"
             className={classes.techContainer}
             align="center"
           >
-            <Typography className={classes.text} variant="body1">
+            <Typography
+              className={classes.text}
+              style={{ margin: 8 }}
+              variant="body1"
+            >
               Tecnologias
             </Typography>
 
-            <Techs className={classes.techButton} />
+            <TextField
+              inputRef={register}
+              name="tecnologia"
+              id="contact-tecnologia"
+              error={!!errors.contact}
+              helperText={errors.contact?.message}
+              style={{ margin: 6 }}
+              defaultValue={user?.techs}
+              variant="outlined"
+              label="Insira sua tecnologia"
+            />
+            <Typography className={classes.text} variant="body1">
+              Qual sua experiência na Tecnologia
+            </Typography>
+
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">Nível</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={userLevel}
+                onChange={handleSelectorChange}
+              >
+                <MenuItem value={10}>Iniciante</MenuItem>
+                <MenuItem value={20}>Intermediário</MenuItem>
+                <MenuItem value={30}>Avançado</MenuItem>
+              </Select>
+              <Button
+                style={{ marginTop: 8 }}
+                color="secondary"
+                variant="outlined"
+              >
+                Salvar
+              </Button>
+            </FormControl>
           </Container>
+          {console.log(userLevel)}
 
-          {/* FIM TECNOLOGIAS */}
+          {/* -----------------------------------------FIM TECNOLOGIAS */}
 
-          <Divider style={{ margin: 30 }} />
+          <Divider style={{ margin: 10, marginTop: 5 }} />
           {/*  */}
 
           <Container
@@ -210,7 +295,7 @@ export default function UserProfile({ user }) {
               variant="outlined"
               label="Portfolio link"
             />
-            <TextField
+            {/* <TextField
               inputRef={register}
               name="contact-telefone"
               id="contact-telefone"
@@ -221,23 +306,97 @@ export default function UserProfile({ user }) {
               variant="outlined"
               type="number"
               label="Numero de telefone"
+            /> */}
+            <MuiPhoneNumber
+              name="contact-telefone"
+              data-cy="user-phone"
+              defaultCountry={"br"}
+              onlyCountries={["br"]}
+              label="Numero de telefone"
+              //
+              inputRef={register}
+              id="contact-telefone"
+              error={!!errors.contact}
+              helperText={errors.contact?.message}
+              style={{ margin: 8 }}
+              variant="outlined"
             />
 
             <Container className={classes.socialButtons}>
-              <Avatar className={classes.avatarButton}>
+              <Avatar
+                className={classes.avatarButton}
+                component={IconButton}
+                onClick={() => handleClickOpen("Linkedin")}
+              >
                 <AiFillLinkedin />
               </Avatar>
-              <Avatar className={classes.avatarButton}>
+
+              <Avatar
+                className={classes.avatarButton}
+                component={IconButton}
+                onClick={() => handleClickOpen("Github")}
+              >
                 <AiFillGithub />
               </Avatar>
-              <Avatar className={classes.avatarButton}>
+
+              <Avatar
+                className={classes.avatarButton}
+                component={IconButton}
+                onClick={() => handleClickOpen("Instagram")}
+              >
                 <AiFillInstagram />
               </Avatar>
+
+              {/* -------------------modal- */}
+
+              <Dialog
+                open={dialogOpen}
+                onClose={handleDialogClose}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Insira o link para seu {socialMedia}
+                  </DialogContentText>
+                  <TextField
+                    name="linkSocial"
+                    autoFocus
+                    margin="dense"
+                    id="linkSocial"
+                    label="Link"
+                    type="email"
+                    fullWidth
+                    color="textPrimary"
+                    error={!!errors.linkSocial}
+                    helperText={errors.linkSocial?.message}
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleDialogClose} color="secondary">
+                    Cancelar
+                  </Button>
+                  <Button
+                    type="submit"
+                    onClick={handleDialogClose}
+                    color="textPrimary"
+                  >
+                    Salvar
+                  </Button>
+                </DialogActions>
+              </Dialog>
+
+              {/* --------------------------- */}
             </Container>
           </Container>
 
           <Container align="center" className={classes.buttons}>
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              style={{ marginTop: 6 }}
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
               SALVAR ALTERAÇÕES
             </Button>
           </Container>

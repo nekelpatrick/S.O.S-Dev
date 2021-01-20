@@ -20,7 +20,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper className={classes.root} color="primary">
+      <Paper className={classes.root}>
         <Header />
         <Pages />
       </Paper>
