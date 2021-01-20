@@ -1,15 +1,16 @@
 import addProjects from "./actions";
 import { api } from "../../../axios-globalConfig/axios-global";
 
-export const addProjectsThunk = (projects) => {
+export const addProjectsThunk = () => {
     return (dispatch) => {
-        if (projects !== undefined) {
-            dispatch(addProjects(projects))
-        }
-        else {
-            api.get("/projects").then((res) => {
-                dispatch(addProjects(res.data))
-            })
-        } 
+        api.get("/projects").then((res) => {
+            dispatch(addProjects(res.data))
+        })
     }
 }
+
+// export const filterProjectsThunk = (projects) => {
+//     return (dispatch) => {
+//         dispatch(addProjects(projects))
+//     }
+// };

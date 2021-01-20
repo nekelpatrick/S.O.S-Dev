@@ -25,9 +25,9 @@ const CheckBoxAtom = ({ color, check, handleFilter, selectValue }) => {
     }
   };
 
-  if ( check ) {
-    handleFilter();
-  }
+  // if ( check ) {
+  //   handleFilter();
+  // }
 
   return (
     <>
