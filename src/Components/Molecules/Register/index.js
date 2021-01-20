@@ -20,7 +20,7 @@ const Register = ({ text, setIsReg, close }) => {
 
   const schema = yup.object().shape({
     user: yup.string().required("Campo obrigatório"),
-    email: yup.string().email("email invalido").required("Campo obrigatório"),
+    email: yup.string().email("Email invalido").required("Campo obrigatório"),
     password: yup
       .string()
       .min(8, "Senha deve conter no mínimo 8 dígitos")
