@@ -70,22 +70,26 @@ const Register = ({ text, setIsReg, close }) => {
       <Types variant="h2" text={title} className="titlePopUp" />
 
       <Form onSubmit={handleSubmit(handleForm)}>
-        <Input
-          label="Usuário"
-          variant="outlined"
-          name="user"
-          id="user"
-          inputRef={register}
-          helperText={errors.user?.message}
-        />
-        <Input
-          label="Email"
-          variant="outlined"
-          name="email"
-          id="email"
-          inputRef={register}
-          helperText={errors.email?.message}
-        />
+        <div>
+          <Input
+            label="Usuário"
+            variant="outlined"
+            name="user"
+            id="user"
+            inputRef={register}
+            helperText={errors.user?.message}
+          />
+        </div>
+        <div>
+          <Input
+            label="Email"
+            variant="outlined"
+            name="email"
+            id="email"
+            inputRef={register}
+            helperText={errors.email?.message}
+          />
+        </div>
         <Input
           label="Senha"
           variant="outlined"
@@ -95,15 +99,17 @@ const Register = ({ text, setIsReg, close }) => {
           inputRef={register}
           helperText={errors.password?.message}
         />
-        <Input
-          label="Confirmar Senha"
-          variant="outlined"
-          name="passwordConfirm"
-          id="passwordConfirm"
-          type="password"
-          inputRef={register}
-          helperText={errors.passwordConfirm?.message}
-        />
+        <div>
+          <Input
+            label="Confirmar Senha"
+            variant="outlined"
+            name="passwordConfirm"
+            id="passwordConfirm"
+            type="password"
+            inputRef={register}
+            helperText={errors.passwordConfirm?.message}
+          />
+        </div>
         <Button
           color="inherit"
           classe="buttonLogin"

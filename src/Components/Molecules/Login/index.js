@@ -55,25 +55,29 @@ const Login = ({ text, setIsReg, isReg, close }) => {
 
   return (
     <>
-      <Types variant="h2" text={title} className="titlePopUp" />
+      <Types variant="h2" text={title} />
       <Form onSubmit={handleSubmit(handleForm)}>
-        <Input
-          label="Email"
-          variant="outlined"
-          name="email"
-          id="email"
-          inputRef={register}
-          helperText={errors.email?.message}
-        />
-        <Input
-          label="Senha"
-          variant="outlined"
-          name="password"
-          id="password"
-          type="password"
-          inputRef={register}
-          helperText={errors.password?.message}
-        />
+        <div>
+          <Input
+            label="Email"
+            variant="outlined"
+            name="email"
+            id="email"
+            inputRef={register}
+            helperText={errors.email?.message}
+          />
+        </div>
+        <div>
+          <Input
+            label="Senha"
+            variant="outlined"
+            name="password"
+            id="password"
+            type="password"
+            inputRef={register}
+            helperText={errors.password?.message}
+          />
+        </div>
         <Button
           color="inherit"
           classe="buttonLogin"
