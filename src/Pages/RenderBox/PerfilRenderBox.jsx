@@ -1,33 +1,23 @@
-import React from "react";
-
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { Switch, Route, useHistory } from "react-router-dom";
 import { api } from "../../axios-globalConfig/axios-global";
-
-import { Switch, Route } from "react-router-dom";
+import { RenderBox } from "./style";
 
 import ProjectCard from "../../Components/Molecules/Project-Card";
 import EditUser from "../../Components/Organisms/ProfileForm";
 import ProductCard from "../../Components/Molecules/Project-Card-Add-New";
 import Filters from "../../Components/Molecules/Filters";
 import UserSearchProfile from "../../Components/Organisms/User-Search-Profile";
-import Favorites from '../../Components/Organisms/Favorites/'
+import Favorites from "../../Components/Organisms/Favorites/";
+import Button from "../../Components/Atoms/Button";
 
-import { makeStyles } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { RenderBox } from './style'
-
-
-const useStyles = makeStyles((theme) => ({
-  RenderBox: {
-    // height: "90vh",
-    // overflowY: 'auto'
-  },
-}));
 const PerfilRenderBox = ({ setAuth }) => {
-  const { projects, filteredProjects, profile } = useSelector((state) => state);
+  const { projects, filteredProjects, profile, filteredUsers } = useSelector(
+    (state) => state
+  );
   const [projectOwner, setProjectOwner] = useState([]);
-  const classes = useStyles();
-
+  const history = useHistory();
   const allProjects = projects?.map((e, index) => (
     <ProjectCard
       key={index}
@@ -36,6 +26,7 @@ const PerfilRenderBox = ({ setAuth }) => {
       userId={e.userId}
       descricao={e.description}
       stack={e.qualifications}
+      time={`Tempo estimado: ${e.time}`}
       projectFavorite={e}
       alreadyFavorite={
         profile.favorites.findIndex((favorite) => favorite.id === e.id) < 0
@@ -56,6 +47,7 @@ const PerfilRenderBox = ({ setAuth }) => {
           userId={e.userId}
           descricao={e.description}
           stack={e.qualifications}
+          time={`Tempo estimado: ${e.time}`}
           projectFavorite={e}
         />
       ))}
@@ -74,8 +66,7 @@ const PerfilRenderBox = ({ setAuth }) => {
   }, [projects, projectOwner]);
 
   return (
-    <div className={classes.RenderBox}>
-      <RenderBox>
+    <RenderBox>
       <Switch>
         <Route exact path="/profile">
           <Filters projects={projects} />
@@ -91,12 +82,21 @@ const PerfilRenderBox = ({ setAuth }) => {
         <Route exact path="/profile/novoProjeto">
           <ProductCard setAuth={setAuth} />
         </Route>
-        <Route path="/profile/:user">
-          <UserSearchProfile />
+        <Route path="/profile/search">
+          <Button
+            text="Voltar para o profile"
+            onClick={() => history.push("/profile")}
+          />
+          {filteredUsers.length > 0 ? (
+            filteredUsers.map((e, i) => (
+              <UserSearchProfile key={i} profile={e} />
+            ))
+          ) : (
+            <div>Nenhum usuario encontrado</div>
+          )}
         </Route>
       </Switch>
-      </RenderBox>
-    </div>
+    </RenderBox>
   );
 };
 
