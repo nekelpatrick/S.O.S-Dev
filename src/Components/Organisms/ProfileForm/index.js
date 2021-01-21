@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import * as yup from "yup";
+
+import { api } from "../../../axios-globalConfig/axios-global";
 
 import Techs from "../../Molecules/Techs";
 import { FormContainer, TechContainer, TechBox, StyledForm } from "./style";
@@ -22,11 +23,12 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@material-ui/core";
-import MuiPhoneNumber from "material-ui-phone-number";
 
 import { RiImageEditLine } from "react-icons/ri";
-
 import { AiFillLinkedin, AiFillGithub, AiFillInstagram } from "react-icons/ai";
+import { useSelector, useDispatch } from "react-redux";
+import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
+import { useHistory } from "react-router-dom";
 
 // METERIAL-UI RELATED
 const useStyles = makeStyles((theme) => ({
@@ -77,20 +79,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UserProfile({ user }) {
-  // GLOBAL VARIABLES
-
+export default function UserProfile({ setAuth }) {
   const classes = useStyles();
+  const { profile } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const history = useHistory();
   let image = false;
-  // const token = window.localStorage.getItem("token") || Cookies.get("token");
 
-  // GLOBAL STATES
-
-  // LOCAL STATES
-  const [course_module, setCourse_madule] = useState("");
+  const [imputLink, setInputLink] = useState("");
+  const [socialMedia, setSocialMedia] = useState("");
   const [open, setOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
-  // UPADATE MESSAGE
+  useEffect(() => {
+    setAuth(2);
+  }, [setAuth]);
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -99,28 +103,47 @@ export default function UserProfile({ user }) {
     setOpen(false);
   };
 
-  // COURSE_MODULES HANDLERS
-  const handleChange = (evt) => {
-    setCourse_madule(evt.target.value);
-  };
-
-  // GET AVATAR HANDLER
   const handleAvatarChange = (e) => {
     image = new FormData();
     image.append("avatar", e.target.files[0]);
   };
 
-  // FORM HANDLER
+  const schema = yup.object().shape({
+    user: yup.string().required("Campo Necessário"),
+    email: yup
+      .string()
+      .email("Formato de email Inválido")
+      .required("Campo Necessário"),
+    portifolio: yup.string(),
+    phone: yup.string(),
+  });
+
+  const { register, handleSubmit, errors, setError } = useForm({
+    resolver: yupResolver(schema),
+  });
   const handleForm = (data) => {
-    data.course_module = course_module;
     data.image = image;
     setOpen(true);
+    api
+      .patch(
+        `/users/${profile.id}`,
+        {
+          user: data.user,
+          email: data.email,
+          portifolio: data.portifolio,
+          phone: data.phone,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${profile.token}`,
+          },
+        }
+      )
+      .then((res) => {
+        dispatch(getProfileThunk(profile.email, profile.token));
+        history.push("/profile");
+      });
   };
-
-  // ------ MODAL POP UP PARA REDE SOCIAIS --------------------
-
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [socialMedia, setSocialMedia] = useState("");
 
   const handleClickOpen = (media) => {
     setDialogOpen(true);
@@ -130,35 +153,28 @@ export default function UserProfile({ user }) {
   const handleDialogClose = () => {
     setDialogOpen(false);
   };
-
   const handleSaveLink = () => {
     setDialogOpen(false);
+
+    api
+      .patch(
+        `/users/${profile.id}`,
+        {
+          socialMedia: [
+            ...profile.socialMedia,
+            { name: socialMedia, link: imputLink },
+          ],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${profile.token}`,
+          },
+        }
+      )
+      .then((res) => {
+        dispatch(getProfileThunk(profile.email, profile.token));
+      });
   };
-
-  // ---------------- VALIDATION YUP ---------------------------------
-  const schema = yup.object().shape({
-    user: yup
-      .string()
-      .required("Campo Necessário")
-      .matches(/[A-Za-z]\s[A-Za-z]/, "Formato Inválido"),
-    email: yup
-      .string()
-      .required("Campo Necessário")
-      .email("Formato de email Inválido"),
-    contact: yup.string().required("Campo Necessário"),
-    linkSocial: yup
-      .string()
-      .matches(
-        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-        "Enter correct url!"
-      ),
-  });
-
-  const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(schema),
-  });
-
-  //------------------------------VALIDATION YUP------------------------
 
   return (
     <>
@@ -190,10 +206,10 @@ export default function UserProfile({ user }) {
               multiline
               name="user"
               inputRef={register}
-              error={!!errors.name}
+              error={!!errors.user}
               helperText={errors.name?.message}
               style={{ margin: 3 }}
-              defaultValue={user?.name}
+              defaultValue={profile.user}
               label="Nome do Usuário"
             />
           </Container>
@@ -229,35 +245,32 @@ export default function UserProfile({ user }) {
               error={!!errors.contact}
               helperText={errors.contact?.message}
               style={{ margin: 3 }}
-              defaultValue={user?.email}
+              defaultValue={profile.email}
               variant="outlined"
               label="Email"
             />
             <TextField
               inputRef={register}
-              name="contact-portfolio"
+              name="portifolio"
               id="contact-portfolio"
               error={!!errors.contact}
-              helperText={errors.contact?.message}
+              helperText={errors.portifolio?.message}
               style={{ margin: 3 }}
-              defaultValue={user?.contact}
+              defaultValue={profile.portifolio}
               variant="outlined"
               label="Portfolio link"
             />
 
-            <MuiPhoneNumber
-              name="contact-telefone"
-              data-cy="user-phone"
-              defaultCountry={"br"}
-              onlyCountries={["br"]}
+            <TextField
+              name="phone"
               label="Numero de telefone"
-              //
               inputRef={register}
-              id="contact-telefone"
-              error={!!errors.contact}
-              helperText={errors.contact?.message}
+              id="phone"
+              error={!!errors.phone}
+              helperText={errors.phone?.message}
               style={{ margin: 3 }}
               variant="outlined"
+              defaultValue={profile.phone}
             />
 
             <Container className={classes.socialButtons}>
@@ -285,8 +298,6 @@ export default function UserProfile({ user }) {
                 <AiFillInstagram />
               </Avatar>
 
-              {/* -------------------modal- */}
-
               <Dialog
                 open={dialogOpen}
                 onClose={handleDialogClose}
@@ -298,7 +309,6 @@ export default function UserProfile({ user }) {
                     Insira o link para seu {socialMedia}
                   </DialogContentText>
                   <TextField
-                    name="linkSocial"
                     autoFocus
                     margin="dense"
                     id="linkSocial"
@@ -306,6 +316,7 @@ export default function UserProfile({ user }) {
                     type="email"
                     fullWidth
                     color="textPrimary"
+                    onChange={(e) => setInputLink(e.target.value)}
                     error={!!errors.linkSocial}
                     helperText={errors.linkSocial?.message}
                   />
@@ -314,17 +325,11 @@ export default function UserProfile({ user }) {
                   <Button onClick={handleDialogClose} color="secondary">
                     Cancelar
                   </Button>
-                  <Button
-                    type="submit"
-                    onClick={handleDialogClose}
-                    color="textPrimary"
-                  >
+                  <Button onClick={handleSaveLink} color="textPrimary">
                     Salvar
                   </Button>
                 </DialogActions>
               </Dialog>
-
-              {/* --------------------------- */}
             </Container>
           </Container>
 

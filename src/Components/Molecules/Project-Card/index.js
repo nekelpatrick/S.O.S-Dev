@@ -16,47 +16,70 @@ import useStyles from "./style";
 import { api } from "../../../axios-globalConfig/axios-global";
 
 import { useSelector, useDispatch } from "react-redux";
-// import { useState } from "react";
-// import { useHistory } from "react-router-dom";
+
 import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
 
-const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, isFavorite = false }) => {
+import { useHistory } from "react-router-dom";
+
+import { useContext } from "react";
+import { StateContext } from "../../../Pages/Profile/stateContext";
+
+const ProjectCard = ({
+  titulo,
+  tipo,
+  descricao,
+  stack,
+  userId,
+  time,
+  projectFavorite,
+  isFavorite = false,
+  alreadyFavorite = false,
+}) => {
+  const history = useHistory();
+
+  const { isFavoriteTime, setFavouriteTime } = useContext(StateContext);
   const classes = useStyles();
   const dispatch = useDispatch();
-  // const history = useHistory();
   const { users, profile } = useSelector((state) => state);
   const findUser = users.find((e) => e.id === parseInt(userId));
-  const favoriteIcon = <i class="fas fa-star"></i>
-  const removeIcon = <i class="fas fa-eraser"></i>
+  const favoriteIcon = <i class="fas fa-star"></i>;
+  const removeIcon = <i class="fas fa-eraser"></i>;
 
   const patchFavoriteList = (favoriteList) => {
-    api.patch(`/users/${profile.id}`, 
+    api
+      .patch(
+        `/users/${profile.id}`,
         {
-          favorites: favoriteList
+          favorites: favoriteList,
         },
-      {
-        headers: {
-          Authorization: `Bearer ${profile.token}`}
-      }
-    )
-    .then((res) => {
-      console.log(res)
-      dispatch(getProfileThunk(profile.email, profile.token))
-    })
-    .catch ((error) => {
-      console.log(error)
-    })
+        {
+          headers: {
+            Authorization: `Bearer ${profile.token}`,
+          },
+        }
+      )
+      .then((res) => {
+        dispatch(getProfileThunk(profile.email, profile.token));
+      })
+      .catch((error) => {});
   };
 
+  const findRepeatedFavorite = profile.favorites.findIndex(
+    (project) => project.id === projectFavorite.id
+  );
   const handleAddFavorite = (e) => {
-    e.target.style.color = "yellow"
-    patchFavoriteList([...profile.favorites, projectFavorite])
+    e.target.style.color = "yellow";
+    if (findRepeatedFavorite < 0) {
+      patchFavoriteList([...profile.favorites, projectFavorite]);
+    }
   };
   const handleRemoveFavorite = (e) => {
-    const newFavorites = profile.favorites.filter((favorite) => favorite.id !== projectFavorite.id );
-    e.target.style.color = "red"
-    patchFavoriteList(newFavorites)
-  }
+    const newFavorites = profile.favorites.filter(
+      (favorite) => favorite.id !== projectFavorite.id
+    );
+    e.target.style.color = "red";
+    patchFavoriteList(newFavorites);
+  };
 
   return (
     <Card elevation={14} align="center" className={classes.root}>
@@ -70,10 +93,12 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, 
               variant="h4"
               text={titulo}
             />
-            <Button 
-            onClick={(e) => isFavorite ? handleRemoveFavorite(e) : handleAddFavorite(e)} 
-            text={isFavorite ? removeIcon : favoriteIcon}
-            classe={"addFavorites"}
+            <Button
+              onClick={(e) =>
+                isFavorite ? handleRemoveFavorite(e) : handleAddFavorite(e)
+              }
+              text={isFavorite ? removeIcon : favoriteIcon}
+              classe={alreadyFavorite ? "alreadyFavorites" : "addFavorites"}
             />
           </Grid>
 
@@ -84,6 +109,13 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, 
               gutterBottom
               variant="h6"
               text={tipo}
+            />
+            <Typography
+              align="center"
+              color="textPrimary"
+              gutterBottom
+              variant="h6"
+              text={time}
             />
           </Grid>
         </Grid>
@@ -144,6 +176,10 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, 
               <Button
                 className={classes.statsIcon}
                 text="abrir projeto"
+                onClick={() => {
+                  setFavouriteTime(true);
+                  history.push("/profile/novoProjeto");
+                }}
               ></Button>
             </CardActions>
           </Grid>
