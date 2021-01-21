@@ -46,11 +46,6 @@ const Slides = () => {
 
   return (
     <SlideContainer>
-      <ContainedButtons
-        text="<"
-        classe="buttonArrow"
-        onClick={(e) => showProjects(e)}
-      />
       <Card className={classes.root}>
         <CardContent>
           <Types
@@ -81,15 +76,7 @@ const Slides = () => {
             }
           />
         </CardContent>
-        <CardActions>
-          <ContainedButtons text={"Abrir Projeto"} classe={"button"} />
-        </CardActions>
       </Card>
-      <ContainedButtons
-        text=">"
-        classe="buttonArrow"
-        onClick={(e) => showProjects(e)}
-      />
     </SlideContainer>
   );
 };

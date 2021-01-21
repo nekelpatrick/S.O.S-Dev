@@ -12,12 +12,14 @@ export const useStyles = makeStyles({
 export const SlideContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 50vw;
   height: 25vh;
   margin: 0 auto;
 
   .MuiCardContent-root {
     height: 170px;
+    border: 2px solid #efdcbd;
+    background-color: #17223a;
   }
 `;
