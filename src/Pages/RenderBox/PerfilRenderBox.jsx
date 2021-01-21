@@ -21,9 +21,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const PerfilRenderBox = ({ setAuth }) => {
-  const { projects, profile } = useSelector((state) => state);
+  const { projects, filteredProjects, profile } = useSelector((state) => state);
   const [projectOwner, setProjectOwner] = useState([]);
   const classes = useStyles();
+
+  const allProjects =
+    projects?.map((e, index) => (
+      <ProjectCard
+        key={index}
+        titulo={e.title}
+        tipo={e.type}
+        userId={e.userId}
+        descricao={e.description}
+        stack={e.qualifications}
+        projectFavorite={e}
+        alreadyFavorite={
+          profile.favorites.findIndex((favorite) => favorite.id === e.id) < 0 ? false : true
+        }
+      />
+    ));
+    const h3OfFiltereds = "Encontramos esse(s) projeto(s) aqui..."
+    const filtereds = 
+    <>
+    <h3>{h3OfFiltereds}</h3>
+      {filteredProjects?.map((e, index) => (
+        <ProjectCard
+        key={index}
+        titulo={e.title}
+        tipo={e.type}
+        userId={e.userId}
+        descricao={e.description}
+        stack={e.qualifications}
+        projectFavorite={e}
+      />
+      ))}
+    </>
 
   useEffect(() => {
     setAuth(2);
@@ -45,21 +77,7 @@ const PerfilRenderBox = ({ setAuth }) => {
       <Switch>
         <Route exact path="/profile">
           <Filters projects={projects} />
-          {projects.length > 0 &&
-            projects.map((e, index) => (
-              <ProjectCard
-                key={index}
-                titulo={e.title}
-                tipo={e.type}
-                userId={e.userId}
-                descricao={e.description}
-                stack={e.qualifications}
-                projectFavorite={e}
-                alreadyFavorite={
-                  profile.favorites.findIndex((favorite) => favorite.id === e.id) < 0 ? false : true
-                }
-              />
-            ))}
+          {filteredProjects.length > 0 ? filtereds : allProjects}
         </Route>
         <Route exact path="/profile/favoritos">
           <Favorites />
