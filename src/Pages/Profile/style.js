@@ -9,6 +9,7 @@ export const Container = styled.div`
     margin-top: -1vh;
     font-size: 1.5vw;
     word-wrap: break-word;
+    position: fixed;
 
     display: flex;
     flex-direction: column;
@@ -221,3 +222,18 @@ export const ButtonContainer = styled.div `
     }
 
 `
+
+export const SocialMedia = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    text-decoration: none;
+    color: #efdcbd;
+    font-weight: bold;
+    :hover {
+      color: #eb5c82;
+    }
+  }
+`;

@@ -20,6 +20,7 @@ const Filters = () => {
     nivel: "",
     time: "",
   });
+  const [notFound, setMessageNotFound] = useState(false)
   const { user, projects, users, filteredProjects } = useSelector(
     (state) => state
   ); //-> estão sendo aplicados nas lógicas do redux

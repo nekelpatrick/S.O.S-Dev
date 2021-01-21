@@ -1,35 +1,41 @@
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import ProjectCard from "../../Molecules/Project-Card";
 
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+const Favorites = ({ setAuth }) => {
+  const { profile } = useSelector((state) => state);
+  const [load, setLoad] = useState(true);
 
-const Favorites = () => {
-    const [favorites, setFavorites] = useState([]);
-    const [haveFavorites, setHaveFavorites] = useState(false);
-    const { profile } = useSelector((state) => state)
+  useEffect(() => {
+    setAuth(2);
+  }, [setAuth]);
 
-    useEffect(() => {
-        setFavorites([profile])
-        if ( favorites.length > 0 ) {
-            setHaveFavorites(true)
-        };
-    }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoad(false);
+    }, 3000);
+  }, []);
 
-    console.log(favorites)
-
-    // utilizar em ProjectCard
-    // titulo={title} tipo={type} descricao={description} stack={qualifications}
-    return (
-        <>
-        {
-        haveFavorites 
-            && 
-            // favorites.map(({title, type, description, qualifications}) => (
-                <ProjectCard />
-            // ))
-        }
-        </>
-    )
+  return (
+    <>
+      {load ? (
+        <h3>Carregando...</h3>
+      ) : profile.favorites.length > 0 ? (
+        profile.favorites.map((e) => (
+          <ProjectCard
+            titulo={e.title}
+            tipo={e.type}
+            descricao={e.description}
+            stack={e.qualifications}
+            projectFavorite={e}
+            userId={e.userId}
+            isFavorite
+          />
+        ))
+      ) : (
+        <h3>Você está sem projetos favoritos aqui...</h3>
+      )}
+    </>
+  );
 };
-
 export default Favorites;

@@ -5,6 +5,7 @@ import {
   CompletedProjectsContainer,
   ContactContainer,
   ButtonContainer,
+  SocialMedia,
 } from "./style";
 import Image from "../../Components/Atoms/Image";
 import Types from "../../Components/Atoms/Types";
@@ -49,6 +50,8 @@ const Profile = ({ auth, setAuth }) => {
 
   const classe = useStyles()
 
+  console.log(profile)
+
   useEffect(() =>
     matchesMobile ?
     setDisplay(false) :
@@ -83,7 +86,7 @@ const Profile = ({ auth, setAuth }) => {
                   );
                 }}
               />
-              <Projects />
+              <Projects setAuth={setAuth}/>
               <ContainedButtons
                 text="Editar Perfil"
                 classe="profileFavorites"
@@ -131,31 +134,37 @@ const Profile = ({ auth, setAuth }) => {
                 align="center"
                 classe="fontStyleProfile"
               />
-              <div>Projeto do beabá</div>
-            </PendingProjectsContainer>
-            <CompletedProjectsContainer>
-              <div className="project">
-                <Types
-                  variant="h6"
-                  component="h3"
-                  text="Projetos Prontos"
-                  align="center"
-                  classe="fontStyleProfile"
-                />
-                <div>Projeto da dona maria</div>
-              </div>
-              <div className="deploy">
-                <Types
-                  variant="h6"
-                  component="h3"
-                  text="Deploy"
-                  align="center"
-                  classe="fontStyleProfile"
-                />
-                <div>www.adocicameuamor.com.br</div>
-              </div>
-            </CompletedProjectsContainer>
-            <ContactContainer>
+            {profile.onGoingProjects.map((e) => (
+              <div>{e}</div>
+            ))}
+          </PendingProjectsContainer>
+          <CompletedProjectsContainer>
+            <div className="project">
+              <Types
+                variant="h6"
+                component="h3"
+                text="Projetos Prontos"
+                align="center"
+                classe="fontStyleProfile"
+              />
+              {profile.completedProjects.map((e) => (
+                <div>{e.name}</div>
+              ))}
+            </div>
+            <div className="deploy">
+              <Types
+                variant="h6"
+                component="h3"
+                text="Deploy"
+                align="center"
+                classe="fontStyleProfile"
+              />
+              {profile.completedProjects.map((e) => (
+                <div>{e.deploy}</div>
+              ))}
+            </div>
+          </CompletedProjectsContainer>
+          <ContactContainer>
               <Types
                 variant="h6"
                 component="h3"
@@ -198,9 +207,15 @@ const Profile = ({ auth, setAuth }) => {
                     align="center"
                     classe="profileContacts"
                   />
-                  <div>{profile.socialMedia}</div>
-                </div>
+                {profile.socialMedia?.map((e, i) => (
+                  <SocialMedia key={i}>
+                    <a href={e?.link} target="_blank" rel="noreferrer">
+                      {e?.name}
+                    </a>
+                  </SocialMedia>
+                ))}
               </div>
+                </div>
             </ContactContainer>
           </Container>
         </Grid>

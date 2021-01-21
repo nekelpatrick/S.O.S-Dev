@@ -9,25 +9,58 @@ import EditUser from "../../Components/Organisms/ProfileForm";
 import ProductCard from "../../Components/Molecules/Project-Card-Add-New";
 import Filters from "../../Components/Molecules/Filters";
 import UserSearchProfile from "../../Components/Organisms/User-Search-Profile";
+import Favorites from '../../Components/Organisms/Favorites/'
 
 import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { RenderBox } from './style'
 
 
 const useStyles = makeStyles((theme) => ({
   RenderBox: {
-    height: "90vh",
-    overflowY: 'auto',
+    // height: "90vh",
+    // overflowY: 'auto'
   },
 }));
-
-const PerfilRenderBox = () => {
-  const { projects } = useSelector((state) => state);
+const PerfilRenderBox = ({ setAuth }) => {
+  const { projects, filteredProjects, profile } = useSelector((state) => state);
   const [projectOwner, setProjectOwner] = useState([]);
   const classes = useStyles();
 
-  console.log(projects);
+  const allProjects = projects?.map((e, index) => (
+    <ProjectCard
+      key={index}
+      titulo={e.title}
+      tipo={e.type}
+      userId={e.userId}
+      descricao={e.description}
+      stack={e.qualifications}
+      projectFavorite={e}
+      alreadyFavorite={
+        profile.favorites.findIndex((favorite) => favorite.id === e.id) < 0
+          ? false
+          : true
+      }
+    />
+  ));
+  const h3OfFiltereds = "Encontramos esse(s) projeto(s) aqui...";
+  const filtereds = (
+    <>
+      <h3>{h3OfFiltereds}</h3>
+      {filteredProjects?.map((e, index) => (
+        <ProjectCard
+          key={index}
+          titulo={e.title}
+          tipo={e.type}
+          userId={e.userId}
+          descricao={e.description}
+          stack={e.qualifications}
+          projectFavorite={e}
+        />
+      ))}
+    </>
+  );
 
   useEffect(() => {
     projects[projectOwner.length] &&
@@ -42,35 +75,27 @@ const PerfilRenderBox = () => {
 
   return (
     <div className={classes.RenderBox}>
+      <RenderBox>
       <Switch>
         <Route exact path="/profile">
           <Filters projects={projects} />
-          {projects.length > 0 &&
-            projects.map((e, index) => (
-              <ProjectCard
-                key={index}
-                titulo={e.title}
-                tipo={e.type}
-                userId={e.userId}
-                descricao={e.description}
-                stack={e.qualifications}
-              />
-            ))}
+          {filteredProjects.length > 0 ? filtereds : allProjects}
         </Route>
         <Route exact path="/profile/favoritos">
           <Filters />
-          <div>favoritos</div>
+          <Favorites setAuth={setAuth} />
         </Route>
         <Route exact path="/profile/editarPerfil">
-          <EditUser />
+          <EditUser setAuth={setAuth} />
         </Route>
         <Route exact path="/profile/novoProjeto">
-          <ProductCard />
+          <ProductCard setAuth={setAuth} />
         </Route>
         <Route path="/profile/:user">
           <UserSearchProfile />
         </Route>
       </Switch>
+      </RenderBox>
     </div>
   );
 };
