@@ -28,7 +28,8 @@ const ProjectCard = ({
   titulo,
   tipo,
   descricao,
-  stack,
+  linguagem,
+  nivel,
   userId,
   time,
   projectFavorite,
@@ -138,29 +139,27 @@ const ProjectCard = ({
             </Grid>
             <Grid item xs={8}>
               <Paper elevation={7} className={classes.contentItemStacksTech}>
-                {stack.map((e) => (
-                  <Grid
-                    container
-                    xs={12}
-                    spacing={1}
-                    style={{ marginTop: "5px" }}
-                  >
-                    <Grid item xs={6} align="center">
-                      <Typography
-                        color="secondary"
-                        variant="body1"
-                        text={e.linguagem}
-                      />
-                    </Grid>
-                    <Grid item xs={6} align="center">
-                      <Typography
-                        color="secondary"
-                        variant="body1"
-                        text={e.nivel}
-                      />
-                    </Grid>
+                <Grid
+                  container
+                  xs={12}
+                  spacing={1}
+                  style={{ marginTop: "5px" }}
+                >
+                  <Grid item xs={6} align="center">
+                    <Typography
+                      color="secondary"
+                      variant="body1"
+                      text={linguagem}
+                    />
                   </Grid>
-                ))}
+                  <Grid item xs={6} align="center">
+                    <Typography
+                      color="secondary"
+                      variant="body1"
+                      text={nivel}
+                    />
+                  </Grid>
+                </Grid>
               </Paper>
             </Grid>
           </Grid>
