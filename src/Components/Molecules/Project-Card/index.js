@@ -16,36 +16,43 @@ import useStyles from "./style";
 import { api } from "../../../axios-globalConfig/axios-global";
 
 import { useSelector, useDispatch } from "react-redux";
-// import { useState } from "react";
-// import { useHistory } from "react-router-dom";
+
 import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
 
-const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, isFavorite = false, alreadyFavorite = false }) => {
+const ProjectCard = ({ 
+  titulo, 
+  tipo, 
+  descricao, 
+  stack, 
+  userId, 
+  projectFavorite, 
+  isFavorite = false, 
+  alreadyFavorite = false }) => {
+    
   const classes = useStyles();
   const dispatch = useDispatch();
-  // const history = useHistory();
   const { users, profile } = useSelector((state) => state);
   const findUser = users.find((e) => e.id === parseInt(userId));
-  const favoriteIcon = <i class="fas fa-star"></i>
-  const removeIcon = <i class="fas fa-eraser"></i>
+  const favoriteIcon = <i class="fas fa-star"></i>;
+  const removeIcon = <i class="fas fa-eraser"></i>;
 
   const patchFavoriteList = (favoriteList) => {
-    api.patch(`/users/${profile.id}`, 
+    api
+      .patch(
+        `/users/${profile.id}`,
         {
-          favorites: favoriteList
+          favorites: favoriteList,
         },
-      {
-        headers: {
-          Authorization: `Bearer ${profile.token}`}
-      }
-    )
-    .then((res) => {
-      console.log(res)
-      dispatch(getProfileThunk(profile.email, profile.token))
-    })
-    .catch ((error) => {
-      console.log(error)
-    })
+        {
+          headers: {
+            Authorization: `Bearer ${profile.token}`,
+          },
+        }
+      )
+      .then((res) => {
+        dispatch(getProfileThunk(profile.email, profile.token));
+      })
+      .catch((error) => {});
   };
 
   const findRepeatedFavorite = profile.favorites.findIndex((project) => project.id === projectFavorite.id);
@@ -56,10 +63,12 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, 
     }
   };
   const handleRemoveFavorite = (e) => {
-    const newFavorites = profile.favorites.filter((favorite) => favorite.id !== projectFavorite.id );
-    e.target.style.color = "red"
-    patchFavoriteList(newFavorites)
-  }
+    const newFavorites = profile.favorites.filter(
+      (favorite) => favorite.id !== projectFavorite.id
+    );
+    e.target.style.color = "red";
+    patchFavoriteList(newFavorites);
+  };
 
   return (
     <Card elevation={14} align="center" className={classes.root}>
