@@ -12,7 +12,9 @@ import UserSearchProfile from "../../Components/Organisms/User-Search-Profile";
 import Favorites from "../../Components/Organisms/Favorites";
 
 const PerfilRenderBox = ({ setAuth }) => {
-  const { projects, filteredProjects, profile } = useSelector((state) => state);
+  const { projects, filteredProjects, profile, filteredUsers } = useSelector(
+    (state) => state
+  );
   const [projectOwner, setProjectOwner] = useState([]);
 
   const allProjects = projects?.map((e, index) => (
@@ -78,8 +80,14 @@ const PerfilRenderBox = ({ setAuth }) => {
         <Route exact path="/profile/novoProjeto">
           <ProductCard setAuth={setAuth} />
         </Route>
-        <Route path="/profile/:user">
-          <UserSearchProfile />
+        <Route path="/profile/search">
+          {filteredUsers.length > 0 ? (
+            filteredUsers.map((e, i) => (
+              <UserSearchProfile key={i} profile={e} />
+            ))
+          ) : (
+            <div>Nenhum usuario encontrado</div>
+          )}
         </Route>
       </Switch>
     </RenderBox>
