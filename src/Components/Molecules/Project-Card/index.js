@@ -19,7 +19,17 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
 
-const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, isFavorite = false, alreadyFavorite = false }) => {
+const ProjectCard = ({
+  time,
+  titulo,
+  tipo,
+  descricao,
+  stack,
+  userId,
+  projectFavorite,
+  isFavorite = false,
+  alreadyFavorite = false,
+}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { users, profile } = useSelector((state) => state);
@@ -46,11 +56,13 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, 
       .catch((error) => {});
   };
 
-  const findRepeatedFavorite = profile.favorites.findIndex((project) => project.id === projectFavorite.id);
+  const findRepeatedFavorite = profile.favorites.findIndex(
+    (project) => project.id === projectFavorite.id
+  );
   const handleAddFavorite = (e) => {
     e.target.style.color = "yellow";
-    if ( findRepeatedFavorite < 0 ) {
-      patchFavoriteList([...profile.favorites, projectFavorite])
+    if (findRepeatedFavorite < 0) {
+      patchFavoriteList([...profile.favorites, projectFavorite]);
     }
   };
   const handleRemoveFavorite = (e) => {
@@ -73,10 +85,12 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, 
               variant="h4"
               text={titulo}
             />
-            <Button 
-            onClick={(e) => isFavorite ? handleRemoveFavorite(e) : handleAddFavorite(e)} 
-            text={isFavorite ? removeIcon : favoriteIcon}
-            classe={alreadyFavorite ? "alreadyFavorites" : "addFavorites"}
+            <Button
+              onClick={(e) =>
+                isFavorite ? handleRemoveFavorite(e) : handleAddFavorite(e)
+              }
+              text={isFavorite ? removeIcon : favoriteIcon}
+              classe={alreadyFavorite ? "alreadyFavorites" : "addFavorites"}
             />
           </Grid>
 
@@ -87,6 +101,13 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, 
               gutterBottom
               variant="h6"
               text={tipo}
+            />
+            <Typography
+              align="center"
+              color="textPrimary"
+              gutterBottom
+              variant="h6"
+              text={time}
             />
           </Grid>
         </Grid>

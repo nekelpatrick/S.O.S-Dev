@@ -1,6 +1,8 @@
-import { api } from "../../axios-globalConfig/axios-global";
-
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import { api } from "../../axios-globalConfig/axios-global";
+import { RenderBox } from "./style";
 
 import ProjectCard from "../../Components/Molecules/Project-Card";
 import EditUser from "../../Components/Organisms/ProfileForm";
@@ -9,21 +11,9 @@ import Filters from "../../Components/Molecules/Filters";
 import UserSearchProfile from "../../Components/Organisms/User-Search-Profile";
 import Favorites from "../../Components/Organisms/Favorites";
 
-import { makeStyles } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { RenderBox } from "./style";
-
-const useStyles = makeStyles((theme) => ({
-  RenderBox: {
-    width: "100%",
-    height: "95%",
-  },
-}));
 const PerfilRenderBox = ({ setAuth }) => {
   const { projects, filteredProjects, profile } = useSelector((state) => state);
   const [projectOwner, setProjectOwner] = useState([]);
-  const classes = useStyles();
 
   const allProjects = projects?.map((e, index) => (
     <ProjectCard
@@ -53,6 +43,7 @@ const PerfilRenderBox = ({ setAuth }) => {
           userId={e.userId}
           descricao={e.description}
           stack={e.qualifications}
+          time={`Tempo estimado: ${e.time}`}
           projectFavorite={e}
         />
       ))}

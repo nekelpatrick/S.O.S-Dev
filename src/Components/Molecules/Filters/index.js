@@ -20,7 +20,7 @@ const Filters = () => {
     nivel: "",
     time: "",
   });
-  const [notFound, setMessageNotFound] = useState(false)
+  const [notFound, setMessageNotFound] = useState(false);
   const { user, projects, users, filteredProjects } = useSelector(
     (state) => state
   ); //-> estão sendo aplicados nas lógicas do redux
@@ -94,7 +94,6 @@ const Filters = () => {
   };
 
   const optionsList = [
-    //array de selects para ser renderizado com map
     {
       setValue: (e) => {
         setOptions({ ...options, qualifications: e.target.value });
@@ -125,8 +124,6 @@ const Filters = () => {
         "Programação Mobile",
         "Programação Desktop",
         "Web Design",
-        "Front-end",
-        "Full-Stack",
       ],
       label: "Área",
       value: "type",

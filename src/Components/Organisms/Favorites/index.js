@@ -13,7 +13,7 @@ const Favorites = ({ setAuth }) => {
   useEffect(() => {
     setTimeout(() => {
       setLoad(false);
-    }, 3000);
+    }, 1000);
   }, []);
 
   return (
@@ -29,6 +29,7 @@ const Favorites = ({ setAuth }) => {
             stack={e.qualifications}
             projectFavorite={e}
             userId={e.userId}
+            time={`Tempo estimado: ${e.time}`}
             isFavorite
           />
         ))
