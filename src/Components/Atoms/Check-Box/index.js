@@ -2,17 +2,22 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 import { useContext } from "react";
 import { FilterContext } from "../../Molecules/Filters/filterContext";
+import { useEffect, useState } from "react";
 
 const CheckBoxAtom = ({ color, check, handleFilter, selectValue }) => {
   const { options, setOptions } = useContext(FilterContext);
+  const [value, setValue] = useState("");
+  
+  if (selectValue !== value) {
+    setValue(selectValue);
+  }
 
   const setNewOption = () => {
     const optionsValue = Object.values(options);
     const indexOfValue = optionsValue.findIndex((project) => project === selectValue);
 
     if (indexOfValue === 0) {
-      setOptions({...options, title: ""});
-      console.log(options)
+      setOptions({...options, qualifications: ""});
     }
     if (indexOfValue === 1) {
       setOptions({...options, type: ""});
@@ -25,9 +30,9 @@ const CheckBoxAtom = ({ color, check, handleFilter, selectValue }) => {
     }
   };
 
-  // if ( check ) {
-  //   handleFilter();
-  // }
+  useEffect(() => {
+    return handleFilter()
+  },[value])
 
   return (
     <>
