@@ -26,10 +26,6 @@ const PerfilRenderBox = ({ setAuth }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    setAuth(2);
-  }, [setAuth]);
-
-  useEffect(() => {
     projects[projectOwner.length] &&
       api
         .get(`/users/${projects[projectOwner.length].userId}`)
@@ -59,13 +55,13 @@ const PerfilRenderBox = ({ setAuth }) => {
         </Route>
         <Route exact path="/profile/favoritos">
           <Filters />
-          <Favorites />
+          <Favorites setAuth={setAuth} />
         </Route>
         <Route exact path="/profile/editarPerfil">
-          <EditUser />
+          <EditUser setAuth={setAuth} />
         </Route>
         <Route exact path="/profile/novoProjeto">
-          <ProductCard />
+          <ProductCard setAuth={setAuth} />
         </Route>
         <Route path="/profile/:user">
           <UserSearchProfile />

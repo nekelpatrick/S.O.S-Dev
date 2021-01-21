@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -13,8 +15,12 @@ import { StyledPopup, Container, StyledForm } from "./style";
 
 import { useForm } from "react-hook-form";
 
-const Projects = ({ text }) => {
+const Projects = ({ setAuth }) => {
   const title = "Cadastrar Novo Projeto";
+
+  useEffect(() => {
+    setAuth(2);
+  }, [setAuth]);
 
   const schema = yup.object().shape({
     title: yup

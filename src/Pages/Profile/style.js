@@ -90,3 +90,18 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
 `;
+
+export const SocialMedia = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    text-decoration: none;
+    color: #efdcbd;
+    font-weight: bold;
+    :hover {
+      color: #eb5c82;
+    }
+  }
+`;
