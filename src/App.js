@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 function App() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const projects = useSelector((state) => state.projects);
+  // const projects = useSelector((state) => state.projects);
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
