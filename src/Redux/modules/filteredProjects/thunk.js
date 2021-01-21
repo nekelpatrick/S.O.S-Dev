@@ -1,8 +1,8 @@
-import addProjects from "../projects/actions";
+import addFilteredProjects from "../filteredProjects/actions";
 
 const addFilteredProjectsThunk = (filteredProjects) => {
     return (dispatch) => {
-        dispatch(addProjects(filteredProjects))
+        dispatch(addFilteredProjects(filteredProjects))
     }
 };
 

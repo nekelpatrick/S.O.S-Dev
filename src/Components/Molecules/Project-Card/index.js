@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Avatar,
   Box,
@@ -13,10 +12,43 @@ import {
 import Button from "../../Atoms/Button";
 import Typography from "../../Atoms/Types";
 import useStyles from "./style";
+import { api } from "../../../axios-globalConfig/axios-global";
 
-const ProjectCard = ({titulo, tipo, descricao, stack, user}) => {
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
+const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectToFavorite, isFavorite = false }) => {
   const classes = useStyles();
+  const { users, profile } = useSelector((state) => state);
+  const [favorite, setFavorite] = useState([]);
+  // const [allFavoritesOfUser, setAllFavoritesOfUser] = useState([]);
+
+  const findUser = users.find((e) => e.id === parseInt(userId));
+
+  const handleAddFavorite = () => {
+
+    setFavorite(projectToFavorite)
+    // setAllFavoritesOfUser([profile.favorite])
+
+    api.patch(`/users/${profile.id}`, 
+      {
+        data: 
+        {
+          favorites: favorite
+        }
+      },
+      {
+        headers: {
+          authorization: `Bearer ${profile.token}`}
+      }
+    )
+    .then((res) => {
+      console.log(res)
+    })
+    .catch ((error) => {
+      console.log(error)
+    })
+  }
 
   return (
     <Card elevation={12} className={classes.root}>
@@ -28,9 +60,10 @@ const ProjectCard = ({titulo, tipo, descricao, stack, user}) => {
               color="textSecondary"
               gutterBottom
               variant="h4"
-              text= {titulo}
+              text={titulo}
             />
           </Grid>
+          <button onClick={handleAddFavorite}>AQUI</button>
 
           <Grid item xs={1}>
             <Typography
@@ -57,12 +90,22 @@ const ProjectCard = ({titulo, tipo, descricao, stack, user}) => {
             </Grid>
             <Grid item xs>
               <Paper elevation={7} className={classes.contentItem}>
-                <Typography
-                  color="textSecondary"
-                  display="inline"
-                  variant="body2"
-                  text={stack}
-                />
+                {stack?.map((e) => (
+                  <>
+                    <Typography
+                      color="textSecondary"
+                      display="inline"
+                      variant="body2"
+                      text={e.linguagem}
+                    />
+                    <Typography
+                      color="textSecondary"
+                      display="inline"
+                      variant="body2"
+                      text={e.nivel}
+                    />
+                  </>
+                ))}
               </Paper>
             </Grid>
           </Grid>
@@ -86,10 +129,10 @@ const ProjectCard = ({titulo, tipo, descricao, stack, user}) => {
             <Typography
               color="textPrimary"
               display="inline"
-              variant="h8"
-              text= {user}
+              variant="h6"
+              text={findUser?.user}
             />
-            <Avatar className={classes.statsIcon} />
+            <Avatar className={classes.statsIcon} src={findUser?.src} />
           </Grid>
         </Grid>
       </Box>
