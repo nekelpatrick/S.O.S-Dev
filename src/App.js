@@ -11,7 +11,6 @@ import { getAllUsersThunk } from "./Redux/modules/users/thunks";
 import { addProjectsThunk } from "./Redux/modules/projects/thunk";
 
 function App() {
-
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -19,10 +18,10 @@ function App() {
     dispatch(getAllUsersThunk());
     dispatch(addProjectsThunk());
   }, [dispatch]);
-
+  console.log(theme.palette);
   return (
     <ThemeProvider theme={theme}>
-      <Paper className={classes.root} color="primary">
+      <Paper className={classes.root}>
         <Pages />
       </Paper>
     </ThemeProvider>
