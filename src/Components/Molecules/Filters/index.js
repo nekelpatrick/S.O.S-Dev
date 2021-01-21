@@ -1,6 +1,6 @@
 import { FiltersContent } from "./style";
 
-import CheckBoxAtom from "../../Atoms/Check-Box"; 
+import CheckBoxAtom from "../../Atoms/Check-Box";
 import Input from "../../Atoms/Input";
 import Buttom from "../../Atoms/Button";
 
@@ -147,9 +147,6 @@ const Filters = () => {
       value: "time",
     },
   ];
-
-  console.log(filteredProjects);
-  console.log(projects);
 
   return (
     <FilterProvider options={options} setOptions={setOptions}>

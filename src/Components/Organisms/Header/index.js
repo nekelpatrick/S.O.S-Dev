@@ -18,7 +18,7 @@ export default function ButtonAppBar({ auth, setAuth }) {
   const history = useHistory();
 
   const logout = () => {
-    setAuth(false);
+    setAuth(1);
     window.localStorage.clear();
     history.push("/");
   };
