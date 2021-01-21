@@ -20,9 +20,10 @@ const Pages = () => {
       if (auth < 2) {
         setAuth(1);
         history.push("/profile");
+        console.log(auth);
       }
     }
-  }, [profile, history]);
+  }, [profile, history, auth]);
 
   if (auth === 0) {
     return (

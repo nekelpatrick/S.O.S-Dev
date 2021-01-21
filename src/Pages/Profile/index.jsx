@@ -5,6 +5,7 @@ import {
   CompletedProjectsContainer,
   ContactContainer,
   ButtonContainer,
+  SocialMedia,
 } from "./style";
 import Image from "../../Components/Atoms/Image";
 import Types from "../../Components/Atoms/Types";
@@ -111,7 +112,9 @@ const Profile = ({ auth, setAuth }) => {
               align="center"
               classe="fontStyleProfile"
             />
-            <div>Projeto do beabá</div>
+            {profile.onGoingProjects.map((e) => (
+              <div>{e}</div>
+            ))}
           </PendingProjectsContainer>
           <CompletedProjectsContainer>
             <div className="project">
@@ -122,7 +125,9 @@ const Profile = ({ auth, setAuth }) => {
                 align="center"
                 classe="fontStyleProfile"
               />
-              <div>Projeto da dona maria</div>
+              {profile.completedProjects.map((e) => (
+                <div>{e.name}</div>
+              ))}
             </div>
             <div className="deploy">
               <Types
@@ -132,7 +137,9 @@ const Profile = ({ auth, setAuth }) => {
                 align="center"
                 classe="fontStyleProfile"
               />
-              <div>www.adocicameuamor.com.br</div>
+              {profile.completedProjects.map((e) => (
+                <div>{e.deploy}</div>
+              ))}
             </div>
           </CompletedProjectsContainer>
           <ContactContainer>
@@ -178,7 +185,13 @@ const Profile = ({ auth, setAuth }) => {
                   align="center"
                   classe="profileContacts"
                 />
-                <div>{profile.socialMedia}</div>
+                {profile.socialMedia.map((e, i) => (
+                  <SocialMedia key={i}>
+                    <a href={e.link} target="_blank" rel="noreferrer">
+                      {e.name}
+                    </a>
+                  </SocialMedia>
+                ))}
               </div>
             </div>
           </ContactContainer>
