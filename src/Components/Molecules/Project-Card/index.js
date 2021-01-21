@@ -19,7 +19,15 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
 
+import { useHistory } from 'react-router-dom'
+
+import { useContext } from 'react'
+import { StateContext } from '../../../Pages/Profile/stateContext'
+
 const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, isFavorite = false, alreadyFavorite = false }) => {
+  const history = useHistory()
+  
+  const {isFavoriteTime, setFavouriteTime} = useContext(StateContext)
   const classes = useStyles();
   const dispatch = useDispatch();
   const { users, profile } = useSelector((state) => state);
@@ -147,6 +155,10 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, 
               <Button
                 className={classes.statsIcon}
                 text="abrir projeto"
+                onClick= {() => {
+                  setFavouriteTime(true)
+                  history.push('/profile/novoProjeto')
+                }}
               ></Button>
             </CardActions>
           </Grid>

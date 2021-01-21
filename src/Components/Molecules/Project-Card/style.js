@@ -5,8 +5,13 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     maxWidth: "50vw",
-    margin: theme.spacing(3),
+    margin: '2vh auto',
     flexGrow: 1,
+    '@media(maxWidth: 720px)' : {
+      ".makeStyles-root-36": {
+      width: '90%'
+      }
+    }
   },
 
   cardHeader: {

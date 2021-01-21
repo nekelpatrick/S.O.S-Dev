@@ -1,3 +1,5 @@
+import React from "react";
+
 import { api } from "../../axios-globalConfig/axios-global";
 
 import { Switch, Route } from "react-router-dom";
@@ -7,17 +9,18 @@ import EditUser from "../../Components/Organisms/ProfileForm";
 import ProductCard from "../../Components/Molecules/Project-Card-Add-New";
 import Filters from "../../Components/Molecules/Filters";
 import UserSearchProfile from "../../Components/Organisms/User-Search-Profile";
-import Favorites from "../../Components/Organisms/Favorites";
+import Favorites from '../../Components/Organisms/Favorites/'
 
 import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { RenderBox } from "./style";
+import { RenderBox } from './style'
+
 
 const useStyles = makeStyles((theme) => ({
   RenderBox: {
-    width: "100%",
-    height: "95%",
+    // height: "90vh",
+    // overflowY: 'auto'
   },
 }));
 const PerfilRenderBox = ({ setAuth }) => {
@@ -71,7 +74,8 @@ const PerfilRenderBox = ({ setAuth }) => {
   }, [projects, projectOwner]);
 
   return (
-    <RenderBox>
+    <div className={classes.RenderBox}>
+      <RenderBox>
       <Switch>
         <Route exact path="/profile">
           <Filters projects={projects} />
@@ -91,7 +95,8 @@ const PerfilRenderBox = ({ setAuth }) => {
           <UserSearchProfile />
         </Route>
       </Switch>
-    </RenderBox>
+      </RenderBox>
+    </div>
   );
 };
 
