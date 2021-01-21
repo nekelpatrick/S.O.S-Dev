@@ -4,26 +4,23 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
 const Favorites = () => {
-    const [favorites, setFavorites] = useState([]);
-    const [haveFavorites, setHaveFavorites] = useState(false);
-    const { profile } = useSelector((state) => state)
+    const { profile } = useSelector((state) => state);
+    const [load, setLoad] = useState(true);
 
-    // useEffect(() => {
-    //     if ( favorites.length < 1 ) {
-    //         setFavorites(profile.favorites)
-    //     }
-    //     if ( favorites.length > 0 ) {
-    //         setHaveFavorites(true)
-    //     };
-    // },[])
-
-    console.log(profile.favorites)
+    useEffect(() => {
+        setTimeout(() => {
+            setLoad(false);
+        }, 3000)
+    }, [])
 
     return (
         <>
-        {
+        { load 
+        ? 
+        <h3>Carregando...</h3>
+        :
         profile.favorites.length > 0 
-            && 
+            ? 
             profile.favorites.map((e) => (
                 <ProjectCard 
                 titulo={e.title} 
@@ -33,6 +30,8 @@ const Favorites = () => {
                 projectFavorite={e} 
                 isFavorite/>
             ))
+            :
+            <h3>Você está sem projetos favoritos aqui...</h3>
         }
         </>
     )

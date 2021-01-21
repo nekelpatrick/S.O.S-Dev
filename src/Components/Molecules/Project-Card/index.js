@@ -20,7 +20,7 @@ import { useSelector, useDispatch } from "react-redux";
 // import { useHistory } from "react-router-dom";
 import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
 
-const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, isFavorite = false }) => {
+const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, isFavorite = false, alreadyFavorite = false }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   // const history = useHistory();
@@ -48,9 +48,12 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, 
     })
   };
 
+  const findRepeatedFavorite = profile.favorites.findIndex((project) => project.id === projectFavorite.id);
   const handleAddFavorite = (e) => {
-    e.target.style.color = "yellow"
-    patchFavoriteList([...profile.favorites, projectFavorite])
+    e.target.style.color = "yellow";
+    if ( findRepeatedFavorite < 0 ) {
+      patchFavoriteList([...profile.favorites, projectFavorite])
+    }
   };
   const handleRemoveFavorite = (e) => {
     const newFavorites = profile.favorites.filter((favorite) => favorite.id !== projectFavorite.id );
@@ -73,7 +76,7 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, 
             <Button 
             onClick={(e) => isFavorite ? handleRemoveFavorite(e) : handleAddFavorite(e)} 
             text={isFavorite ? removeIcon : favoriteIcon}
-            classe={"addFavorites"}
+            classe={alreadyFavorite ? "alreadyFavorites" : "addFavorites"}
             />
           </Grid>
 

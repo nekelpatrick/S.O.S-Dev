@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const PerfilRenderBox = ({ setAuth }) => {
-  const { projects } = useSelector((state) => state);
+  const { projects, profile } = useSelector((state) => state);
   const [projectOwner, setProjectOwner] = useState([]);
   const classes = useStyles();
 
@@ -55,11 +55,13 @@ const PerfilRenderBox = ({ setAuth }) => {
                 descricao={e.description}
                 stack={e.qualifications}
                 projectFavorite={e}
+                alreadyFavorite={
+                  profile.favorites.findIndex((favorite) => favorite.id === e.id) < 0 ? false : true
+                }
               />
             ))}
         </Route>
         <Route exact path="/profile/favoritos">
-          <Filters />
           <Favorites />
         </Route>
         <Route exact path="/profile/editarPerfil">
