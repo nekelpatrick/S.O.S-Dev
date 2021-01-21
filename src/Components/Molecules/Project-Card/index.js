@@ -16,17 +16,18 @@ import useStyles from "./style";
 import { api } from "../../../axios-globalConfig/axios-global";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useState } from "react";
+// import { useHistory } from "react-router-dom";
 import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
 
 const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, isFavorite = false }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   const { users, profile } = useSelector((state) => state);
-
   const findUser = users.find((e) => e.id === parseInt(userId));
+  const favoriteIcon = <i class="fas fa-star"></i>
+  const removeIcon = <i class="fas fa-eraser"></i>
 
   const patchFavoriteList = (favoriteList) => {
     api.patch(`/users/${profile.id}`, 
@@ -47,16 +48,14 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, 
     })
   };
 
-  const handleAddFavorite = () => {
-    // setFavorite([projectFavorite])
-    // console.log(favorite)
-    // setAllFavoritesOfUser(profile.favorites)
+  const handleAddFavorite = (e) => {
+    e.target.style.color = "yellow"
     patchFavoriteList([...profile.favorites, projectFavorite])
   };
-  const handleRemoveFavorite = () => {
+  const handleRemoveFavorite = (e) => {
     const newFavorites = profile.favorites.filter((favorite) => favorite.id !== projectFavorite.id );
+    e.target.style.color = "red"
     patchFavoriteList(newFavorites)
-    history.push("/profile/favoritos")
   }
 
   return (
@@ -71,8 +70,12 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, 
               variant="h4"
               text={titulo}
             />
+            <Button 
+            onClick={(e) => isFavorite ? handleRemoveFavorite(e) : handleAddFavorite(e)} 
+            text={isFavorite ? removeIcon : favoriteIcon}
+            classe={"addFavorites"}
+            />
           </Grid>
-          <button onClick={isFavorite ? handleRemoveFavorite : handleAddFavorite}>AQUI</button>
 
           <Grid item xs={6}>
             <Typography
