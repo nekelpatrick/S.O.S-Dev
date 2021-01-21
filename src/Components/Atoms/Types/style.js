@@ -6,6 +6,9 @@ const Style = makeStyles((theme) => ({
     marginBottom: "0px",
   },
 
+  titlePopUp: {
+    color: "blue",
+  },
   textCard: {
     width: "90%",
   },
@@ -22,6 +25,15 @@ const Style = makeStyles((theme) => ({
   fontStyleProfile: {
     color: "#EFDCBD",
     fontSize: '1.7vw',
+    "@media(max-width: 280px)": {
+      fontSize: '4vw !important',
+    },
+    "@media(max-width: 320px)": {
+      fontSize: '3vw !important',
+    },    
+    "@media(max-width: 540px)": {
+      fontSize: '2.5vw !important',
+    },
     "@media(min-width: 1440px)": {
       fontSize: '1vw',
     },
@@ -34,6 +46,15 @@ const Style = makeStyles((theme) => ({
   fontStyleProfileName: {
     color: "#EFDCBD",
     fontSize: '2.5vw',
+    "@media(max-width: 280px)": {
+      fontSize: '5vw !important',
+    },
+    "@media(max-width: 320px)": {
+      fontSize: '4.5vw !important',
+    },
+    "@media(max-width: 540px)": {
+      fontSize: '4vw !important',
+    },
     "@media(min-width: 1440px)": {
       fontSize: '1.8vw',
     },

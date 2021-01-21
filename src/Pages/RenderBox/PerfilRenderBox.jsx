@@ -17,13 +17,11 @@ import { useState, useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   RenderBox: {
-    // width: "100%",
-    height: "91.5vh",
+    height: "90vh",
     overflowY: 'auto',
-    // margin: ' -1vh 0 0 3.3vw',
-
   },
 }));
+
 const PerfilRenderBox = () => {
   const { projects } = useSelector((state) => state);
   const [projectOwner, setProjectOwner] = useState([]);

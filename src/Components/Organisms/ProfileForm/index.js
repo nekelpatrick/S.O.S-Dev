@@ -4,6 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import * as yup from "yup";
 
+import Techs from "../../Molecules/Techs";
+import { FormContainer, TechContainer, TechBox, StyledForm } from "./style";
+
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Avatar,
@@ -18,10 +21,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
 } from "@material-ui/core";
 import MuiPhoneNumber from "material-ui-phone-number";
 
@@ -32,8 +31,8 @@ import { AiFillLinkedin, AiFillGithub, AiFillInstagram } from "react-icons/ai";
 // METERIAL-UI RELATED
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "90vh",
-    marginTop: 10,
+    height: "30vh",
+    marginTop: 5,
   },
 
   avatar: {
@@ -52,7 +51,8 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    display: "flex",
+    flexDirection: "column",
   },
   techButton: {
     height: "40px",
@@ -70,6 +70,10 @@ const useStyles = makeStyles((theme) => ({
   },
   avatarButton: {
     margin: "5px",
+  },
+  saveLevelButton: {
+    width: "5vw",
+    margin: "auto",
   },
 }));
 
@@ -99,8 +103,6 @@ export default function UserProfile({ user }) {
   const handleChange = (evt) => {
     setCourse_madule(evt.target.value);
   };
-
-  //  AQUI PODEMOS FAZER UM ARRAY PARA INPUT SELECT
 
   // GET AVATAR HANDLER
   const handleAvatarChange = (e) => {
@@ -133,17 +135,9 @@ export default function UserProfile({ user }) {
     setDialogOpen(false);
   };
 
-  //----------------------SELECT---------------------------------
-
-  const [userLevel, setUserLevel] = useState("");
-
-  const handleSelectorChange = (event) => {
-    setUserLevel(event.target.value);
-  };
-
   // ---------------- VALIDATION YUP ---------------------------------
   const schema = yup.object().shape({
-    name: yup
+    user: yup
       .string()
       .required("Campo Necessário")
       .matches(/[A-Za-z]\s[A-Za-z]/, "Formato Inválido"),
@@ -168,8 +162,8 @@ export default function UserProfile({ user }) {
 
   return (
     <>
-      <Container maxWidth="md" align="center" className={classes.root}>
-        <form onSubmit={handleSubmit(handleForm)}>
+      <FormContainer>
+        <StyledForm onSubmit={handleSubmit(handleForm)}>
           <Avatar className={classes.avatar}></Avatar>
 
           {/* SE O USUARIO FOR TROCAR O ÍCONE */}
@@ -190,79 +184,34 @@ export default function UserProfile({ user }) {
             onChange={handleAvatarChange}
           />
 
-          {/*  */}
-
-          <Container maxWidth="md" className={classes.textContainer}>
+          <Container maxWidth="xs" className={classes.textContainer}>
             <TextField
               variant="outlined"
               multiline
-              name="name"
+              name="user"
               inputRef={register}
               error={!!errors.name}
               helperText={errors.name?.message}
-              style={{ margin: 8 }}
+              style={{ margin: 3 }}
               defaultValue={user?.name}
               label="Nome do Usuário"
             />
           </Container>
 
-          {/* ------------------------------- TECNOLOGIAS */}
-
-          <Container
-            maxWidth="md"
-            className={classes.techContainer}
-            align="center"
-          >
-            <Typography
-              className={classes.text}
-              style={{ margin: 8 }}
-              variant="body1"
-            >
-              Tecnologias
-            </Typography>
-
-            <TextField
-              inputRef={register}
-              name="tecnologia"
-              id="contact-tecnologia"
-              error={!!errors.contact}
-              helperText={errors.contact?.message}
-              style={{ margin: 6 }}
-              defaultValue={user?.techs}
-              variant="outlined"
-              label="Insira sua tecnologia"
-            />
-            <Typography className={classes.text} variant="body1">
-              Qual sua experiência na Tecnologia
-            </Typography>
-
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">Nível</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={userLevel}
-                onChange={handleSelectorChange}
+          <TechContainer>
+            <TechBox>
+              <Typography
+                className={classes.text}
+                style={{ margin: 3 }}
+                variant="body1"
               >
-                <MenuItem value={10}>Iniciante</MenuItem>
-                <MenuItem value={20}>Intermediário</MenuItem>
-                <MenuItem value={30}>Avançado</MenuItem>
-              </Select>
-              <Button
-                style={{ marginTop: 8 }}
-                color="secondary"
-                variant="outlined"
-              >
-                Salvar
-              </Button>
-            </FormControl>
-          </Container>
-          {console.log(userLevel)}
-
-          {/* -----------------------------------------FIM TECNOLOGIAS */}
+                Adicionar Tecnologias
+              </Typography>
+              <Techs />
+            </TechBox>
+          </TechContainer>
 
           <Divider style={{ margin: 10, marginTop: 5 }} />
-          {/*  */}
 
           <Container
             align="center"
@@ -279,7 +228,7 @@ export default function UserProfile({ user }) {
               id="contact-email"
               error={!!errors.contact}
               helperText={errors.contact?.message}
-              style={{ margin: 8 }}
+              style={{ margin: 3 }}
               defaultValue={user?.email}
               variant="outlined"
               label="Email"
@@ -290,23 +239,12 @@ export default function UserProfile({ user }) {
               id="contact-portfolio"
               error={!!errors.contact}
               helperText={errors.contact?.message}
-              style={{ margin: 8 }}
+              style={{ margin: 3 }}
               defaultValue={user?.contact}
               variant="outlined"
               label="Portfolio link"
             />
-            {/* <TextField
-              inputRef={register}
-              name="contact-telefone"
-              id="contact-telefone"
-              error={!!errors.contact}
-              helperText={errors.contact?.message}
-              style={{ margin: 8 }}
-              defaultValue={user?.contact}
-              variant="outlined"
-              type="number"
-              label="Numero de telefone"
-            /> */}
+
             <MuiPhoneNumber
               name="contact-telefone"
               data-cy="user-phone"
@@ -318,7 +256,7 @@ export default function UserProfile({ user }) {
               id="contact-telefone"
               error={!!errors.contact}
               helperText={errors.contact?.message}
-              style={{ margin: 8 }}
+              style={{ margin: 3 }}
               variant="outlined"
             />
 
@@ -400,8 +338,8 @@ export default function UserProfile({ user }) {
               SALVAR ALTERAÇÕES
             </Button>
           </Container>
-        </form>
-      </Container>
+        </StyledForm>
+      </FormContainer>
     </>
   );
 }

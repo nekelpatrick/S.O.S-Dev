@@ -148,9 +148,6 @@ const Filters = () => {
     },
   ];
 
-  console.log(filteredProjects);
-  console.log(projects);
-
   return (
     <FilterProvider options={options} setOptions={setOptions}>
       <FiltersContent>

@@ -29,7 +29,6 @@ const Style = makeStyles((theme) => ({
     height: "16%",
     borderRadius: "9px",
     margin: "0 auto",
-
   },
   buttonPupUpAddTechs: {
     fontFamily: "fontawesome",
@@ -40,9 +39,9 @@ const Style = makeStyles((theme) => ({
     width: "60px",
     backgroundColor: "#ffffff00",
     borderRadius: "12px",
-    '&:hover': {
-      backgroundColor: "#ffffff05"
-    }
+    "&:hover": {
+      backgroundColor: "#ffffff05",
+    },
   },
 
   profileFavorites: {
@@ -51,6 +50,18 @@ const Style = makeStyles((theme) => ({
 
     borderRadius: "12px",
     marginBottom: '1vh',
+    "@media(max-width: 280px)": {
+      width: '30vw !important',
+      fontSize: "3.5vw !important"
+    },
+    "@media(max-width: 320px)": {
+      width: '30vw !important',
+      fontSize: "3vw !important"
+    },
+    "@media(max-width: 540px)": {
+      width: '30vw !important',
+      fontSize: "2vw !important"
+    },
     '@media(min-width: 768px)': {
       width: '9vw',
     },
@@ -61,6 +72,10 @@ const Style = makeStyles((theme) => ({
 
   buttonLogin: {},
   buttonRegister: {},
+
+  saveButton: {
+    width: "20px",
+  },
 }));
 
 export default Style;

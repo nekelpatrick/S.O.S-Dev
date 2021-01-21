@@ -25,28 +25,39 @@ import Projects from '../../Components/Molecules/Projects'
 
 import { StateProvider } from './stateContext'
 
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
+import { makeStyles } from "@material-ui/core";
+
+import { useContext } from "react";
+
+import { MobileStateContext } from '../../Routes/mobileStateContext'
+
+const useStyles = makeStyles((theme) => ({
+  display: {
+    display: 'none'
+  },
+}));
+
 const Profile = ({ auth, setAuth }) => {
+  const {display, setDisplay} = useContext(MobileStateContext)
   const { profile } = useSelector((state) => state);
   const history = useHistory();
   const [isFavoriteTime, setFavouriteTime] = useState(false);
   
-  const [display, setDisplay] = useState(undefined)
+  const matchesMobile = useMediaQuery('(max-width:767px)');
 
-  const window = document.body.clientWidth
+  const classe = useStyles()
 
-  useEffect (() => {
-    if( window >= 768){
-      setDisplay(undefined)
-    } else {
-      setDisplay(true)
-    }
-  }, [])
-
-  console.log('display ' + display, 'window ' + window)
+  useEffect(() =>
+    matchesMobile ?
+    setDisplay(false) :
+    setDisplay(undefined)
+  ,[matchesMobile])
 
   return (
     <Grid container>
-        <Grid item xs  = {4} >
+        <Grid item xs  = {display === true ? 12 : display === undefined && 4} className = {display === false && classe.display}>
           <Container>
             <Image
               src={profile.src !== "" ? profile.src : noImage}
@@ -193,9 +204,9 @@ const Profile = ({ auth, setAuth }) => {
             </ContactContainer>
           </Container>
         </Grid>
-      <Grid item xs={8} >
+      <Grid item xs={display === false ? 12 : display === undefined && 8} className = {display === true && classe.display}>
         <StateProvider isFavoriteTime = {isFavoriteTime} setFavouriteTime = {setFavouriteTime}>
-          <RenderBox />
+          <RenderBox setAuth={setAuth}/>
         </StateProvider>
       </Grid>
     </Grid>
