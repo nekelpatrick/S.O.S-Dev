@@ -7,6 +7,7 @@ import {
   Grid,
   CardActions,
   Paper,
+  Typography as TypographyDesc,
 } from "@material-ui/core";
 
 import Button from "../../Atoms/Button";
@@ -22,7 +23,7 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId }) => {
   const findUser = users.find((e) => e.id === parseInt(userId));
 
   return (
-    <Card elevation={12} align="center" className={classes.root}>
+    <Card elevation={14} align="center" className={classes.root}>
       <CardContent>
         <Grid className={classes.cardHeader} container spacing={2}>
           <Grid item xs={2}>
@@ -50,12 +51,16 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId }) => {
           <Grid container spacing={2}>
             <Grid item xs>
               <Paper elevation={7} className={classes.contentItem}>
-                <Typography
+                <TypographyDesc
                   color="textSecondary"
-                  display="inline"
                   variant="body2"
-                  text={descricao}
-                />
+                  align="center"
+                  style={{
+                    margin: "20px 30px",
+                  }}
+                >
+                  {descricao}
+                </TypographyDesc>
               </Paper>
             </Grid>
             <Grid item xs>
