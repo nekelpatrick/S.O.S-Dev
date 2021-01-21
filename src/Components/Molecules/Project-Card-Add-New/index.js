@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
   Box,
@@ -21,18 +21,21 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import * as yup from "yup";
+import { api } from "../../../axios-globalConfig/axios-global";
 
 const ProductCard = () => {
   const classes = useStyles();
 
-  const { openProject } = useSelector((state) => state);
+  const { openProject, profile } = useSelector((state) => state);
 
   const today = new Date();
   const date =
     today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
   const [time, setTime] = useState(date);
-
   const [estimated, setEstimated] = useState("7");
+  const [comment, setComment] = useState("");
+  const [commentOfProject, setCommentOfProject] = useState({});
+
 
   // INPUTS
   const [value, setValue] = useState("");
@@ -40,6 +43,22 @@ const ProductCard = () => {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+  const getComment = (e) => {
+    setComment(e);
+  }
+
+  // handles
+  const patchComment = () => {
+    api.post("/comments", {comment: comment, userId: profile.id, projectId: openProject.id},
+    { 
+      headers: {
+        Authorization: `Bearer ${profile.token}`
+      }
+    }
+    ).then((res) => {
+      console.log(res)
+    })
+  }
 
   // --------- VALIDATION YUP ------------
 
@@ -66,6 +85,10 @@ const ProductCard = () => {
   });
 
   //---------------------------------------
+
+  useEffect(() => {
+
+  })
 
   return (
     <Card elevation={12} className={classes.root}>
@@ -205,10 +228,11 @@ const ProductCard = () => {
             style={{ width: "20vw", margin: "auto" }}
             variant="outlined"
             label="Insira seu comentário"
+            onChange={(e) => getComment(e.target.value)}
           />
 
           <ButtonSave
-            //onClick={}
+            onClick={patchComment}
             color="secondary"
             variant="outlined"
             className={classes.saveButton}

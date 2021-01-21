@@ -140,7 +140,7 @@ const ProjectCard = ({
             </Grid>
             <Grid item xs={8}>
               <Paper elevation={7} className={classes.contentItemStacksTech}>
-                {/* {stack?.map((e) => (
+                {stack?.map((e) => (
                   <Grid
                     container
                     xs={12}
@@ -162,7 +162,7 @@ const ProjectCard = ({
                       />
                     </Grid>
                   </Grid>
-                ))} */}
+                ))}
               </Paper>
             </Grid>
           </Grid>

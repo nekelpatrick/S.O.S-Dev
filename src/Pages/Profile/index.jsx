@@ -127,7 +127,7 @@ const Profile = ({ auth, setAuth }) => {
             </div>
           </TechContainer>
           <PendingProjectsContainer>
-            {/* <Types
+            <Types
               variant="h6"
               component="h3"
               text="Projetos em Andamento"
@@ -136,10 +136,10 @@ const Profile = ({ auth, setAuth }) => {
             />
             {profile.onGoingProjects.map((e) => (
               <div>{e}</div>
-            ))} */}
+            ))}
           </PendingProjectsContainer>
           <CompletedProjectsContainer>
-            {/* <div className="project">
+            <div className="project">
               <Types
                 variant="h6"
                 component="h3"
@@ -150,9 +150,9 @@ const Profile = ({ auth, setAuth }) => {
               {profile.completedProjects.map((e) => (
                 <div>{e.name}</div>
               ))}
-            </div> */}
+            </div>
             <div className="deploy">
-              {/* <Types
+              <Types
                 variant="h6"
                 component="h3"
                 text="Deploy"
@@ -161,7 +161,7 @@ const Profile = ({ auth, setAuth }) => {
               />
               {profile.completedProjects.map((e) => (
                 <div>{e.deploy}</div>
-              ))} */}
+              ))}
             </div>
           </CompletedProjectsContainer>
           <ContactContainer>
