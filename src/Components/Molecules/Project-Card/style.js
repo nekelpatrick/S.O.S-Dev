@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     maxWidth: "50vw",
-    margin: theme.spacing(3),
+    margin: '2vh auto',
     flexGrow: 1,
   },
 

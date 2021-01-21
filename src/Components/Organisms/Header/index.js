@@ -11,8 +11,13 @@ import Style from "./style";
 import Typography from "../../Atoms/Types/";
 import Popup from "../../Organisms/Pop-up";
 import Button from "../../Atoms/Button";
+import { useContext } from "react";
+
+import { MobileStateContext } from '../../../Routes/mobileStateContext'
 
 export default function ButtonAppBar({ auth, setAuth }) {
+  const {display, setDisplay} = useContext(MobileStateContext)
+
   const useStyles = Style;
   const classes = useStyles();
   const history = useHistory();
@@ -24,6 +29,8 @@ export default function ButtonAppBar({ auth, setAuth }) {
     window.location.reload();
   };
 
+  console.log(window.innerWidth)
+
   return (
     <div className={classes.root}>
       <AppBar position="sticky">
@@ -33,6 +40,7 @@ export default function ButtonAppBar({ auth, setAuth }) {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick = {() => setDisplay(display ? false : true)}
           >
             <MenuIcon />
           </IconButton>

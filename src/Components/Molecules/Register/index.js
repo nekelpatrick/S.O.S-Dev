@@ -43,7 +43,7 @@ const Register = ({ text, setIsReg, close }) => {
     data.src = "";
     data.tech = [];
     data.phone = "";
-    data.socialMedia = "";
+    data.socialMedia = [];
     data.portifolio = "";
     data.favorites = [];
     data.onGoingProjects = [];

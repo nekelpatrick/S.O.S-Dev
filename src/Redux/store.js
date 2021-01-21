@@ -13,6 +13,7 @@ const reducers = combineReducers({
   users: getAllUsersReducer,
   profile: getProfileReducer,
   searchUser: searchUserReducer,
+  profile: getProfileReducer,
 });
 
 const store = createStore(reducers, applyMiddleware(thunk));
