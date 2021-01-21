@@ -22,7 +22,7 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId }) => {
   const findUser = users.find((e) => e.id === parseInt(userId));
 
   return (
-    <Card elevation={12} className={classes.root}>
+    <Card elevation={12} align="center" className={classes.root}>
       <CardContent>
         <Grid className={classes.cardHeader} container spacing={2}>
           <Grid item xs={2}>

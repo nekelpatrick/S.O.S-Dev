@@ -14,6 +14,11 @@ import Button from "../../Atoms/Button";
 import Typography from "../../Atoms/Types";
 import useStyles from "./style";
 
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import * as yup from "yup";
+
 const ProductCard = () => {
   const classes = useStyles();
 
@@ -32,33 +37,38 @@ const ProductCard = () => {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+  // --------- VALIDATION YUP ------------
+
+  const schema = yup.object().shape({
+    name: yup
+      .string()
+      .required("Campo Necessário")
+      .matches(/[A-Za-z]\s[A-Za-z]/, "Formato Inválido"),
+    email: yup
+      .string()
+      .required("Campo Necessário")
+      .email("Formato de email Inválido"),
+    contact: yup.string().required("Campo Necessário"),
+    linkSocial: yup
+      .string()
+      .matches(
+        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+        "Enter correct url!"
+      ),
+  });
+
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  //---------------------------------------
+
   return (
     <Card elevation={12} className={classes.root}>
       <CardContent>
         <Grid container justify="space-between" direction="row" wrap="nowrap">
           {/*  */}
-
-          {/* 
-          
-                    <Container maxWidth="md" className={classes.textContainer}>
-            <TextField
-              variant="outlined"
-              multiline
-              name="name"
-              inputRef={register}
-              error={!!errors.name}
-              helperText={errors.name?.message}
-              style={{ margin: 8 }}
-              defaultValue={user?.name}
-              label="Nome do Usuário"
-            />
-          </Container>
-
-          
-          
-          
-          
-          */}
 
           <Grid xs={8} container spacing={1} direction="column">
             <Grid item>
@@ -88,6 +98,26 @@ const ProductCard = () => {
               ></Typography>
             </Grid>
           </Grid>
+
+          {/* 
+          
+          <Container maxWidth="md" className={classes.textContainer}>
+            <TextField
+              variant="outlined"
+              multiline
+              name="name"
+              inputRef={register}
+              error={!!errors.name}
+              helperText={errors.name?.message}
+              style={{ margin: 8 }}
+              defaultValue={user?.name}
+              label="Nome do Usuário"
+            />
+          </Container>
+
+    
+          
+          */}
 
           {/*  */}
           <Grid xs container justify="flex-end" alignItems="flex-start">
