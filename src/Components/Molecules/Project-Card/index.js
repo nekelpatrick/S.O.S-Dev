@@ -13,15 +13,50 @@ import {
 import Button from "../../Atoms/Button";
 import Typography from "../../Atoms/Types";
 import useStyles from "./style";
+import { api } from "../../../axios-globalConfig/axios-global";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+// import { useState } from "react";
+// import { useHistory } from "react-router-dom";
+import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
 
-const ProjectCard = ({ titulo, tipo, descricao, stack, userId }) => {
+const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, isFavorite = false }) => {
   const classes = useStyles();
-
-  const { users } = useSelector((state) => state);
-
+  const dispatch = useDispatch();
+  // const history = useHistory();
+  const { users, profile } = useSelector((state) => state);
   const findUser = users.find((e) => e.id === parseInt(userId));
+  const favoriteIcon = <i class="fas fa-star"></i>
+  const removeIcon = <i class="fas fa-eraser"></i>
+
+  const patchFavoriteList = (favoriteList) => {
+    api.patch(`/users/${profile.id}`, 
+        {
+          favorites: favoriteList
+        },
+      {
+        headers: {
+          Authorization: `Bearer ${profile.token}`}
+      }
+    )
+    .then((res) => {
+      console.log(res)
+      dispatch(getProfileThunk(profile.email, profile.token))
+    })
+    .catch ((error) => {
+      console.log(error)
+    })
+  };
+
+  const handleAddFavorite = (e) => {
+    e.target.style.color = "yellow"
+    patchFavoriteList([...profile.favorites, projectFavorite])
+  };
+  const handleRemoveFavorite = (e) => {
+    const newFavorites = profile.favorites.filter((favorite) => favorite.id !== projectFavorite.id );
+    e.target.style.color = "red"
+    patchFavoriteList(newFavorites)
+  }
 
   return (
     <Card elevation={14} align="center" className={classes.root}>
@@ -34,6 +69,11 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId }) => {
               gutterBottom
               variant="h4"
               text={titulo}
+            />
+            <Button 
+            onClick={(e) => isFavorite ? handleRemoveFavorite(e) : handleAddFavorite(e)} 
+            text={isFavorite ? removeIcon : favoriteIcon}
+            classe={"addFavorites"}
             />
           </Grid>
 

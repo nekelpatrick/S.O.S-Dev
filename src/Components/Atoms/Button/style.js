@@ -52,6 +52,17 @@ const Style = makeStyles((theme) => ({
     marginBottom: "1vh",
   },
 
+  addFavorites: {
+    "&:hover": {
+      backgroundColor: "#ffffff00",
+    },
+    padding: "0%",
+    fontSize: "1.5rem",
+    color: "#656555",
+    backgroundColor: "#ffffff00",
+    width: "15%"
+  },
+
   buttonLogin: {},
   buttonRegister: {},
 
