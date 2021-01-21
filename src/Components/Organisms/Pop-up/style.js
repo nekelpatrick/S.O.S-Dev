@@ -40,4 +40,7 @@ export const Container = styled.div`
     width: 40%;
     margin-top: 10px;
   }
+  input {
+    color: black;
+  }
 `;
