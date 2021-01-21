@@ -21,9 +21,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const PerfilRenderBox = ({ setAuth }) => {
-  const { projects } = useSelector((state) => state);
+  const { projects, filteredProjects } = useSelector((state) => state);
   const [projectOwner, setProjectOwner] = useState([]);
   const classes = useStyles();
+
+  const allProjects =
+    projects?.map((e, index) => (
+      <ProjectCard
+        key={index}
+        titulo={e.title}
+        tipo={e.type}
+        userId={e.userId}
+        descricao={e.description}
+        stack={e.qualifications}
+        projectFavorite={e}
+      />
+    ));
+    const h3OfFiltereds = "Encontramos esse(s) projeto(s) aqui..."
+    const filtereds = 
+    <>
+    <h3>{h3OfFiltereds}</h3>
+      {filteredProjects?.map((e, index) => (
+        <ProjectCard
+        key={index}
+        titulo={e.title}
+        tipo={e.type}
+        userId={e.userId}
+        descricao={e.description}
+        stack={e.qualifications}
+        projectFavorite={e}
+      />
+      ))}
+    </>
 
   useEffect(() => {
     setAuth(2);
@@ -45,21 +74,9 @@ const PerfilRenderBox = ({ setAuth }) => {
       <Switch>
         <Route exact path="/profile">
           <Filters projects={projects} />
-          {projects.length > 0 &&
-            projects.map((e, index) => (
-              <ProjectCard
-                key={index}
-                titulo={e.title}
-                tipo={e.type}
-                userId={e.userId}
-                descricao={e.description}
-                stack={e.qualifications}
-                projectFavorite={e}
-              />
-            ))}
+          {filteredProjects.length > 0 ? filtereds : allProjects}
         </Route>
         <Route exact path="/profile/favoritos">
-          <Filters />
           <Favorites />
         </Route>
         <Route exact path="/profile/editarPerfil">
