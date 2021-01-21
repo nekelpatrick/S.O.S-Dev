@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import { api } from "../../axios-globalConfig/axios-global";
 import { RenderBox } from "./style";
 
@@ -9,14 +9,15 @@ import EditUser from "../../Components/Organisms/ProfileForm";
 import ProductCard from "../../Components/Molecules/Project-Card-Add-New";
 import Filters from "../../Components/Molecules/Filters";
 import UserSearchProfile from "../../Components/Organisms/User-Search-Profile";
-import Favorites from "../../Components/Organisms/Favorites";
+import Favorites from "../../Components/Organisms/Favorites/";
+import Button from "../../Components/Atoms/Button";
 
 const PerfilRenderBox = ({ setAuth }) => {
   const { projects, filteredProjects, profile, filteredUsers } = useSelector(
     (state) => state
   );
   const [projectOwner, setProjectOwner] = useState([]);
-
+  const history = useHistory();
   const allProjects = projects?.map((e, index) => (
     <ProjectCard
       key={index}
@@ -25,6 +26,7 @@ const PerfilRenderBox = ({ setAuth }) => {
       userId={e.userId}
       descricao={e.description}
       stack={e.qualifications}
+      time={`Tempo estimado: ${e.time}`}
       projectFavorite={e}
       alreadyFavorite={
         profile.favorites.findIndex((favorite) => favorite.id === e.id) < 0
@@ -81,6 +83,10 @@ const PerfilRenderBox = ({ setAuth }) => {
           <ProductCard setAuth={setAuth} />
         </Route>
         <Route path="/profile/search">
+          <Button
+            text="Voltar para o profile"
+            onClick={() => history.push("/profile")}
+          />
           {filteredUsers.length > 0 ? (
             filteredUsers.map((e, i) => (
               <UserSearchProfile key={i} profile={e} />

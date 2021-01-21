@@ -71,7 +71,7 @@ const Projects = ({ setAuth }) => {
   return (
     <>
       <StyledPopup
-        trigger={<Button classe="buttonPupUpAddTechs" text={icon} />}
+        trigger={<Button classe="buttonPupUpAddTechs" text={'Novo Projeto'} classe="profileFavorites" />}
         modal
         nested
       >

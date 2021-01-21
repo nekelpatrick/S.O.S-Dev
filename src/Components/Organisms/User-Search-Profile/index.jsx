@@ -26,10 +26,6 @@ const UserSearchProfile = ({ profile }) => {
   const [isFavoriteTime, setFavouriteTime] = useState(false);
   return (
     <>
-      <ContainedButtons
-        text="Voltar para o profile"
-        onClick={() => history.push("/profile")}
-      />
       <Container>
         <Image
           src={profile?.src !== "" ? profile?.src : noImage}

@@ -12,7 +12,7 @@ import Types from "../../Components/Atoms/Types";
 import noImage from "./Image/perfil-blog.png";
 import ContainedButtons from "../../Components/Atoms/Button";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import RenderBox from "../RenderBox/PerfilRenderBox";
 
@@ -22,20 +22,49 @@ import { useHistory } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
+import Projects from "../../Components/Molecules/Projects";
+
+import { StateProvider } from "./stateContext";
+
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+
+import { makeStyles } from "@material-ui/core";
+
+import { useContext } from "react";
+
+import { MobileStateContext } from "../../Routes/mobileStateContext";
+
+const useStyles = makeStyles((theme) => ({
+  display: {
+    display: "none",
+  },
+}));
+
 const Profile = ({ auth, setAuth }) => {
+  const { display, setDisplay } = useContext(MobileStateContext);
   const { profile } = useSelector((state) => state);
   const history = useHistory();
   const [isFavoriteTime, setFavouriteTime] = useState(false);
 
+  const matchesMobile = useMediaQuery("(max-width:767px)");
+
+  const classe = useStyles();
+
+  useEffect(() => (matchesMobile ? setDisplay(false) : setDisplay(undefined)), [
+    matchesMobile,
+  ]);
+
   return (
     <Grid container>
-      <Grid item xs={4}>
+      <Grid
+        item
+        xs={display === true ? 12 : display === undefined && 4}
+        className={display === false && classe.display}
+      >
         <Container>
           <Image
-            src={profile?.src !== "" ? profile?.src : noImage}
+            src={profile.src !== "" ? profile.src : noImage}
             alt="Foto do perfil"
-            width="120px"
-            height="120px"
             borderRadius="50%"
             margin="2vh 0px 2vh 0px"
           />
@@ -57,14 +86,7 @@ const Profile = ({ auth, setAuth }) => {
                 );
               }}
             />
-            <ContainedButtons
-              text="Novo Projeto"
-              classe="profileFavorites"
-              onClick={() => {
-                setFavouriteTime(true);
-                history.push("/profile/novoProjeto");
-              }}
-            />
+            <Projects setAuth={setAuth} />
             <ContainedButtons
               text="Editar Perfil"
               classe="profileFavorites"
@@ -197,8 +219,17 @@ const Profile = ({ auth, setAuth }) => {
           </ContactContainer>
         </Container>
       </Grid>
-      <Grid item align="center" xs={8}>
-        <RenderBox setAuth={setAuth} />
+      <Grid
+        item
+        xs={display === false ? 12 : display === undefined && 8}
+        className={display === true && classe.display}
+      >
+        <StateProvider
+          isFavoriteTime={isFavoriteTime}
+          setFavouriteTime={setFavouriteTime}
+        >
+          <RenderBox setAuth={setAuth} />
+        </StateProvider>
       </Grid>
     </Grid>
   );
