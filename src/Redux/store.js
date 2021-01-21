@@ -3,16 +3,16 @@ import thunk from "redux-thunk";
 
 import getAllUsersReducer from "./modules/users/reducer";
 import getProfileReducer from "./modules/profile/reducer";
-import searchUserReducer from "./modules/Search-User/reducer";
 import projectsReducer from "./modules/projects/reducer";
 import filteredProjectsReducer from "./modules/filteredProjects/reducer";
+import filteredUsersReducer from "./modules/filteredUsers/reducer";
 
 const reducers = combineReducers({
   filteredProjects: filteredProjectsReducer,
+  filteredUsers: filteredUsersReducer,
   projects: projectsReducer,
   users: getAllUsersReducer,
   profile: getProfileReducer,
-  searchUser: searchUserReducer,
 });
 
 const store = createStore(reducers, applyMiddleware(thunk));

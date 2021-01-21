@@ -10,6 +10,11 @@ const Style = makeStyles((theme) => ({
     bottom: 20,
     zIndex: 5,
   },
+  menuButton: {
+    '@media(min-width: 768px)': {
+      display: 'none',
+    }
+  }
 }));
 
 export default Style;

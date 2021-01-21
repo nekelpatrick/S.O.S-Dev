@@ -3,8 +3,7 @@ import styled from "styled-components";
 export const FiltersContent = styled.section `
     width: 60vw;
     height: 18vh;
-    margin-left: auto;
-    margin-right: 3%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
