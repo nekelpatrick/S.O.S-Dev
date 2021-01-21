@@ -9,8 +9,8 @@ export const StyledPopup = styled(Popup)`
   }
 
   &-content {
-    height: 50%;
-    width: 20%;
+    height: 60%;
+    width: 30%;
     background: #17223a;
     border: 5px solid #efdcbd;
     border-radius: 20px;
@@ -25,6 +25,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 
+  h1,
   h2 {
     color: #efdcbd;
     margin: 0;
@@ -37,5 +38,6 @@ export const Container = styled.div`
   }
   button {
     width: 40%;
+    margin-top: 10px;
   }
 `;
