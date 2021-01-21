@@ -36,9 +36,9 @@ const theme = createMuiTheme({
     secondary: {
       main: "#E63462",
     },
-    // background: {
-    //   paper: "#0C101D",
-    // },
+    background: {
+      paper: "#0C101D",
+    },
   },
 });
 

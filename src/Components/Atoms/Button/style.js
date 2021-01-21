@@ -29,7 +29,6 @@ const Style = makeStyles((theme) => ({
     height: "16%",
     borderRadius: "9px",
     margin: "0 auto",
-
   },
   buttonPupUpAddTechs: {
     fontFamily: "fontawesome",
@@ -40,21 +39,25 @@ const Style = makeStyles((theme) => ({
     width: "60px",
     backgroundColor: "#ffffff00",
     borderRadius: "12px",
-    '&:hover': {
-      backgroundColor: "#ffffff05"
-    }
+    "&:hover": {
+      backgroundColor: "#ffffff05",
+    },
   },
 
   profileFavorites: {
     fontSize: "1rem",
-    color: '#EFDCBD',
+    color: "#EFDCBD",
 
     borderRadius: "12px",
-    marginBottom: '1vh',
+    marginBottom: "1vh",
   },
 
   buttonLogin: {},
   buttonRegister: {},
+
+  saveButton: {
+    width: "20px",
+  },
 }));
 
 export default Style;

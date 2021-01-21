@@ -8,6 +8,8 @@ import {
   CardActions,
   Paper,
   TextField,
+  Container,
+  Button as ButtonSave,
 } from "@material-ui/core";
 
 import Button from "../../Atoms/Button";
@@ -99,26 +101,6 @@ const ProductCard = () => {
             </Grid>
           </Grid>
 
-          {/* 
-          
-          <Container maxWidth="md" className={classes.textContainer}>
-            <TextField
-              variant="outlined"
-              multiline
-              name="name"
-              inputRef={register}
-              error={!!errors.name}
-              helperText={errors.name?.message}
-              style={{ margin: 8 }}
-              defaultValue={user?.name}
-              label="Nome do Usuário"
-            />
-          </Container>
-
-    
-          
-          */}
-
           {/*  */}
           <Grid xs container justify="flex-end" alignItems="flex-start">
             <CardActions>
@@ -178,7 +160,63 @@ const ProductCard = () => {
           text={`Comentários`}
           align="center"
         ></Typography>
-        <Paper elevation={7} className={classes.contentItem}></Paper>
+        {/* ---------------------COMENTÁRIOS------------------------- */}
+        <Paper elevation={7} className={classes.contentItemComments}>
+          {/* fazer um map aqui ? */}
+          <Container className={classes.comments}>
+            <Paper style={{ margin: 8, padding: "4px" }}>
+              <Typography
+                color="textPrimary"
+                gutterBottom
+                variant="h8"
+                text={`Comentários`}
+                align="center"
+              ></Typography>
+            </Paper>
+
+            <Paper style={{ margin: 8, padding: "4px" }}>
+              <Typography
+                color="textPrimary"
+                gutterBottom
+                variant="h8"
+                text={`Comentários`}
+                align="center"
+              ></Typography>
+            </Paper>
+
+            <Paper style={{ margin: 8, padding: "4px" }}>
+              <Typography
+                color="textPrimary"
+                gutterBottom
+                variant="h8"
+                text={`Comentários`}
+                align="center"
+              ></Typography>
+            </Paper>
+
+            {/*  */}
+          </Container>
+
+          <TextField
+            inputRef={register}
+            name="comentario"
+            id="contact-tecnologia"
+            style={{ width: "20vw", margin: "auto" }}
+            variant="outlined"
+            label="Insira seu comentário"
+          />
+
+          <ButtonSave
+            //onClick={}
+            color="secondary"
+            variant="outlined"
+            className={classes.saveButton}
+            text="Salvar"
+            style={{ width: "10vw", margin: "auto" }}
+          >
+            Salvar
+          </ButtonSave>
+        </Paper>
       </Box>
     </Card>
   );

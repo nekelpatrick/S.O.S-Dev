@@ -54,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
   },
   techButton: {
     height: "40px",
@@ -75,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
   saveLevelButton: {
     width: "5vw",
+    margin: "auto",
   },
 }));
 
