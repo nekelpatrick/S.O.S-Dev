@@ -188,7 +188,7 @@ const Profile = ({ auth, setAuth }) => {
         <RenderBox />
       </Grid>
     </Grid>
-  );
+  )
 };
 
 export default Profile;
