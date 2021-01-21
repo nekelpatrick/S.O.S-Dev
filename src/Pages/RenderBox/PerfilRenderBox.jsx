@@ -57,7 +57,7 @@ const PerfilRenderBox = () => {
         </Route>
         <Route exact path="/profile/favoritos">
           <Filters />
-          <div>favoritos</div>
+          <Favorites />
         </Route>
         <Route exact path="/profile/editarPerfil">
           <EditUser />

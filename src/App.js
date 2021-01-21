@@ -10,9 +10,12 @@ import { useEffect } from "react";
 import { getAllUsersThunk } from "./Redux/modules/users/thunks";
 import { addProjectsThunk } from "./Redux/modules/projects/thunk";
 
+import { useSelector } from "react-redux";
+
 function App() {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const projects = useSelector((state) => state.projects);
 
   useEffect(() => {
     dispatch(getAllUsersThunk());
@@ -28,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

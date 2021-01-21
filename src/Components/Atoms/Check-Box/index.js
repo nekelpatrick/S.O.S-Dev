@@ -38,7 +38,7 @@ const CheckBoxAtom = ({ color, check, handleFilter, selectValue }) => {
     <>
       <Checkbox
         checked={check}
-        onChange={() => setNewOption()}
+        onClick={() => setNewOption()}
         color={color}
         inputProps={{ "aria-label": "uncontrolled-checkbox" }}
       />
