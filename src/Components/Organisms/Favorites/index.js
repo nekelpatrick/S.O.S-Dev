@@ -23,12 +23,10 @@ const Favorites = () => {
         <>
         {
         haveFavorites 
-            ? 
+            && 
             // favorites.map(({title, type, description, qualifications}) => (
                 <ProjectCard />
             // ))
-            :
-            <h2>Nada Ainda</h2>
         }
         </>
     )
