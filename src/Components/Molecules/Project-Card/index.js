@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Avatar,
   Box,
@@ -19,13 +18,19 @@ import { useHistory } from 'react-router-dom'
 import { useContext } from 'react'
 import { StateContext } from '../../../Pages/Profile/stateContext'
 
+import { useSelector } from "react-redux";
 
-const ProjectCard = ({titulo, tipo, descricao, stack, user}) => {
+
+
+
+const ProjectCard = ({ titulo, tipo, descricao, stack, userId }) => {
   const history = useHistory()
-
+  
   const {isFavoriteTime, setFavouriteTime} = useContext(StateContext)
-
   const classes = useStyles();
+  const { users } = useSelector((state) => state);
+
+  const findUser = users.find((e) => e.id === parseInt(userId));
 
   return (
     <Card elevation={12} className={classes.root}>
@@ -37,7 +42,7 @@ const ProjectCard = ({titulo, tipo, descricao, stack, user}) => {
               color="textSecondary"
               gutterBottom
               variant="h4"
-              text= {titulo}
+              text={titulo}
             />
           </Grid>
 
@@ -66,12 +71,22 @@ const ProjectCard = ({titulo, tipo, descricao, stack, user}) => {
             </Grid>
             <Grid item xs>
               <Paper elevation={7} className={classes.contentItem}>
-                <Typography
-                  color="textSecondary"
-                  display="inline"
-                  variant="body2"
-                  text={stack}
-                />
+                {stack.map((e) => (
+                  <>
+                    <Typography
+                      color="textSecondary"
+                      display="inline"
+                      variant="body2"
+                      text={e.linguagem}
+                    />
+                    <Typography
+                      color="textSecondary"
+                      display="inline"
+                      variant="body2"
+                      text={e.nivel}
+                    />
+                  </>
+                ))}
               </Paper>
             </Grid>
           </Grid>
@@ -99,10 +114,10 @@ const ProjectCard = ({titulo, tipo, descricao, stack, user}) => {
             <Typography
               color="textPrimary"
               display="inline"
-              variant="h8"
-              text= {user}
+              variant="h6"
+              text={findUser.user}
             />
-            <Avatar className={classes.statsIcon} />
+            <Avatar className={classes.statsIcon} src={findUser.src} />
           </Grid>
         </Grid>
       </Box>

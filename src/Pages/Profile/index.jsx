@@ -11,7 +11,7 @@ import Types from "../../Components/Atoms/Types";
 import noImage from "./Image/perfil-blog.png";
 import ContainedButtons from "../../Components/Atoms/Button";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import RenderBox from "../RenderBox/PerfilRenderBox";
 
@@ -25,10 +25,24 @@ import Projects from '../../Components/Molecules/Projects'
 
 import { StateProvider } from './stateContext'
 
-const Profile = () => {
+const Profile = ({ auth, setAuth }) => {
   const { profile } = useSelector((state) => state);
   const history = useHistory();
   const [isFavoriteTime, setFavouriteTime] = useState(false);
+  
+  const [display, setDisplay] = useState(undefined)
+
+  const window = document.body.clientWidth
+
+  useEffect (() => {
+    if( window >= 768){
+      setDisplay(undefined)
+    } else {
+      setDisplay(true)
+    }
+  }, [])
+
+  console.log('display ' + display, 'window ' + window)
 
   return (
     <Grid container>

@@ -23,7 +23,7 @@ export const Container = styled.div`
             height: auto;
 
             @media(min-width: 1440px){
-                width: 8vw;
+                width: 7vw;
             }
 
             @media(min-width: 2560px){
@@ -33,7 +33,7 @@ export const Container = styled.div`
 `
 
 export const TechContainer = styled.div`
-    width: 30vw;
+    width: 33.5vw;
     height: 17vh;
     display: flex;
     flex-direction: row;
@@ -43,7 +43,7 @@ export const TechContainer = styled.div`
         padding: 0 1vw 0 1vw;
         display: flex;
         flex-direction: column;
-        width: 15vw;
+        width: 16.75vw;
         height: 17vh;
         color: #EFDCBD;
     }
@@ -51,7 +51,7 @@ export const TechContainer = styled.div`
 `
 
 export const PendingProjectsContainer = styled.div`
-    width: 30vw;
+    width: 33.5vw;
     height: 17vh;
     padding: 0 1vw 0 1vw;
     color: #EFDCBD;
@@ -60,7 +60,7 @@ export const PendingProjectsContainer = styled.div`
 `
 
 export const CompletedProjectsContainer = styled.div`
-    width: 30vw;
+    width: 33.5vw;
     height: 17vh;
     display: flex;
     flex-direction: row;
@@ -70,7 +70,7 @@ export const CompletedProjectsContainer = styled.div`
         padding: 0 1vw 0 1vw;
         display: flex;
         flex-direction: column;
-        width: 15vw;
+        width: 16.75vw;
         height: 17vh;
         color: #EFDCBD;
     }
@@ -78,14 +78,14 @@ export const CompletedProjectsContainer = styled.div`
 `
 
 export const ContactContainer = styled.div`
-    width: 30vw;
+    width: 33.5vw;
     height: 17vh;
     display: flex;
     flex-direction: column;
     margin-bottom: 2vh;
 
     .contactsContainer{
-        width: 30vw;
+        width: 33.5vw;
         display:  flex;
 
         .webContacts {
@@ -97,16 +97,21 @@ export const ContactContainer = styled.div`
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 15vw;
+            width: 16.75vw;
             height: 12vh;
             color: #EFDCBD;
+
+                div{
+                    height: 3vh;
+                    word-break: break-all;
+                }
         }
     }
 
 `
 
 export const ButtonContainer = styled.div `
-    width: 30vw;
+    width: 33.5vw;
     display: flex;
     justify-content: space-around;
 

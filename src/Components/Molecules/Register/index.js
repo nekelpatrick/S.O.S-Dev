@@ -8,7 +8,7 @@ import Types from "../../Atoms/Types";
 import Input from "../../Atoms/Input";
 
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
 import { getAllUsersThunk } from "../../../Redux/modules/users/thunks";
 import { useHistory } from "react-router-dom";
@@ -45,6 +45,7 @@ const Register = ({ text, setIsReg, close }) => {
     data.phone = "";
     data.socialMedia = "";
     data.portifolio = "";
+    data.favorites = [];
     data.onGoingProjects = [];
     data.completedProjects = [];
     api
