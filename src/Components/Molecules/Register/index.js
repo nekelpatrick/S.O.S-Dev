@@ -48,6 +48,7 @@ const Register = ({ text, setIsReg, close }) => {
     data.favorites = [];
     data.onGoingProjects = [];
     data.completedProjects = [];
+    data.favorites = [];
     api
       .post("/register", { ...data })
       .then((res) => {

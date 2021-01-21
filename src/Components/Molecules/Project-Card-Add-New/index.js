@@ -8,11 +8,18 @@ import {
   CardActions,
   Paper,
   TextField,
+  Container,
+  Button as ButtonSave,
 } from "@material-ui/core";
 
 import Button from "../../Atoms/Button";
 import Typography from "../../Atoms/Types";
 import useStyles from "./style";
+
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import * as yup from "yup";
 
 const ProductCard = () => {
   const classes = useStyles();
@@ -30,6 +37,33 @@ const ProductCard = () => {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+  // --------- VALIDATION YUP ------------
+
+  const schema = yup.object().shape({
+    name: yup
+      .string()
+      .required("Campo Necessário")
+      .matches(/[A-Za-z]\s[A-Za-z]/, "Formato Inválido"),
+    email: yup
+      .string()
+      .required("Campo Necessário")
+      .email("Formato de email Inválido"),
+    contact: yup.string().required("Campo Necessário"),
+    linkSocial: yup
+      .string()
+      .matches(
+        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+        "Enter correct url!"
+      ),
+  });
+
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  //---------------------------------------
+
   return (
     <Card elevation={12} className={classes.root}>
       <CardContent>
@@ -124,7 +158,63 @@ const ProductCard = () => {
           text={`Comentários`}
           align="center"
         ></Typography>
-        <Paper elevation={7} className={classes.contentItem}></Paper>
+        {/* ---------------------COMENTÁRIOS------------------------- */}
+        <Paper elevation={7} className={classes.contentItemComments}>
+          {/* fazer um map aqui ? */}
+          <Container className={classes.comments}>
+            <Paper style={{ margin: 8, padding: "4px" }}>
+              <Typography
+                color="textPrimary"
+                gutterBottom
+                variant="h8"
+                text={`Comentários`}
+                align="center"
+              ></Typography>
+            </Paper>
+
+            <Paper style={{ margin: 8, padding: "4px" }}>
+              <Typography
+                color="textPrimary"
+                gutterBottom
+                variant="h8"
+                text={`Comentários`}
+                align="center"
+              ></Typography>
+            </Paper>
+
+            <Paper style={{ margin: 8, padding: "4px" }}>
+              <Typography
+                color="textPrimary"
+                gutterBottom
+                variant="h8"
+                text={`Comentários`}
+                align="center"
+              ></Typography>
+            </Paper>
+
+            {/*  */}
+          </Container>
+
+          <TextField
+            inputRef={register}
+            name="comentario"
+            id="contact-tecnologia"
+            style={{ width: "20vw", margin: "auto" }}
+            variant="outlined"
+            label="Insira seu comentário"
+          />
+
+          <ButtonSave
+            //onClick={}
+            color="secondary"
+            variant="outlined"
+            className={classes.saveButton}
+            text="Salvar"
+            style={{ width: "10vw", margin: "auto" }}
+          >
+            Salvar
+          </ButtonSave>
+        </Paper>
       </Box>
     </Card>
   );

@@ -7,6 +7,7 @@ import {
   Grid,
   CardActions,
   Paper,
+  Typography as TypographyDesc,
 } from "@material-ui/core";
 
 import Button from "../../Atoms/Button";
@@ -17,15 +18,16 @@ import { useSelector } from "react-redux";
 
 const ProjectCard = ({ titulo, tipo, descricao, stack, userId }) => {
   const classes = useStyles();
+
   const { users } = useSelector((state) => state);
 
   const findUser = users.find((e) => e.id === parseInt(userId));
 
   return (
-    <Card elevation={12} className={classes.root}>
+    <Card elevation={14} align="center" className={classes.root}>
       <CardContent>
-        <Grid className={classes.cardHeader} container spacing={2}>
-          <Grid item xs={2}>
+        <Grid className={classes.cardHeader} container xs={12} spacing={2}>
+          <Grid item xs={8}>
             <Typography
               align="center"
               color="textSecondary"
@@ -35,7 +37,7 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId }) => {
             />
           </Grid>
 
-          <Grid item xs={1}>
+          <Grid item xs={6}>
             <Typography
               align="center"
               color="textPrimary"
@@ -47,34 +49,45 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId }) => {
         </Grid>
 
         <div className={classes.content}>
-          <Grid container spacing={2}>
-            <Grid item xs>
+          <Grid container xs={12} spacing={2}>
+            <Grid item xs={4}>
               <Paper elevation={7} className={classes.contentItem}>
-                <Typography
-                  color="textSecondary"
-                  display="inline"
-                  variant="body2"
-                  text={descricao}
-                />
+                <TypographyDesc
+                  color="textPrimary"
+                  variant="body1"
+                  align="center"
+                  style={{
+                    margin: "20px 30px",
+                  }}
+                >
+                  {descricao}
+                </TypographyDesc>
               </Paper>
             </Grid>
-            <Grid item xs>
-              <Paper elevation={7} className={classes.contentItem}>
+            <Grid item xs={8}>
+              <Paper elevation={7} className={classes.contentItemStacksTech}>
                 {stack.map((e) => (
-                  <>
-                    <Typography
-                      color="textSecondary"
-                      display="inline"
-                      variant="body2"
-                      text={e.linguagem}
-                    />
-                    <Typography
-                      color="textSecondary"
-                      display="inline"
-                      variant="body2"
-                      text={e.nivel}
-                    />
-                  </>
+                  <Grid
+                    container
+                    xs={12}
+                    spacing={1}
+                    style={{ marginTop: "5px" }}
+                  >
+                    <Grid item xs={6} align="center">
+                      <Typography
+                        color="secondary"
+                        variant="body1"
+                        text={e.linguagem}
+                      />
+                    </Grid>
+                    <Grid item xs={6} align="center">
+                      <Typography
+                        color="secondary"
+                        variant="body1"
+                        text={e.nivel}
+                      />
+                    </Grid>
+                  </Grid>
                 ))}
               </Paper>
             </Grid>
