@@ -20,18 +20,22 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     textAlign: "center",
     alignItems: "center",
-    height: "26vh",
+    height: "30vh",
   },
 
   contentItem: {
-    height: "25vh",
+    height: "30vh",
     maxHeight: "24vh",
     backgroundColor: "#17223a",
-    justifyContent: "center",
-    textAlign: "center",
     padding: "10px",
   },
-
+  contentItemStacksTech: {
+    height: "30vh",
+    maxHeight: "24vh",
+    backgroundColor: "#17223a",
+    display: "flex",
+    flexDirection: "column",
+  },
   statsItem: {
     alignItems: "center",
     justifyContent: "center",
