@@ -6,6 +6,9 @@ const Style = makeStyles((theme) => ({
     marginBottom: "0px",
   },
 
+  titlePopUp: {
+    color: "blue",
+  },
   textCard: {
     width: "90%",
   },

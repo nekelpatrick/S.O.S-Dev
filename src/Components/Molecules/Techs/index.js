@@ -6,13 +6,22 @@ import Types from "../../Atoms/Types";
 
 import { api } from "../../../axios-globalConfig/axios-global";
 
+import Select from "@material-ui/core/Select";
+import { useSelector, useDispatch } from "react-redux";
+import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 
 const Techs = () => {
+  const { profile } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   const schema = yup.object().shape({
     techs: yup.string().required("Campo obrigatório"),
+    experience: yup.string().required("Campo Obrigatorio"),
   });
   const { register, handleSubmit, errors, setError } = useForm({
     resolver: yupResolver(schema),
@@ -20,22 +29,23 @@ const Techs = () => {
 
   const patchTechs = (data) => {
     api
-      .patch("/users/tecnologia", { ...data })
+      .patch(
+        `/users/${profile.id}`,
+        { tech: [...profile.tech, data] },
+        {
+          headers: {
+            Authorization: `Bearer ${profile.token}`,
+          },
+        }
+      )
       .then((res) => {
-        console.log(res);
+        dispatch(getProfileThunk(profile.email, profile.token));
       })
       .catch((err) => {
         setError("tech_patch", {
           message: "Tecnologia já cadastrada.",
         });
       });
-  };
-
-  const changeOption = (e) => {
-    console.log(e.target.value);
-  };
-  const changeTextInput = (e) => {
-    console.log(e.target.value);
   };
 
   const icon = <i class="fas fa-plus"></i>;
@@ -54,21 +64,23 @@ const Techs = () => {
               label="Tecnologias"
               name="techs"
               id="techs"
-              onChange={changeTextInput}
               variant="outlined"
               inputRef={register}
               helperText={errors.techs?.message}
             />
-            <Input
+            <Select
+              native={true}
               select="select"
-              label="Nível de Experiência"
-              onChange={changeOption}
+              label="Tempo de produção estimado"
+              name="experience"
               variant="outlined"
+              inputRef={register}
+              helperText={errors.experience?.message}
             >
               <option>Iniciante</option>
               <option>Intermediário</option>
               <option>Avançado</option>
-            </Input>
+            </Select>
             <Button text="Cadastrar" classe="buttonTechs" type="submit" />
           </form>
         </TechsContent>
