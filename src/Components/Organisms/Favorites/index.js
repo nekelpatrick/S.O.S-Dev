@@ -8,25 +8,31 @@ const Favorites = () => {
     const [haveFavorites, setHaveFavorites] = useState(false);
     const { profile } = useSelector((state) => state)
 
-    useEffect(() => {
-        setFavorites([profile])
-        if ( favorites.length > 0 ) {
-            setHaveFavorites(true)
-        };
-    }, []);
+    // useEffect(() => {
+    //     if ( favorites.length < 1 ) {
+    //         setFavorites(profile.favorites)
+    //     }
+    //     if ( favorites.length > 0 ) {
+    //         setHaveFavorites(true)
+    //     };
+    // },[])
 
-    console.log(favorites)
+    console.log(profile.favorites)
 
-    // utilizar em ProjectCard
-    // titulo={title} tipo={type} descricao={description} stack={qualifications}
     return (
         <>
         {
-        haveFavorites 
+        profile.favorites.length > 0 
             && 
-            // favorites.map(({title, type, description, qualifications}) => (
-                <ProjectCard />
-            // ))
+            profile.favorites.map((e) => (
+                <ProjectCard 
+                titulo={e.title} 
+                tipo={e.type} 
+                descricao={e.description} 
+                stack={e.qualifications} 
+                projectFavorite={e} 
+                isFavorite/>
+            ))
         }
         </>
     )

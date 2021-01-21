@@ -10,10 +10,9 @@ import { useEffect } from "react";
 import { getAllUsersThunk } from "./Redux/modules/users/thunks";
 import { addProjectsThunk } from "./Redux/modules/projects/thunk";
 
-import ProjectCard from "./Components/Molecules/Project-Card";
+import { useSelector } from "react-redux";
 
 function App() {
-
   const dispatch = useDispatch();
   const classes = useStyles();
   // const projects = useSelector((state) => state.projects);
@@ -22,16 +21,13 @@ function App() {
     dispatch(getAllUsersThunk());
     dispatch(addProjectsThunk());
   }, [dispatch]);
-
-  // console.log(projects)
-
+  console.log(theme.palette);
   return (
-      <ThemeProvider theme={theme}>
-        <Paper className={classes.root} color="primary">
-          <Pages />
-          <ProjectCard />
-        </Paper>
-      </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <Paper className={classes.root}>
+        <Pages />
+      </Paper>
+    </ThemeProvider>
   );
 }
 

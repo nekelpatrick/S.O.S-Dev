@@ -7,6 +7,7 @@ import {
   Grid,
   CardActions,
   Paper,
+  Typography as TypographyDesc,
 } from "@material-ui/core";
 
 import Button from "../../Atoms/Button";
@@ -14,47 +15,55 @@ import Typography from "../../Atoms/Types";
 import useStyles from "./style";
 import { api } from "../../../axios-globalConfig/axios-global";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
 
-const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectToFavorite, isFavorite = false }) => {
+const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, isFavorite = false }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
   const { users, profile } = useSelector((state) => state);
-  const [favorite, setFavorite] = useState([]);
-  // const [allFavoritesOfUser, setAllFavoritesOfUser] = useState([]);
 
   const findUser = users.find((e) => e.id === parseInt(userId));
 
-  const handleAddFavorite = () => {
-
-    setFavorite(projectToFavorite)
-    // setAllFavoritesOfUser([profile.favorite])
-
+  const patchFavoriteList = (favoriteList) => {
     api.patch(`/users/${profile.id}`, 
-      {
-        data: 
         {
-          favorites: favorite
-        }
-      },
+          favorites: favoriteList
+        },
       {
         headers: {
-          authorization: `Bearer ${profile.token}`}
+          Authorization: `Bearer ${profile.token}`}
       }
     )
     .then((res) => {
       console.log(res)
+      dispatch(getProfileThunk(profile.email, profile.token))
     })
     .catch ((error) => {
       console.log(error)
     })
+  };
+
+  const handleAddFavorite = () => {
+    // setFavorite([projectFavorite])
+    // console.log(favorite)
+    // setAllFavoritesOfUser(profile.favorites)
+    patchFavoriteList([...profile.favorites, projectFavorite])
+  };
+  const handleRemoveFavorite = () => {
+    const newFavorites = profile.favorites.filter((favorite) => favorite.id !== projectFavorite.id );
+    patchFavoriteList(newFavorites)
+    history.push("/profile/favoritos")
   }
 
   return (
-    <Card elevation={12} className={classes.root}>
+    <Card elevation={14} align="center" className={classes.root}>
       <CardContent>
-        <Grid className={classes.cardHeader} container spacing={2}>
-          <Grid item xs={2}>
+        <Grid className={classes.cardHeader} container xs={12} spacing={2}>
+          <Grid item xs={8}>
             <Typography
               align="center"
               color="textSecondary"
@@ -63,9 +72,9 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectToFavorite
               text={titulo}
             />
           </Grid>
-          <button onClick={handleAddFavorite}>AQUI</button>
+          <button onClick={isFavorite ? handleRemoveFavorite : handleAddFavorite}>AQUI</button>
 
-          <Grid item xs={1}>
+          <Grid item xs={6}>
             <Typography
               align="center"
               color="textPrimary"
@@ -77,34 +86,45 @@ const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectToFavorite
         </Grid>
 
         <div className={classes.content}>
-          <Grid container spacing={2}>
-            <Grid item xs>
+          <Grid container xs={12} spacing={2}>
+            <Grid item xs={4}>
               <Paper elevation={7} className={classes.contentItem}>
-                <Typography
-                  color="textSecondary"
-                  display="inline"
-                  variant="body2"
-                  text={descricao}
-                />
+                <TypographyDesc
+                  color="textPrimary"
+                  variant="body1"
+                  align="center"
+                  style={{
+                    margin: "20px 30px",
+                  }}
+                >
+                  {descricao}
+                </TypographyDesc>
               </Paper>
             </Grid>
-            <Grid item xs>
-              <Paper elevation={7} className={classes.contentItem}>
-                {stack?.map((e) => (
-                  <>
-                    <Typography
-                      color="textSecondary"
-                      display="inline"
-                      variant="body2"
-                      text={e.linguagem}
-                    />
-                    <Typography
-                      color="textSecondary"
-                      display="inline"
-                      variant="body2"
-                      text={e.nivel}
-                    />
-                  </>
+            <Grid item xs={8}>
+              <Paper elevation={7} className={classes.contentItemStacksTech}>
+                {stack.map((e) => (
+                  <Grid
+                    container
+                    xs={12}
+                    spacing={1}
+                    style={{ marginTop: "5px" }}
+                  >
+                    <Grid item xs={6} align="center">
+                      <Typography
+                        color="secondary"
+                        variant="body1"
+                        text={e.linguagem}
+                      />
+                    </Grid>
+                    <Grid item xs={6} align="center">
+                      <Typography
+                        color="secondary"
+                        variant="body1"
+                        text={e.nivel}
+                      />
+                    </Grid>
+                  </Grid>
                 ))}
               </Paper>
             </Grid>

@@ -8,6 +8,7 @@ export default function ContainedButtons({
   onClick,
   type,
   size,
+  variant,
 }) {
   const classes = useStyles();
 
@@ -15,7 +16,7 @@ export default function ContainedButtons({
     <Button
       className={classes[classe]}
       onClick={onClick}
-      variant="contained"
+      variant={variant ? variant : "contained"}
       color="secondary"
       type={type}
       size={size}

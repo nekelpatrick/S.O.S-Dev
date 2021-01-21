@@ -53,7 +53,7 @@ const PerfilRenderBox = () => {
                 userId={e.userId}
                 descricao={e.description}
                 stack={e.qualifications}
-                projectToFavorite={e}
+                projectFavorite={e}
               />
             ))}
         </Route>
