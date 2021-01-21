@@ -32,8 +32,8 @@ import { AiFillLinkedin, AiFillGithub, AiFillInstagram } from "react-icons/ai";
 // METERIAL-UI RELATED
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "90vh",
-    marginTop: 10,
+    height: "30vh",
+    marginTop: 5,
   },
 
   avatar: {
@@ -52,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    display: "flex",
+    flexDirection: "column",
   },
   techButton: {
     height: "40px",
@@ -70,6 +71,10 @@ const useStyles = makeStyles((theme) => ({
   },
   avatarButton: {
     margin: "5px",
+  },
+  saveLevelButton: {
+    width: "5vw",
+    margin: "auto",
   },
 }));
 
@@ -168,7 +173,7 @@ export default function UserProfile({ user }) {
 
   return (
     <>
-      <Container maxWidth="md" align="center" className={classes.root}>
+      <Container align="center" className={classes.root}>
         <form onSubmit={handleSubmit(handleForm)}>
           <Avatar className={classes.avatar}></Avatar>
 
@@ -192,7 +197,7 @@ export default function UserProfile({ user }) {
 
           {/*  */}
 
-          <Container maxWidth="md" className={classes.textContainer}>
+          <Container maxWidth="xs" className={classes.textContainer}>
             <TextField
               variant="outlined"
               multiline
@@ -200,7 +205,7 @@ export default function UserProfile({ user }) {
               inputRef={register}
               error={!!errors.name}
               helperText={errors.name?.message}
-              style={{ margin: 8 }}
+              style={{ margin: 3 }}
               defaultValue={user?.name}
               label="Nome do Usuário"
             />
@@ -210,12 +215,12 @@ export default function UserProfile({ user }) {
 
           <Container
             maxWidth="md"
-            className={classes.techContainer}
+            className={classes.textContainer}
             align="center"
           >
             <Typography
               className={classes.text}
-              style={{ margin: 8 }}
+              style={{ margin: 3 }}
               variant="body1"
             >
               Tecnologias
@@ -232,11 +237,15 @@ export default function UserProfile({ user }) {
               variant="outlined"
               label="Insira sua tecnologia"
             />
-            <Typography className={classes.text} variant="body1">
+            <Typography
+              className={classes.text}
+              style={{ marginTop: 20 }}
+              variant="body1"
+            >
               Qual sua experiência na Tecnologia
             </Typography>
 
-            <FormControl className={classes.formControl}>
+            <FormControl maxWidth="xs" className={classes.formControl}>
               <InputLabel id="demo-simple-select-label">Nível</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -252,6 +261,7 @@ export default function UserProfile({ user }) {
                 style={{ marginTop: 8 }}
                 color="secondary"
                 variant="outlined"
+                className={classes.saveLevelButton}
               >
                 Salvar
               </Button>
@@ -279,7 +289,7 @@ export default function UserProfile({ user }) {
               id="contact-email"
               error={!!errors.contact}
               helperText={errors.contact?.message}
-              style={{ margin: 8 }}
+              style={{ margin: 3 }}
               defaultValue={user?.email}
               variant="outlined"
               label="Email"
@@ -290,7 +300,7 @@ export default function UserProfile({ user }) {
               id="contact-portfolio"
               error={!!errors.contact}
               helperText={errors.contact?.message}
-              style={{ margin: 8 }}
+              style={{ margin: 3 }}
               defaultValue={user?.contact}
               variant="outlined"
               label="Portfolio link"
@@ -301,7 +311,7 @@ export default function UserProfile({ user }) {
               id="contact-telefone"
               error={!!errors.contact}
               helperText={errors.contact?.message}
-              style={{ margin: 8 }}
+              style={{ margin: 3 }}
               defaultValue={user?.contact}
               variant="outlined"
               type="number"
@@ -318,7 +328,7 @@ export default function UserProfile({ user }) {
               id="contact-telefone"
               error={!!errors.contact}
               helperText={errors.contact?.message}
-              style={{ margin: 8 }}
+              style={{ margin: 3 }}
               variant="outlined"
             />
 

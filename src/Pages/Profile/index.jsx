@@ -28,7 +28,7 @@ const Profile = ({ auth, setAuth }) => {
 
   return (
     <Grid container>
-      <Grid item xs>
+      <Grid item xs={4}>
         <Container>
           <Image
             src={profile?.src !== "" ? profile?.src : noImage}
@@ -184,7 +184,7 @@ const Profile = ({ auth, setAuth }) => {
           </ContactContainer>
         </Container>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item align="center" xs={8}>
         <RenderBox />
       </Grid>
     </Grid>

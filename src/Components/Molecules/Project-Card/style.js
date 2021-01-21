@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     maxWidth: "50vw",
-    margin: theme.spacing(1),
+    margin: theme.spacing(3),
     flexGrow: 1,
   },
 
@@ -20,11 +20,22 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     textAlign: "center",
     alignItems: "center",
-    height: "18vh",
+    height: "30vh",
   },
 
-  contentItem: { height: "18vh", backgroundColor: "#17223a" },
-
+  contentItem: {
+    height: "30vh",
+    maxHeight: "24vh",
+    backgroundColor: "#17223a",
+    padding: "10px",
+  },
+  contentItemStacksTech: {
+    height: "30vh",
+    maxHeight: "24vh",
+    backgroundColor: "#17223a",
+    display: "flex",
+    flexDirection: "column",
+  },
   statsItem: {
     alignItems: "center",
     justifyContent: "center",
