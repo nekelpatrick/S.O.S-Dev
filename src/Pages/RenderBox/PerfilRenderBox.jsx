@@ -54,6 +54,7 @@ const PerfilRenderBox = ({ setAuth }) => {
                 userId={e.userId}
                 descricao={e.description}
                 stack={e.qualifications}
+                projectFavorite={e}
               />
             ))}
         </Route>
