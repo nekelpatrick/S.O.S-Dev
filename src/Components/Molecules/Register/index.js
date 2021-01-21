@@ -67,7 +67,7 @@ const Register = ({ text, setIsReg, close }) => {
 
   return (
     <>
-      <Types variant="h2" text={title} className="titlePopUp" />
+      <Types variant="h1" text={title} className="titlePopUp" />
 
       <Form onSubmit={handleSubmit(handleForm)}>
         <Input

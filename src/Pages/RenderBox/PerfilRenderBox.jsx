@@ -9,6 +9,7 @@ import EditUser from "../../Components/Organisms/ProfileForm";
 import ProductCard from "../../Components/Molecules/Project-Card-Add-New";
 import Filters from "../../Components/Molecules/Filters";
 import UserSearchProfile from "../../Components/Organisms/User-Search-Profile";
+import Favorites from "../../Components/Organisms/Favorites";
 
 import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";

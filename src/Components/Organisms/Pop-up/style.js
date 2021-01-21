@@ -9,13 +9,14 @@ export const StyledPopup = styled(Popup)`
   }
 
   &-content {
-    height: 70%;
-    width: 30%;
+    height: 50%;
+    width: 20%;
     background: #17223a;
     border: 5px solid #efdcbd;
-    border-radius: 5px;
+    border-radius: 20px;
   }
 `;
+
 export const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -23,4 +24,18 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  h2 {
+    color: #efdcbd;
+    margin: 0;
+  }
+  label {
+    color: grey;
+  }
+  p {
+    color: #efdcbd;
+  }
+  button {
+    width: 40%;
+  }
 `;
