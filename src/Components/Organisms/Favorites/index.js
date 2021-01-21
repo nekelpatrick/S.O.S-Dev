@@ -1,11 +1,15 @@
-import ProjectCard from "../../Molecules/Project-Card";
-
-import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import ProjectCard from "../../Molecules/Project-Card";
 
 const Favorites = () => {
     const { profile } = useSelector((state) => state);
     const [load, setLoad] = useState(true);
+
+useEffect(() => {
+    setAuth(2);
+  }, [setAuth]);
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -28,13 +32,12 @@ const Favorites = () => {
                 descricao={e.description} 
                 stack={e.qualifications} 
                 projectFavorite={e} 
+                userId={e.userId}
                 isFavorite/>
             ))
             :
             <h3>Você está sem projetos favoritos aqui...</h3>
         }
         </>
-    )
-};
-
+    )}
 export default Favorites;

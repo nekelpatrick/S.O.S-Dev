@@ -43,23 +43,20 @@ const PerfilRenderBox = ({ setAuth }) => {
     const h3OfFiltereds = "Encontramos esse(s) projeto(s) aqui..."
     const filtereds = 
     <>
-    <h3>{h3OfFiltereds}</h3>
+      <h3>{h3OfFiltereds}</h3>
       {filteredProjects?.map((e, index) => (
         <ProjectCard
-        key={index}
-        titulo={e.title}
-        tipo={e.type}
-        userId={e.userId}
-        descricao={e.description}
-        stack={e.qualifications}
-        projectFavorite={e}
-      />
+          key={index}
+          titulo={e.title}
+          tipo={e.type}
+          userId={e.userId}
+          descricao={e.description}
+          stack={e.qualifications}
+          projectFavorite={e}
+        />
       ))}
     </>
-
-  useEffect(() => {
-    setAuth(2);
-  }, [setAuth]);
+  );
 
   useEffect(() => {
     projects[projectOwner.length] &&
@@ -80,13 +77,14 @@ const PerfilRenderBox = ({ setAuth }) => {
           {filteredProjects.length > 0 ? filtereds : allProjects}
         </Route>
         <Route exact path="/profile/favoritos">
-          <Favorites />
+          <Filters />
+          <Favorites setAuth={setAuth} />
         </Route>
         <Route exact path="/profile/editarPerfil">
-          <EditUser />
+          <EditUser setAuth={setAuth} />
         </Route>
         <Route exact path="/profile/novoProjeto">
-          <ProductCard />
+          <ProductCard setAuth={setAuth} />
         </Route>
         <Route path="/profile/:user">
           <UserSearchProfile />

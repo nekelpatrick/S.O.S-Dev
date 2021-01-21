@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -13,8 +15,12 @@ import { StyledPopup, Container, StyledForm } from "./style";
 
 import { useForm } from "react-hook-form";
 
-const Projects = ({ text }) => {
+const Projects = ({ setAuth }) => {
   const title = "Cadastrar Novo Projeto";
+
+  useEffect(() => {
+    setAuth(2);
+  }, [setAuth]);
 
   const schema = yup.object().shape({
     title: yup
@@ -33,26 +39,33 @@ const Projects = ({ text }) => {
   const { register, handleSubmit, errors, setError } = useForm({
     resolver: yupResolver(schema),
   });
-
+  const options = [
+    "React",
+    "Python",
+    "SQL",
+    "JavaScript",
+    "Java",
+    "TypeScript",
+    "C#",
+    "C++",
+    "C",
+    "PHP",
+    "Ruby",
+    "Go",
+  ];
   const handleForm = (data) => {
-    api
-      .post("/projects", { ...data })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        setError("add_project", {
-          message: "Projeto já existe",
-        });
-      });
+    console.log(data);
+    // api
+    //   .post("/projects", { ...data })
+    //   .then((res) => {
+    //   })
+    //   .catch((err) => {
+    //     setError("add_project", {
+    //       message: "Projeto já existe",
+    //     });
+    //   });
   };
 
-  const changeOption = (e) => {
-    console.log(e.target.value);
-  };
-  const changeTextInput = (e) => {
-    console.log(e.target.value);
-  };
   const icon = <i class="fas fa-plus"></i>;
 
   return (
@@ -72,7 +85,6 @@ const Projects = ({ text }) => {
                 name="title"
                 id="title"
                 inputRef={register}
-                onChange={changeTextInput}
                 helperText={errors.title?.message}
               />
               <Input
@@ -81,23 +93,41 @@ const Projects = ({ text }) => {
                 name="description"
                 id="description"
                 inputRef={register}
-                onChange={changeTextInput}
                 helperText={errors.description?.message}
               />
-              <Input
-                label="Qualificações"
-                variant="outlined"
-                name="skills"
-                id="skills"
-                inputRef={register}
-                onChange={changeTextInput}
-                helperText={errors.skills?.message}
-              />
+              <div>
+                <Select
+                  native={true}
+                  select="select"
+                  label="Tecnologia"
+                  name="skills"
+                  variant="outlined"
+                  inputRef={register}
+                  helperText={errors.skills?.message}
+                >
+                  {options.map((e) => (
+                    <option>{e}</option>
+                  ))}
+                </Select>
+                <Select
+                  native={true}
+                  select="select"
+                  label="Tecnologia"
+                  name="nivel"
+                  variant="outlined"
+                  inputRef={register}
+                  helperText={errors.nivel?.message}
+                >
+                  <option>Iniciante</option>
+                  <option>Intermediario</option>
+                  <option>Avançado</option>
+                </Select>
+              </div>
+
               <Select
                 native={true}
                 select="select"
                 label="Tipo do Pojeto"
-                onChange={changeOption}
                 name="type"
                 variant="outlined"
                 inputRef={register}
@@ -112,7 +142,6 @@ const Projects = ({ text }) => {
                 select="select"
                 label="Tempo de produção estimado"
                 name="time"
-                onChange={changeOption}
                 variant="outlined"
                 inputRef={register}
                 helperText={errors.time?.message}
