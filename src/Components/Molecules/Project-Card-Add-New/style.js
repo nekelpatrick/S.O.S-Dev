@@ -8,7 +8,8 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
     flexGrow: 1,
 
-    maxHeight: "90vh",
+    maxHeight: "85vh",
+    width: "85vw",
   },
 
   content: {

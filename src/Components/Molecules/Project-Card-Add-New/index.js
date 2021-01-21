@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   Box,
   Card,
@@ -24,17 +24,15 @@ import * as yup from "yup";
 const ProductCard = () => {
   const classes = useStyles();
 
-  //  CARD-HEADER -------
-
   const today = new Date();
   const date =
     today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
-  const [time, setTime] = React.useState(date);
+  const [time, setTime] = useState(date);
 
-  const [estimated, setEstimated] = React.useState("7");
+  const [estimated, setEstimated] = useState("7");
 
   // INPUTS
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = useState("");
 
   const handleChange = (event) => {
     setValue(event.target.value);
