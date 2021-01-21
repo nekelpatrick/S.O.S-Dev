@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import {
   Box,
   Card,
@@ -23,6 +24,8 @@ import * as yup from "yup";
 
 const ProductCard = () => {
   const classes = useStyles();
+
+  const { openProject } = useSelector((state) => state);
 
   const today = new Date();
   const date =
@@ -76,7 +79,7 @@ const ProductCard = () => {
                 color="textPrimary"
                 gutterBottom
                 variant="h5"
-                text="Título do projeto"
+                text={openProject.title}
               ></Typography>
             </Grid>
 

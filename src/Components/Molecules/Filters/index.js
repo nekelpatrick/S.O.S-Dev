@@ -1,49 +1,38 @@
 import { FiltersContent } from "./style";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { FilterProvider } from "./filterContext";
 
+import { filteredUsersThunk } from "../../../Redux/modules/filteredUsers/thunk";
 import CheckBoxAtom from "../../Atoms/Check-Box";
 import Input from "../../Atoms/Input";
 import Buttom from "../../Atoms/Button";
 
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { FilterProvider } from "./filterContext";
-
-import { searchUser } from "../../../Redux/modules/Search-User/action";
-
-import { useHistory } from "react-router-dom";
 import addFilteredProjectsThunk from "../../../Redux/modules/filteredProjects/thunk";
 
 const Filters = () => {
+  const [searchUser, setSearchUser] = useState("");
   const [options, setOptions] = useState({
     qualifications: "",
     type: "",
     nivel: "",
     time: "",
   });
-  const [notFound, setMessageNotFound] = useState(false)
-  const { user, projects, users, filteredProjects } = useSelector(
-    (state) => state
-  ); //-> estão sendo aplicados nas lógicas do redux
+  const { projects, users, filteredProjects } = useSelector((state) => state); //-> estão sendo aplicados nas lógicas do redux
   const dispatch = useDispatch(); //=> estão sendo aplicados nas lógicas do redux
   const history = useHistory();
 
   const handleFilterBySelects = () => {
     // variáveis e funções auxiliáres
-    const filterProjectsByProp = (propToFilter, isQualifications) => {
-      //filtrar projeto pela prop do select
+    const filterProjectsByProp = (isQualifications) => {
       if (isQualifications) {
-        return projects.filter((project) =>
-          project.qualifications.includes(options[propToFilter])
-        );
+        return projects.filter((project, i) => {
+          console.log(project.qualifications[i]);
+          // project.qualifications.linguagem.includes(options[propToFilter]);
+        });
       }
-      return projects.filter(
-        (project) => project[propToFilter] === options[propToFilter]
-      );
     };
-
-    let filterByQualifications = filterProjectsByProp("qualifications", true);
-    let haveProjectsByThisQualifications =
-      filterByQualifications.length > 0 ? true : false;
 
     let filterByType = filterProjectsByProp("type");
     let haveProjectsByThisType = filterByType.length > 0 ? true : false;
@@ -69,9 +58,7 @@ const Filters = () => {
     };
 
     //push em filteredsList se encontrar projetos com os filtros de select
-    if (haveProjectsByThisQualifications) {
-      pushOnFilteredProjects(filterByQualifications);
-    }
+
     if (haveProjectsByThisType) {
       pushOnFilteredProjects(filterByType);
     }
@@ -86,15 +73,14 @@ const Filters = () => {
   };
 
   const changeTextInputValue = (e) => {
-    dispatch(searchUser(e.target.value));
+    setSearchUser(e.target.value);
   };
   const handleFilterByName = () => {
-    //leva a render box para o componente que renderiza o perfil de outros usuários;
-    history.push(`/profile/${user}`);
+    dispatch(filteredUsersThunk(searchUser));
+    history.push("/profile/search");
   };
 
   const optionsList = [
-    //array de selects para ser renderizado com map
     {
       setValue: (e) => {
         setOptions({ ...options, qualifications: e.target.value });
@@ -125,8 +111,6 @@ const Filters = () => {
         "Programação Mobile",
         "Programação Desktop",
         "Web Design",
-        "Front-end",
-        "Full-Stack",
       ],
       label: "Área",
       value: "type",
