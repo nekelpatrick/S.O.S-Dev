@@ -19,16 +19,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
 
-const ProjectCard = ({ 
-  titulo, 
-  tipo, 
-  descricao, 
-  stack, 
-  userId, 
-  projectFavorite, 
-  isFavorite = false, 
-  alreadyFavorite = false }) => {
-    
+const ProjectCard = ({ titulo, tipo, descricao, stack, userId, projectFavorite, isFavorite = false, alreadyFavorite = false }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { users, profile } = useSelector((state) => state);

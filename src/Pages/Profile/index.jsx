@@ -185,13 +185,13 @@ const Profile = ({ auth, setAuth }) => {
                   align="center"
                   classe="profileContacts"
                 />
-                {profile.socialMedia?.map((e, i) => (
+                {/* {profile?.socialMedia?.map((e, i) => (
                   <SocialMedia key={i}>
                     <a href={e?.link} target="_blank" rel="noreferrer">
                       {e?.name}
                     </a>
                   </SocialMedia>
-                ))}
+                ))} */}
               </div>
             </div>
           </ContactContainer>

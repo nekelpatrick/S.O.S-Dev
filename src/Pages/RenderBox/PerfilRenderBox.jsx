@@ -25,25 +25,6 @@ const PerfilRenderBox = ({ setAuth }) => {
   const [projectOwner, setProjectOwner] = useState([]);
   const classes = useStyles();
 
-<<<<<<< HEAD
-  const allProjects =
-    projects?.map((e, index) => (
-      <ProjectCard
-        key={index}
-        titulo={e.title}
-        tipo={e.type}
-        userId={e.userId}
-        descricao={e.description}
-        stack={e.qualifications}
-        projectFavorite={e}
-        alreadyFavorite={
-          profile.favorites.findIndex((favorite) => favorite.id === e.id) < 0 ? false : true
-        }
-      />
-    ));
-    const h3OfFiltereds = "Encontramos esse(s) projeto(s) aqui..."
-    const filtereds = 
-=======
   const allProjects = projects?.map((e, index) => (
     <ProjectCard
       key={index}
@@ -53,11 +34,15 @@ const PerfilRenderBox = ({ setAuth }) => {
       descricao={e.description}
       stack={e.qualifications}
       projectFavorite={e}
+      alreadyFavorite={
+        profile.favorites.findIndex((favorite) => favorite.id === e.id) < 0
+          ? false
+          : true
+      }
     />
   ));
   const h3OfFiltereds = "Encontramos esse(s) projeto(s) aqui...";
   const filtereds = (
->>>>>>> c2236b322a24c554284a4a82fd4f372b1d0af77d
     <>
       <h3>{h3OfFiltereds}</h3>
       {filteredProjects?.map((e, index) => (
