@@ -185,10 +185,10 @@ const Profile = ({ auth, setAuth }) => {
         </Container>
       </Grid>
       <Grid item align="center" xs={8}>
-        <RenderBox />
+        <RenderBox setAuth={setAuth} />
       </Grid>
     </Grid>
-  )
+  );
 };
 
 export default Profile;

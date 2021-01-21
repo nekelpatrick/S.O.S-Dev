@@ -7,6 +7,5 @@ export const getProfileThunk = (email, token) => (dispatch, getState) => {
     findUser.token = token;
     localStorage.setItem("user", JSON.stringify(findUser));
     dispatch(getProfile(findUser));
-    console.log(findUser);
   });
 };

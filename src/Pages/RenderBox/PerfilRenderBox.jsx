@@ -1,5 +1,3 @@
-import React from "react";
-
 import { api } from "../../axios-globalConfig/axios-global";
 
 import { Switch, Route } from "react-router-dom";
@@ -9,10 +7,12 @@ import EditUser from "../../Components/Organisms/ProfileForm";
 import ProductCard from "../../Components/Molecules/Project-Card-Add-New";
 import Filters from "../../Components/Molecules/Filters";
 import UserSearchProfile from "../../Components/Organisms/User-Search-Profile";
+import Favorites from "../../Components/Organisms/Favorites";
 
 import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { RenderBox } from "./style";
 
 const useStyles = makeStyles((theme) => ({
   RenderBox: {
@@ -20,24 +20,28 @@ const useStyles = makeStyles((theme) => ({
     height: "95%",
   },
 }));
-const PerfilRenderBox = () => {
+const PerfilRenderBox = ({ setAuth }) => {
   const { projects } = useSelector((state) => state);
   const [projectOwner, setProjectOwner] = useState([]);
   const classes = useStyles();
 
-  // useEffect(() => {
-  //   projects[projectOwner.length] &&
-  //     api
-  //       .get(`/users/${projects[projectOwner.length].userId}`)
-  //       .then((res) =>
-  //         projectOwner.length > 0
-  //           ? setProjectOwner([...projectOwner, res.data.user])
-  //           : setProjectOwner([res.data.user])
-  //       );
-  // }, [projects, projectOwner]);
+  useEffect(() => {
+    setAuth(2);
+  }, [setAuth]);
+
+  useEffect(() => {
+    projects[projectOwner.length] &&
+      api
+        .get(`/users/${projects[projectOwner.length].userId}`)
+        .then((res) =>
+          projectOwner.length > 0
+            ? setProjectOwner([...projectOwner, res.data.user])
+            : setProjectOwner([res.data.user])
+        );
+  }, [projects, projectOwner]);
 
   return (
-    <div className={classes.RenderBox}>
+    <RenderBox>
       <Switch>
         <Route exact path="/profile">
           <Filters projects={projects} />
@@ -67,7 +71,7 @@ const PerfilRenderBox = () => {
           <UserSearchProfile />
         </Route>
       </Switch>
-    </div>
+    </RenderBox>
   );
 };
 

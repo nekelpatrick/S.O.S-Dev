@@ -18,6 +18,7 @@ export const CardInfo = styled.div`
 
   h3 {
     margin: 0 0 0 10px;
+    font-size: 1.5em;
   }
 `;
 export const CardContent = styled.div`
@@ -26,6 +27,7 @@ export const CardContent = styled.div`
 
   p {
     margin: 0;
+    font-size: 1.3em;
   }
 `;
 

@@ -9,20 +9,22 @@ import Header from "../Components/Organisms/Header";
 const Pages = () => {
   const { profile } = useSelector((state) => state);
   const history = useHistory();
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(1);
 
   useEffect(() => {
     const user = window.localStorage.getItem("user");
     if (!JSON.parse(user)?.token) {
-      setAuth(false);
+      setAuth(0);
       history.push("/");
     } else {
-      setAuth(true);
-      history.push("/profile");
+      if (auth < 2) {
+        setAuth(1);
+        history.push("/profile");
+      }
     }
   }, [profile, history]);
 
-  if (auth === false) {
+  if (auth === 0) {
     return (
       <>
         <Switch>
