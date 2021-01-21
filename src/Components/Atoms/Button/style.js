@@ -46,11 +46,17 @@ const Style = makeStyles((theme) => ({
   },
 
   profileFavorites: {
-    fontSize: "1rem",
+    fontSize: "1vw",
     color: '#EFDCBD',
 
     borderRadius: "12px",
     marginBottom: '1vh',
+    '@media(min-width: 768px)': {
+      width: '9vw',
+    },
+    '@media(min-width: 1440px)': {
+      fontSize: "0.8vw",
+    },
   },
 
   buttonLogin: {},

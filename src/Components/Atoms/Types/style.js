@@ -21,6 +21,13 @@ const Style = makeStyles((theme) => ({
 
   fontStyleProfile: {
     color: "#EFDCBD",
+    fontSize: '1.7vw',
+    "@media(min-width: 1440px)": {
+      fontSize: '1.3vw',
+    },
+    "@media(min-width: 2560px)": {
+      fontSize: '1vw',
+    }
   },
 
   profileContacts: {
@@ -29,6 +36,13 @@ const Style = makeStyles((theme) => ({
 
   fontStyleProfileName: {
     color: "#EFDCBD",
+    fontSize: '2.5vw',
+    "@media(min-width: 1440px)": {
+      fontSize: '2vw',
+    },
+    "@media(min-width: 2560px)": {
+      fontSize: '1.5vw',
+    }
   },
 }));
 

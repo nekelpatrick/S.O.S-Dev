@@ -23,6 +23,8 @@ export default function ButtonAppBar({ auth, setAuth }) {
     history.push("/");
   };
 
+  console.log(window.innerWidth)
+
   return (
     <div className={classes.root}>
       <AppBar position="sticky">

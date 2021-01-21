@@ -7,10 +7,29 @@ export const Container = styled.div`
     border-right: 1px solid #EFDCBD;
     align-self: left;
     margin-top: -1vh;
+    font-size: 1.5vw;
+    word-wrap: break-word;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media(min-width: 1440px){
+        font-size: 1vw;
+    }
+
+        img{
+            width: 10vw;
+            height: auto;
+
+            @media(min-width: 1440px){
+                width: 8vw;
+            }
+
+            @media(min-width: 2560px){
+                width: 6vw;
+            }
+        }
 `
 
 export const TechContainer = styled.div`

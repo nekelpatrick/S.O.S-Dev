@@ -30,10 +30,10 @@ const PerfilRenderBox = () => {
   const [projects, setProjects] = useState([])
   const [projectOwner, setProjectOwner] = useState([])
 
-  useEffect(() => 
-    api.get('/projects')
-    .then((res) => setProjects(res.data))
-  , [])
+  // useEffect(() => 
+  //   api.get('/projects')
+  //   .then((res) => setProjects(res.data))
+  // , [])
 
   useEffect(() => {
     projects[projectOwner.length] &&
