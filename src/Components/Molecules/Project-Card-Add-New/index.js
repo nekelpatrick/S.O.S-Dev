@@ -143,13 +143,13 @@ const ProductCard = () => {
           {/*  */}
           <Grid xs container justify="flex-end" alignItems="flex-start">
             <CardActions>
-              <Button text="Finalizar Projeto"></Button>
+              <Button text="Voltar" onClick={() => history.goBack()}></Button>
             </CardActions>
           </Grid>
           {/*  */}
         </Grid>
 
-        <div className={classes.content}>
+        {/* <div className={classes.content}>
           <Grid container spacing={2}>
             <Grid item xs>
               <Paper elevation={7} className={classes.contentItem}>
@@ -186,12 +186,12 @@ const ProductCard = () => {
               </Paper>
             </Grid>
           </Grid>
-        </div>
+        </div> */}
       </CardContent>
 
       <Divider />
 
-      <Box m={2.1}>
+      <Box m={3.1}>
         <Typography
           color="textPrimary"
           gutterBottom

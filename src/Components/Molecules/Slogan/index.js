@@ -7,11 +7,15 @@ const Slogan = ({ slogan, img }) => {
   return (
     <StyledContainer>
       <div className="sloganbutton">
-        <Image width="21vw" height="auto" src = { slogan }/>
-        <Button text="Saiba Mais" classe="buttonSaibaMais" />
+        <Image width="25vw" height="auto" src={slogan} />
+        {/* <Button
+          text="Saiba Mais"
+          classe="buttonSaibaMais"
+          onClick={this.scrollToTop()}
+        /> */}
       </div>
       <div className="pessoas">
-        <Image width="21vw" height="auto" src = { img }/>
+        <Image width="25vw" height="auto" src={img} />
       </div>
     </StyledContainer>
   );
