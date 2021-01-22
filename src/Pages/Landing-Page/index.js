@@ -10,12 +10,11 @@ import img2 from "./Images/Img2.png";
 import { Container, BoxComments } from "./style";
 
 const LandingPage = () => {
-
   return (
     <Container>
       <Slogan slogan={slogan} img={img1} />
       <DescriptionText image={img2} />
-      <BoxComments>
+      <BoxComments id="box">
         <Comments name="" text="" src="" />
       </BoxComments>
       <Slides />
