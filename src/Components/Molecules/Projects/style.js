@@ -10,22 +10,47 @@ export const StyledPopup = styled(Popup)`
 
   &-content {
     height: 70%;
-    width: 30%;
+    width: 35%;
     background: #17223a;
     border: 5px solid #efdcbd;
     border-radius: 5px;
   }
 `;
-export const Container = styled.div`
-  width: 100%;
-  height: 100%;
+export const StyledForm = styled.form`
+  width: 60%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-export const StyledForm = styled.form`
+  div {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    label {
+      color: grey;
+    }
+    div {
+      input {
+        background-color: white;
+        border-radius: 10px;
+        color: black;
+      }
+    }
+  }
+`;
+export const Container = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

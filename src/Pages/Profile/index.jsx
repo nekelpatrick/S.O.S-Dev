@@ -22,7 +22,7 @@ import { useHistory } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
-import Projects from "../../Components/Molecules/Projects";
+import PopupNewProject from "../../Components/Organisms/Pop-upNewProject";
 
 import { StateProvider } from "./stateContext";
 
@@ -86,7 +86,7 @@ const Profile = ({ auth, setAuth }) => {
                 );
               }}
             />
-            <Projects setAuth={setAuth} />
+            <PopupNewProject setAuth={setAuth} />
             <ContainedButtons
               text="Editar Perfil"
               classe="profileFavorites"

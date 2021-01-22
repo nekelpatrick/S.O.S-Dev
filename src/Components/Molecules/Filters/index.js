@@ -18,59 +18,6 @@ const Filters = () => {
     nivel: "",
     time: "",
   });
-  const { projects, users, filteredProjects } = useSelector((state) => state); //-> estão sendo aplicados nas lógicas do redux
-  const dispatch = useDispatch(); //=> estão sendo aplicados nas lógicas do redux
-  const history = useHistory();
-  const handleFilterBySelects = () => {
-    // variáveis e funções auxiliáres
-    const filterProjectsByProp = (isQualifications) => {
-      if (isQualifications) {
-        return projects.filter((project, i) => {
-          console.log(project.qualifications[i]);
-          // project.qualifications.linguagem.includes(options[propToFilter]);
-        });
-      }
-    };
-    let filterByType = filterProjectsByProp("type");
-    let haveProjectsByThisType = filterByType.length > 0 ? true : false;
-    let filterByNivel = filterProjectsByProp("nivel");
-    let haveProjectsByThisNivel = filterByNivel.length > 0 ? true : false;
-    let filterByTime = filterProjectsByProp("time");
-    let haveProjectsByThisTime = filterByTime.length > 0 ? true : false;
-    const filteredsList = []; //será dado push com os elementos filtrados e dispach no thunk no final
-    const pushOnFilteredProjects = (filterBy) => {
-      //faz push em filteredsList sem repetições
-      filterBy.forEach((project) => {
-        if (
-          !filteredsList.some(
-            (repeatedProject) => repeatedProject.id === project.id
-          )
-        ) {
-          filteredsList.push(project);
-        }
-      });
-    };
-    //push em filteredsList se encontrar projetos com os filtros de select
-    if (haveProjectsByThisType) {
-      pushOnFilteredProjects(filterByType);
-    }
-    if (haveProjectsByThisNivel) {
-      pushOnFilteredProjects(filterByNivel);
-    }
-    if (haveProjectsByThisTime) {
-      pushOnFilteredProjects(filterByTime);
-    }
-    dispatch(addFilteredProjectsThunk(filteredsList));
-  };
-
-  const changeTextInputValue = (e) => {
-    setSearchUser(e.target.value);
-  };
-
-  const handleFilterByName = () => {
-    dispatch(filteredUsersThunk(searchUser));
-    history.push("/profile/search");
-  };
   const optionsList = [
     {
       setValue: (e) => {
@@ -123,6 +70,68 @@ const Filters = () => {
       value: "time",
     },
   ];
+  const { projects, users, filteredProjects } = useSelector((state) => state); //-> estão sendo aplicados nas lógicas do redux
+  const dispatch = useDispatch(); //=> estão sendo aplicados nas lógicas do redux
+  const history = useHistory();
+  const handleFilterBySelects = () => {
+    // variáveis e funções auxiliáres
+    const filterProjectsByProp = (propToFilter, isQualifications) => {
+      //filtrar projeto pela prop do select
+      if (isQualifications) {
+        return projects.filter((project) =>
+          project.qualifications?.includes(options[propToFilter])
+        );
+      }
+      return projects.filter(
+        (project) => project[propToFilter] === options[propToFilter]
+      );
+    };
+    let filterByQualifications = filterProjectsByProp("qualifications", true);
+    let haveProjectsByThisQualifications =
+      filterByQualifications.length > 0 ? true : false;
+    let filterByType = filterProjectsByProp("type");
+    let haveProjectsByThisType = filterByType.length > 0 ? true : false;
+    let filterByNivel = filterProjectsByProp("nivel");
+    let haveProjectsByThisNivel = filterByNivel.length > 0 ? true : false;
+    let filterByTime = filterProjectsByProp("time");
+    let haveProjectsByThisTime = filterByTime.length > 0 ? true : false;
+    const filteredsList = []; //será dado push com os elementos filtrados e dispach no thunk no final
+    const pushOnFilteredProjects = (filterBy) => {
+      //faz push em filteredsList sem repetições
+      filterBy.forEach((project) => {
+        if (
+          !filteredsList.some(
+            (repeatedProject) => repeatedProject.id === project.id
+          )
+        ) {
+          filteredsList.push(project);
+        }
+      });
+    };
+    //push em filteredsList se encontrar projetos com os filtros de select
+    if (haveProjectsByThisQualifications) {
+      pushOnFilteredProjects(filterByQualifications);
+    }
+    if (haveProjectsByThisType) {
+      pushOnFilteredProjects(filterByType);
+    }
+    if (haveProjectsByThisNivel) {
+      pushOnFilteredProjects(filterByNivel);
+    }
+    if (haveProjectsByThisTime) {
+      pushOnFilteredProjects(filterByTime);
+    }
+    dispatch(addFilteredProjectsThunk(filteredsList));
+  };
+
+  const changeTextInputValue = (e) => {
+    setSearchUser(e.target.value);
+  };
+
+  const handleFilterByName = () => {
+    dispatch(filteredUsersThunk(searchUser));
+    history.push("/profile/search");
+  };
 
   return (
     <FilterProvider options={options} setOptions={setOptions}>
