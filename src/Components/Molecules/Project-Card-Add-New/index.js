@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   Box,
   Card,
@@ -25,6 +26,7 @@ import { api } from "../../../axios-globalConfig/axios-global";
 
 const ProductCard = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   const { openProject, profile } = useSelector((state) => state);
 
@@ -34,7 +36,7 @@ const ProductCard = () => {
   const [time, setTime] = useState(date);
   const [estimated, setEstimated] = useState("7");
   const [comment, setComment] = useState("");
-  const [commentOfProject, setCommentOfProject] = useState({});
+  const [commentOfProject, setCommentOfProject] = useState([]);
 
 
   // INPUTS
@@ -56,7 +58,14 @@ const ProductCard = () => {
       }
     }
     ).then((res) => {
-      console.log(res)
+      console.log(res);
+      api.get(`/comments?projectId=${openProject.id}`)
+    .then((res) => {
+      if ( res.data?.length > 0 ) {
+        const commentsOfThisProject = res.data.filter((comment) => comment.projectId === openProject.id)
+        setCommentOfProject(commentsOfThisProject)
+      }
+    })
     })
   }
 
@@ -87,8 +96,14 @@ const ProductCard = () => {
   //---------------------------------------
 
   useEffect(() => {
-
-  })
+    api.get(`/comments?projectId=${openProject.id}`)
+    .then((res) => {
+      if ( res.data?.length > 0 ) {
+        const commentsOfThisProject = res.data.filter((comment) => comment.projectId === openProject.id)
+        setCommentOfProject(commentsOfThisProject)
+      }
+    })
+  }, [])
 
   return (
     <Card elevation={12} className={classes.root}>
@@ -188,36 +203,19 @@ const ProductCard = () => {
         <Paper elevation={7} className={classes.contentItemComments}>
           {/* fazer um map aqui ? */}
           <Container className={classes.comments}>
-            <Paper style={{ margin: 8, padding: "4px" }}>
+          {commentOfProject.length > 0 && 
+            commentOfProject.map((comments) => (
+              <Paper style={{ margin: 8, padding: "4px" }}>
               <Typography
                 color="textPrimary"
                 gutterBottom
                 variant="h8"
-                text={`Comentários`}
+                text={comments.comment}
                 align="center"
               ></Typography>
             </Paper>
-
-            <Paper style={{ margin: 8, padding: "4px" }}>
-              <Typography
-                color="textPrimary"
-                gutterBottom
-                variant="h8"
-                text={`Comentários`}
-                align="center"
-              ></Typography>
-            </Paper>
-
-            <Paper style={{ margin: 8, padding: "4px" }}>
-              <Typography
-                color="textPrimary"
-                gutterBottom
-                variant="h8"
-                text={`Comentários`}
-                align="center"
-              ></Typography>
-            </Paper>
-
+            ))
+          }
             {/*  */}
           </Container>
 

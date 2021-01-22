@@ -70,11 +70,11 @@ const PerfilRenderBox = ({ setAuth }) => {
     <RenderBox>
       <Switch>
         <Route exact path="/profile">
-          <Filters projects={projects} />
+          {/* <Filters projects={projects} /> */}
           {filteredProjects.length > 0 ? filtereds : allProjects}
         </Route>
         <Route exact path="/profile/favoritos">
-          <Filters />
+          {/* <Filters /> */}
           <Favorites setAuth={setAuth} />
         </Route>
         <Route exact path="/profile/editarPerfil">
