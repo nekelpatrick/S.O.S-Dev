@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FilterProvider } from "./filterContext";
-
 import { filteredUsersThunk } from "../../../Redux/modules/filteredUsers/thunk";
 import CheckBoxAtom from "../../Atoms/Check-Box";
 import Input from "../../Atoms/Input";
@@ -22,7 +21,6 @@ const Filters = () => {
   const { projects, users, filteredProjects } = useSelector((state) => state); //-> estão sendo aplicados nas lógicas do redux
   const dispatch = useDispatch(); //=> estão sendo aplicados nas lógicas do redux
   const history = useHistory();
-
   const handleFilterBySelects = () => {
     // variáveis e funções auxiliáres
     const filterProjectsByProp = (isQualifications) => {
@@ -33,16 +31,12 @@ const Filters = () => {
         });
       }
     };
-
     let filterByType = filterProjectsByProp("type");
     let haveProjectsByThisType = filterByType.length > 0 ? true : false;
-
     let filterByNivel = filterProjectsByProp("nivel");
     let haveProjectsByThisNivel = filterByNivel.length > 0 ? true : false;
-
     let filterByTime = filterProjectsByProp("time");
     let haveProjectsByThisTime = filterByTime.length > 0 ? true : false;
-
     const filteredsList = []; //será dado push com os elementos filtrados e dispach no thunk no final
     const pushOnFilteredProjects = (filterBy) => {
       //faz push em filteredsList sem repetições
@@ -56,9 +50,7 @@ const Filters = () => {
         }
       });
     };
-
     //push em filteredsList se encontrar projetos com os filtros de select
-
     if (haveProjectsByThisType) {
       pushOnFilteredProjects(filterByType);
     }
@@ -68,18 +60,17 @@ const Filters = () => {
     if (haveProjectsByThisTime) {
       pushOnFilteredProjects(filterByTime);
     }
-
     dispatch(addFilteredProjectsThunk(filteredsList));
   };
 
   const changeTextInputValue = (e) => {
     setSearchUser(e.target.value);
   };
+
   const handleFilterByName = () => {
     dispatch(filteredUsersThunk(searchUser));
     history.push("/profile/search");
   };
-
   const optionsList = [
     {
       setValue: (e) => {
@@ -141,7 +132,9 @@ const Filters = () => {
             <div key={index} className="selects-content">
               <CheckBoxAtom
                 check={options[option.value].length > 0 ? true : false}
-                handleFilter={handleFilterBySelects}
+                handleFilter={() =>
+                  handleFilterBySelects(options[option.value], options)
+                }
                 selectValue={options[option.value]}
               />
               <Input
