@@ -33,10 +33,9 @@ const LandingPage = () => {
               <Comments name="" text="" src="" />
             </BoxComments>
           </Container>
+          <Slides />
         </>
       )}
-
-      <Slides />
     </>
   );
 };
