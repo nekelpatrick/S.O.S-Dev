@@ -11,7 +11,11 @@ import { useStyles, SlideContainer } from "./style";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
+import { Typography, Container, useMediaQuery } from "@material-ui/core";
+
 const Slides = () => {
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   const classes = useStyles();
   const [bestProjects, setBestProjects] = useState([]);
   const [projectIndex, setProjectIndex] = useState(0);
