@@ -10,6 +10,10 @@ export const Container = styled.div`
   background: #17223a;
   border: 1px solid #efdcbd;
   border-radius: 5px;
+
+  @media (max-width: 375px) {
+    width: 80vw;
+  }
 `;
 
 export const TechContainer = styled.div`
@@ -27,6 +31,11 @@ export const TechContainer = styled.div`
     width: 15vw;
     height: 17vh;
     color: #efdcbd;
+
+    @media (max-width: 375px) {
+      font-size: 0.8em;
+      width: 50vw;
+    }
   }
 `;
 
@@ -36,6 +45,12 @@ export const PendingProjectsContainer = styled.div`
   padding: 0 1vw 0 1vw;
   color: #efdcbd;
   margin-bottom: 2vh;
+
+  @media (max-width: 375px) {
+    padding-top: 20px;
+    font-size: 0.8em;
+    width: 50vw;
+  }
 `;
 
 export const CompletedProjectsContainer = styled.div`
@@ -53,6 +68,11 @@ export const CompletedProjectsContainer = styled.div`
     width: 15vw;
     height: 17vh;
     color: #efdcbd;
+
+    @media (max-width: 375px) {
+      font-size: 10px;
+      width: 50vw;
+    }
   }
 `;
 
@@ -64,12 +84,19 @@ export const ContactContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   .contactsContainer {
     width: 30vw;
     display: flex;
 
     .webContacts {
       border-right: 1px solid #efdcbd;
+
+      @media (max-width: 375px) {
+        width: 80vw;
+        word-wrap: break-word;
+        border: none;
+      }
     }
 
     .webContacts,
@@ -81,6 +108,17 @@ export const ContactContainer = styled.div`
       width: 15vw;
       height: 12vh;
       color: #efdcbd;
+      @media (max-width: 375px) {
+        width: 90px;
+        height: 100px;
+        margin-left: 50px;
+      }
+    }
+
+    @media (max-width: 375px) {
+      justify-content: center;
+      width: 50vw;
+      font-size: 10px;
     }
   }
 `;
