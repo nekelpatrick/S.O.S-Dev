@@ -49,59 +49,39 @@ const Slides = () => {
   }, [projects]);
 
   return (
-    <>
-      {" "}
-      {isMobile ? (
-        <div>teste</div>
-      ) : (
-        <SlideContainer>
-          <ContainedButtons
-            text="<"
-            classe="buttonArrow"
-            onClick={(e) => showProjects(e)}
+    <SlideContainer>
+      <Card className={classes.root}>
+        <CardContent>
+          <Types
+            variant="h5"
+            component="h2"
+            text={
+              bestProjects.length > 0
+                ? bestProjects[projectIndex].title
+                : "Título do Projeto"
+            }
           />
-          <Card className={classes.root}>
-            <CardContent>
-              <Types
-                variant="h5"
-                component="h2"
-                text={
-                  bestProjects.length > 0
-                    ? bestProjects[projectIndex].title
-                    : "Título do Projeto"
-                }
-              />
-              <Types
-                variant="h7"
-                component="h5"
-                text={
-                  bestProjects.length > 0
-                    ? bestProjects[projectIndex].type
-                    : "Tipo do projeto"
-                }
-              />
-              <Types
-                variant="body1"
-                component="p"
-                text={
-                  bestProjects.length > 0
-                    ? bestProjects[projectIndex].description
-                    : "Descrição"
-                }
-              />
-            </CardContent>
-            <CardActions>
-              <ContainedButtons text={"Abrir Projeto"} classe={"button"} />
-            </CardActions>
-          </Card>
-          <ContainedButtons
-            text=">"
-            classe="buttonArrow"
-            onClick={(e) => showProjects(e)}
+          <Types
+            variant="h7"
+            component="h5"
+            text={
+              bestProjects.length > 0
+                ? bestProjects[projectIndex].type
+                : "Tipo do projeto"
+            }
           />
-        </SlideContainer>
-      )}
-    </>
+          <Types
+            variant="body1"
+            component="p"
+            text={
+              bestProjects.length > 0
+                ? bestProjects[projectIndex].description
+                : "Descrição"
+            }
+          />
+        </CardContent>
+      </Card>
+    </SlideContainer>
   );
 };
 

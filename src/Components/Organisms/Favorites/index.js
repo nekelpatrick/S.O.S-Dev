@@ -1,21 +1,17 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ProjectCard from "../../Molecules/Project-Card";
-
 const Favorites = ({ setAuth }) => {
   const { profile } = useSelector((state) => state);
   const [load, setLoad] = useState(true);
-
   useEffect(() => {
     setAuth(2);
   }, [setAuth]);
-
   useEffect(() => {
     setTimeout(() => {
       setLoad(false);
     }, 1000);
   }, []);
-
   return (
     <>
       {load ? (
@@ -29,6 +25,8 @@ const Favorites = ({ setAuth }) => {
             stack={e.qualifications}
             projectFavorite={e}
             userId={e.userId}
+            linguagem={e.qualifications}
+            nivel={e.nivel}
             time={`Tempo estimado: ${e.time}`}
             isFavorite
           />

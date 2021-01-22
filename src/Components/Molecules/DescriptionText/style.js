@@ -5,7 +5,6 @@ const Section2Content = styled.section`
   max-width: 100%;
   display: flex;
   align-items: center;
-
   height: 50vh;
 
   .description-text-content {
@@ -13,14 +12,17 @@ const Section2Content = styled.section`
     display: flex;
     flex-direction: column;
     margin: 0px;
+    color: #efdcbd;
+    padding-left: 2vw;
   }
 
   .description {
-    width: 40vw;
+    width: 20vw;
   }
 
   .second-image-content {
-    width: 50vw;
+    width: 60vw;
+    padding-left: 10vw;
     display: flex;
     justify-content: center;
     align-items: center;

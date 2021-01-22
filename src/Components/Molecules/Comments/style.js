@@ -6,6 +6,7 @@ export const Card = styled.div`
   margin: 0 20px;
   border: 2px solid #efdcbd;
   border-radius: 5px;
+  background-color: #17223a;
 `;
 
 export const CardInfo = styled.div`

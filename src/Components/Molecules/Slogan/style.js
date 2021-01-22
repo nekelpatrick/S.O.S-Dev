@@ -3,11 +3,10 @@ import styled from "styled-components";
 const StyledContainer = styled.div`
   display: flex;
   align-items: center;
-
   height: 50vh;
-
-  width: 100vw;
+  width: 70vw;
   max-width: 100%;
+  margin: 0 auto;
 
   .sloganbutton {
     width: 50vw;
@@ -15,7 +14,7 @@ const StyledContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
+
     img {
       margin-bottom: 6vh;
     }
