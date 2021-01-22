@@ -6,6 +6,7 @@ import getProfileReducer from "./modules/profile/reducer";
 import projectsReducer from "./modules/projects/reducer";
 import filteredProjectsReducer from "./modules/filteredProjects/reducer";
 import filteredUsersReducer from "./modules/filteredUsers/reducer";
+import openProjectReducer from "./modules/projectsToOpen/reducer";
 
 const reducers = combineReducers({
   filteredProjects: filteredProjectsReducer,
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   projects: projectsReducer,
   users: getAllUsersReducer,
   profile: getProfileReducer,
+  openProject: openProjectReducer
 });
 
 const store = createStore(reducers, applyMiddleware(thunk));

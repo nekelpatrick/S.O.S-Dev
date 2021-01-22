@@ -209,10 +209,10 @@ const Profile = ({ auth, setAuth }) => {
                 />
                 {profile.socialMedia?.map((e, i) => (
                   <SocialMedia key={i}>
-                    <a href={e?.link} target="_blank" rel="noreferrer">
-                      {e?.name}
-                    </a>
-                  </SocialMedia>
+                  <a href={e?.link} target="_blank" rel="noreferrer">
+                    {e?.name}
+                  </a>
+                </SocialMedia>
                 ))}
               </div>
             </div>

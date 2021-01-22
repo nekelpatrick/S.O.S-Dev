@@ -7,6 +7,11 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "50vw",
     margin: '2vh auto',
     flexGrow: 1,
+    '@media(maxWidth: 720px)' : {
+      ".makeStyles-root-36": {
+      width: '90%'
+      }
+    }
   },
 
   cardHeader: {

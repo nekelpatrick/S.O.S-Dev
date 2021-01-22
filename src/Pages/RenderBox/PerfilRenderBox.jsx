@@ -29,6 +29,7 @@ const PerfilRenderBox = ({ setAuth }) => {
       descricao={e.description}
       stack={e.qualifications}
       time={`Tempo estimado: ${e.time}`}
+      projectToOpen={e}
       projectFavorite={e}
       alreadyFavorite={
         profile.favorites.findIndex((favorite) => favorite.id === e.id) < 0
@@ -71,11 +72,11 @@ const PerfilRenderBox = ({ setAuth }) => {
     <RenderBox>
       <Switch>
         <Route exact path="/profile">
-          <Filters projects={projects} />
+          {/* <Filters projects={projects} /> */}
           {filteredProjects.length > 0 ? filtereds : allProjects}
         </Route>
         <Route exact path="/profile/favoritos">
-          <Filters />
+          {/* <Filters /> */}
           <Favorites setAuth={setAuth} />
         </Route>
         <Route exact path="/profile/editarPerfil">

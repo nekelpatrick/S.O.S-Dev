@@ -18,6 +18,7 @@ import { api } from "../../../axios-globalConfig/axios-global";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getProfileThunk } from "../../../Redux/modules/profile/thunks";
+import addOpenProjectThunk from "../../../Redux/modules/projectsToOpen/thunk";
 
 import { useHistory } from "react-router-dom";
 
@@ -32,6 +33,7 @@ const ProjectCard = ({
   nivel,
   userId,
   time,
+  projectToOpen,
   projectFavorite,
   isFavorite = false,
   alreadyFavorite = false,
@@ -178,6 +180,7 @@ const ProjectCard = ({
                 onClick={() => {
                   setFavouriteTime(true);
                   history.push("/profile/novoProjeto");
+                  dispatch(addOpenProjectThunk(projectToOpen))
                 }}
               ></Button>
             </CardActions>
