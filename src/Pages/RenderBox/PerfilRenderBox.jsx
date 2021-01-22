@@ -18,10 +18,12 @@ const PerfilRenderBox = ({ setAuth }) => {
   );
   const [projectOwner, setProjectOwner] = useState([]);
   const history = useHistory();
-  const allProjects = projects?.map((e, index) => (
+  const allProjects = projects?.map((e, index, arr) => (
     <ProjectCard
       key={index}
       titulo={e.title}
+      linguagem={e.qualifications}
+      nivel={e.nivel}
       tipo={e.type}
       userId={e.userId}
       descricao={e.description}
